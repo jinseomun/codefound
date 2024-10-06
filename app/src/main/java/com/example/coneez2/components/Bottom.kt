@@ -53,6 +53,7 @@ fun NextButton(text : String) {
     }
 }
 
+/*
 @Composable
 fun PrevNextButton() {
     Divider(color = Color(0xFFF1F2F3), thickness = 1.dp)  // 하단에 회색 구분선 추가
@@ -104,4 +105,6 @@ fun PrevNextButton() {
         }
     }
 }
+*/
+
 

@@ -41,7 +41,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.coneez2.R
 import com.example.coneez2.components.CustomTopBar
-import com.example.coneez2.components.PrevNextButton
+import com.example.coneez2.components.NextButton
 
 
 @OptIn(ExperimentalMaterial3Api::class)  // 실험적 API 사용을 명시적으로 허용
@@ -68,7 +68,7 @@ fun SecondScreen() {
         },
         bottomBar = {
             // 하단 바에 NextButton 추가
-            PrevNextButton()
+            NextButton("예약하기")
         }
     )
 }
@@ -95,7 +95,6 @@ fun ContentScreen2() {
         Spacer(modifier = Modifier.height(40.dp))
 
         Box (
-            modifier = Modifier.padding(horizontal = 10.dp)
         ){
             Column {
                 // "클래스 진행 방식" 텍스트
@@ -137,7 +136,6 @@ fun ContentScreen2() {
 
         // "인원수" 텍스트
         Box(
-            modifier = Modifier.padding(horizontal = 10.dp)
         ) {
             Row(
                 modifier = Modifier.fillMaxWidth(),
@@ -159,6 +157,11 @@ fun ContentScreen2() {
                     PlusMinusButton()
                 }
             }
+        }
+
+        // 오프라인일 경우에만 예약 일정 및 방문 주소 표시
+        if (selectedMode == "오프라인"){
+            OffScreen()
         }
 
     }
@@ -238,6 +241,64 @@ fun PlusMinusButton() {
     }
 }
 
+@Composable
+fun OffScreen(){
+    Spacer(modifier = Modifier.height(40.dp))
+
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+    ) {
+        Text(text = "예약 일정", fontSize = 16.sp, fontWeight = FontWeight.Bold)
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        Button(
+            onClick = {},
+            modifier = Modifier
+                .fillMaxWidth()
+                .border(width = 1.dp, color = Color(0xFFE4E5E7), shape = RoundedCornerShape(4.dp)),  // 회색 테두리 추가
+            shape = RoundedCornerShape(4.dp),  // 둥근 모서리 정도를 명시적으로 설정
+            colors = ButtonDefaults.buttonColors(containerColor = Color.White)
+        ) {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween, // 좌우로 텍스트와 아이콘 배치
+                verticalAlignment = Alignment.CenterVertically // 수직으로 중앙 정렬
+            ) {
+                Text(
+                    text = "일정을 선택해 주세요.",
+                    fontSize = 16.sp,
+                    color = Color(0xFFAEB1B7),
+                    modifier = Modifier.weight(1f) // 텍스트가 남은 공간을 차지하도록
+                )
+
+                // 아이콘 추가
+                Icon(
+                    painter = painterResource(id = R.drawable.calendar),  // 로컬 리소스에서 아이콘 불러오기
+                    contentDescription = "Calendar Icon",
+                    modifier = Modifier.size(24.dp),  // 아이콘 크기 설정
+                    tint = Color(0xFFAEB1B7)  // 아이콘 색상
+                )
+            }        }
+    }
+
+    Column(
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        Spacer(modifier = Modifier.height(40.dp))
+        // 오프라인 시 방문 주소
+        Text(
+            text = "오프라인 시 방문 주소",
+            fontSize = 16.sp,
+            fontWeight = FontWeight.Bold,
+        )
+        Spacer(modifier = Modifier.height(8.dp))
+        Text(text = "서울시 서초구 강남대로 545-4, 8층 커니즈 교육센터", color = Color.Gray)
+    }
+
+
+}
 
 
 @Preview(showBackground = true)
