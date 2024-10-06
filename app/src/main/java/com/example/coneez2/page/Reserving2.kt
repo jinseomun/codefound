@@ -41,7 +41,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.coneez2.R
 import com.example.coneez2.components.CustomTopBar
-import com.example.coneez2.components.NextButton
+import com.example.coneez2.components.PrevNextButton
+
 
 @OptIn(ExperimentalMaterial3Api::class)  // 실험적 API 사용을 명시적으로 허용
 @Composable
@@ -67,7 +68,7 @@ fun SecondScreen() {
         },
         bottomBar = {
             // 하단 바에 NextButton 추가
-            NextButton("다음")
+            PrevNextButton()
         }
     )
 }
@@ -150,10 +151,10 @@ fun ContentScreen2() {
                 )
 
                 // 인원수 조절 버튼
-                Row(
+                Box(
                     modifier = Modifier
                         .fillMaxWidth(),
-                    horizontalArrangement = Arrangement.End
+                    contentAlignment = Alignment.CenterEnd
                 ) {
                     PlusMinusButton()
                 }
@@ -182,51 +183,61 @@ fun ModeButton(title: String, isSelected: Boolean, onClick: () -> Unit,  modifie
     }
 }
 
+//인원 변경 버튼
 @Composable
-fun PlusMinusButton(){
-    var numberOfPeople by remember { mutableStateOf(1) }      // 기본값은 1명
+fun PlusMinusButton() {
+    var numberOfPeople by remember { mutableStateOf(1) }  // 기본값은 1명
 
-    Row() {
+    Row(
+        verticalAlignment = Alignment.CenterVertically, // 수직 중앙 정렬
+        modifier = Modifier
+            .border(
+                width = 1.dp, // 테두리 두께
+                color = Color(0xFFE4E5E7), // 테두리 색상
+                shape = RoundedCornerShape(4.dp) // 테두리 모서리 둥글게 설정
+            )
 
+    ) {
         Button(
             onClick = { if (numberOfPeople > 1) numberOfPeople-- },
-            modifier = Modifier
-                .height(40.dp)
-                .width(40.dp), // 버튼 크기 설정
             colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent),
-            shape = RoundedCornerShape(8.dp) // 둥근 모서리 설정
+            modifier = Modifier.width(60.dp),
+            contentPadding = PaddingValues(0.dp) // 기본 패딩을 0으로 설정
         ) {
-            Image(
-                painter = painterResource(id = R.drawable.minus), // 로컬 리소스에서 아이콘 불러오기
-                contentDescription = "Minus",
-                modifier = Modifier.size(24.dp) // 아이콘 크기 설정
-            )
+            Box(contentAlignment = Alignment.Center) {
+                Image(
+                    painter = painterResource(id = R.drawable.minus), // 로컬 리소스에서 아이콘 불러오기
+                    contentDescription = "Minus",
+                    modifier = Modifier.size(24.dp) // 아이콘 크기 설정
+                )
+            }
         }
 
+        // 인원수 텍스트
         Text(
             text = "$numberOfPeople",
             fontSize = 18.sp,
             fontWeight = FontWeight.Bold,
-            color = Color.Black
+            color = Color.Black,
         )
 
         Button(
             onClick = { numberOfPeople++ },
-            modifier = Modifier
-                .height(40.dp)
-                .width(40.dp), // 버튼 크기 설정
-            colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent),
-            shape = RoundedCornerShape(8.dp) // 둥근 모서리 설정
-
+            colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent), // 배경색 설정
+            modifier = Modifier.width(60.dp),
+            contentPadding = PaddingValues(0.dp) // 기본 패딩을 0으로 설정
         ) {
-            Image(
-                painter = painterResource(id = R.drawable.plus), // 로컬 리소스에서 아이콘 불러오기
-                contentDescription = "Minus",
-                modifier = Modifier.size(24.dp) // 아이콘 크기 설정
-            )
+            Box(contentAlignment = Alignment.Center) {
+                Image(
+                    painter = painterResource(id = R.drawable.plus), // 로컬 리소스에서 아이콘 불러오기
+                    contentDescription = "Plus",
+                    modifier = Modifier.size(24.dp) // 아이콘 크기 설정
+                )
+            }
         }
     }
 }
+
 
 
 @Preview(showBackground = true)
