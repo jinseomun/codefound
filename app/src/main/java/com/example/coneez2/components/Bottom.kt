@@ -19,8 +19,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
+
 @Composable
-fun NextButton() {
+fun NextButton(text : String) {
     Divider(color = Color(0xFFF1F2F3), thickness = 1.dp)  // 하단에 회색 구분선 추가
 
     // 버튼을 중앙에 정렬하기 위해 Box와 fillMaxWidth() 사용
@@ -39,7 +40,7 @@ fun NextButton() {
             colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF644E46)) // 버튼 배경 흰색
         ) {
             Text(
-                text = "다음",
+                text = text,
                 color = Color.White,
                 style = TextStyle(fontWeight = FontWeight.Bold),
                 fontSize = 14.sp // 제목 텍스트 크기 설정

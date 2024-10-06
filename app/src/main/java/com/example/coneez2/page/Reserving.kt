@@ -15,7 +15,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -41,10 +40,11 @@ import androidx.compose.ui.unit.sp
 import com.example.coneez2.R
 import com.example.coneez2.components.CustomTopBar
 import com.example.coneez2.components.NextButton
+import com.example.coneez2.ui.theme.Main600
 
 @OptIn(ExperimentalMaterial3Api::class)  // 실험적 API 사용을 명시적으로 허용
 @Composable
-fun ExampleScreen() {
+fun FirstScreen() {
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
 
     Scaffold(
@@ -61,18 +61,18 @@ fun ExampleScreen() {
         content = { innerPadding ->
             Box(modifier = Modifier.padding(innerPadding)) {
                 // 메인 콘텐츠
-                ContentScreen()
+                ContentScreen1()
             }
         },
         bottomBar = {
             // 하단 바에 NextButton 추가
-            NextButton()
+            NextButton("다음")
         }
     )
 }
 
 @Composable
-fun ContentScreen(){
+fun ContentScreen1(){
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -129,7 +129,7 @@ fun ServiceButton(title: String, description: String) {
             .height(120.dp)
             .border(
                 width = 1.dp,
-                color = if (isClicked) Color(0xFF8B4513) else Color(0xFFf1f2f3), // 클릭 시 갈색 테두리
+                color = if (isClicked) Main600 else Color(0xFFf1f2f3), // 클릭 시 갈색 테두리
                 shape = RoundedCornerShape(size = 8.dp)
             ),
         shape = RoundedCornerShape(size = 8.dp),
@@ -165,6 +165,6 @@ fun ServiceButton(title: String, description: String) {
 
 @Preview(showBackground = true)
 @Composable
-fun Preview() {
-        ExampleScreen()
+fun Preview1() {
+    FirstScreen()
 }
