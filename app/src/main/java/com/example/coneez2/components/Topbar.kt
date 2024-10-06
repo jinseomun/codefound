@@ -63,7 +63,7 @@ fun CustomTopBar(
                         Icon(
                             imageVector = Icons.Filled.KeyboardArrowLeft,  // 네비게이션 아이콘 (왼쪽 아이콘)
                             contentDescription = "Back",
-                            modifier = Modifier.size(24.dp)
+                            modifier = Modifier.size(30.dp)
                         )
                     }
                 }
