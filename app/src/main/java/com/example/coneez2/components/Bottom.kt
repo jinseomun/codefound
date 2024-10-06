@@ -32,13 +32,13 @@ fun NextButton(text : String) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = 8.dp), // 상하 패딩 추가
+            .padding(vertical = 8.dp, horizontal = 20.dp), // 상하 좌우 패딩 추가
         contentAlignment = Alignment.Center // 중앙 정렬
     ) {
         Button(
             onClick = { /*TODO*/ },
             modifier = Modifier
-                .width(320.dp)
+                .fillMaxWidth()
                 .height(48.dp),
             shape = RoundedCornerShape(size = 4.dp),
             colors = ButtonDefaults.buttonColors(containerColor = Main600)
