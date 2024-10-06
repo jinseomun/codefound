@@ -21,12 +21,17 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
@@ -34,8 +39,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.coneez2.R
+import com.example.coneez2.components.CustomTopBar
+import com.example.coneez2.components.NextButton
+import com.example.coneez2.components.TopLogo
 import com.example.coneez2.ui.theme.Main600
-
+/*
 @Composable
 fun ReservationScreen(modifier: Modifier = Modifier) {
     Box(
@@ -50,24 +58,27 @@ fun ReservationScreen(modifier: Modifier = Modifier) {
         }
     }
 }
-
+*/
+@OptIn(ExperimentalMaterial3Api::class)  // 실험적 API 사용을 명시적으로 허용
 @Composable
-fun TopLogo() {
-    Box(
-        Modifier
-            .fillMaxWidth()
-            .height(56.dp),
-        contentAlignment = Alignment.CenterStart
-    ) {
-        Image(
-            painter = painterResource(id = R.drawable.coneez_logo),
-            contentDescription = "poster",
-            contentScale = ContentScale.Crop,
-            modifier = Modifier
-                .padding(start = 20.dp)
-                .height(24.dp)
-        )
-    }
+fun ReservationScreen(modifier: Modifier = Modifier) {
+    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
+
+    Scaffold(
+        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
+        topBar = {
+                TopLogo()
+        },
+        content = { innerPadding ->
+            Box(modifier = Modifier.padding(innerPadding)) {
+                // 메인 콘텐츠
+                ImageSliderWithDotsIndicator()
+            }
+        },
+        bottomBar = {
+            // 하단 바에 NextButton 추가
+        }
+    )
 }
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -150,6 +161,7 @@ fun ImageSliderWithDotsIndicator() {
         }
     }
 }
+
 
 @Composable
 fun ReservationButton(onClick: () -> Unit) {
