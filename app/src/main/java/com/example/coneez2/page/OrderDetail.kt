@@ -170,7 +170,7 @@ fun OrderCard(@DrawableRes imageRes : Int, Date : String, OrderState :String, Na
                 Text(
                     text = Date,
                     style = TextStyle(
-                        fontSize = 18.sp,
+                        fontSize = 22.sp,
                         fontWeight = FontWeight.Bold
                     )
                 )
