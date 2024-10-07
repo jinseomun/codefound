@@ -85,7 +85,7 @@ fun HomeScreen() {
                     fontSize = 22.sp,
                     lineHeight = 28.sp,
                     fontWeight = FontWeight(800),
-                    color = Color(0xFFFFFFFF),
+                    color = Color.White,
                 ),
                 modifier = Modifier
                     .padding(start = 28.dp, top = 130.dp)
@@ -97,7 +97,7 @@ fun HomeScreen() {
                     fontSize = 14.sp,
                     lineHeight = 18.sp,
                     fontWeight = FontWeight(400),
-                    color = Color(0xFFFFFFFF),
+                    color = Color.White,
                 ),
                 modifier = Modifier
                     .padding(start = 28.dp, top = 190.dp)
@@ -562,62 +562,58 @@ fun HomeScreen() {
                     .padding(start = 20.dp, end = 20.dp)
             ) {
                 val images = listOf(
-                    painterResource(id = R.drawable.brazil),
                     painterResource(id = R.drawable.guatemala),
-                    painterResource(id = R.drawable.indonesia)
+                    painterResource(id = R.drawable.arabica),
+                    painterResource(id = R.drawable.ethi_co),
+                    painterResource(id = R.drawable.ethi_ari)
                 )
                 val prices = listOf(
-                    "5,800원",
-                    "9,200원",
-                    "7,500원",
-                    "7,500원",
+                    "8,300원",
+                    "7,900원",
+                    "11,200원",
+                    "16,800원",
                 )
 
                 val names = listOf(
-                    "브라질 산토스 NY2",
-                    "인도네시아 만델링 G1 프리미엄",
-                    "콜롬비아 후일라 수프리모",
                     "과테말라 안티구아 SHB",
+                    "100 아라비카 블렌딩 롱로이",
+                    "에티오피아 코케허니 예가체프 G1 스페셜티",
+                    "에티오피아 아리차 내추럴 예가체프 G1 스페셜티",
+
                 )
 
                 val features = listOf(
-                    "고소, 담백",
-                    "고소, 깔끔",
-                    "스모키, 코코넛",
-                    "다크초콜릿, 호두",
+                    "다크 초콜릿",
+                    "산미, 감귤",
+                    "고소, 견과류",
+                    "산미, 감귤",
 
                     )
 
-                LazyColumn(
+                LazyRow(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(16.dp)
+                        .padding(start = 20.dp, end = 20.dp),
+                    horizontalArrangement = Arrangement.spacedBy(10.dp)
                 ) {
-                    // 데이터를 두 개씩 묶어 한 행에 두 개의 아이템을 배치
+                    // 데이터를 두 개씩 묶어 한 줄에 두 개의 아이템을 배치
                     itemsIndexed(names.chunked(2)) { rowIndex, rowItems ->
-                        Row(
+                        Column(
                             modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.spacedBy(16.dp) // 아이템 사이에 간격 추가
+                            verticalArrangement = Arrangement.spacedBy(24.dp) // 각 아이템 사이에 간격 추가
                         ) {
-                            // 두 개의 ColumnItem을 한 줄에 배치
+                            // 두 개의 ColumnItem을 한 열에 배치
                             for (index in rowItems.indices) {
                                 ColumnItem(
                                     name = rowItems[index],
                                     image = images[rowIndex * 2 + index],
                                     feature = features[rowIndex * 2 + index],
                                     price = prices[rowIndex * 2 + index]
-
                                 )
                             }
-                            // 만약 2개 미만의 아이템이 있다면, 빈 공간을 추가해 그리드 정렬 유지
-                            if (rowItems.size < 2) {
-                                Spacer(modifier = Modifier.weight(1f))
-                            }
+                            // 각 열 사이에 간격 추가
                         }
-                        Spacer(modifier = Modifier.height(16.dp)) // 각 행 사이에 간격 추가
                     }
-
-
                 }
             }
 
@@ -698,7 +694,7 @@ fun ColumnItem(name: String, image: Painter,feature: String, price : String) {
             .width(155.dp)
             .height(219.dp),  // 각 항목의 너비를 고정
         colors = CardDefaults.cardColors(
-            containerColor = Color.Gray
+            containerColor = Color.White
         ),
 
         ) {
