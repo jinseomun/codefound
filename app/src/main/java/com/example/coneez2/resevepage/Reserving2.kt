@@ -1,6 +1,7 @@
 package com.example.coneez2.resevepage
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -14,23 +15,23 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.BottomSheetScaffold
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
-import androidx.compose.material3.rememberTopAppBarState
+import androidx.compose.material3.rememberBottomSheetScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
@@ -39,41 +40,62 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.coneez2.R
+import com.example.coneez2.components.CustomCalendar
 import com.example.coneez2.components.CustomTopBar
 import com.example.coneez2.components.NextButton
+import kotlinx.coroutines.launch
 
 
-@OptIn(ExperimentalMaterial3Api::class)  // 실험적 API 사용을 명시적으로 허용
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SecondScreen() {
-    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
+    val sheetState = rememberBottomSheetScaffoldState()
+    val scope = rememberCoroutineScope()
 
-    Scaffold(
-        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
+    BottomSheetScaffold(
+        scaffoldState = sheetState,
+        sheetContent = {
+            CustomCalendar(
+                onDateSelected = { selectedDate ->
+                    scope.launch { sheetState.bottomSheetState.hide() }
+                    // 날짜를 선택했을 때 처리할 로직 추가 가능
+                }
+            )
+        },
+        sheetPeekHeight = 0.dp,
         topBar = {
             CustomTopBar(
                 title = "커니즈 서비스",
-                showNavigationIcon = false, // 네비게이션 아이콘을 보여줌
-                showActionIcon = true,    // 액션 아이콘을 숨김
+                showNavigationIcon = false,
+                showActionIcon = true,
                 onNavigationClick = { /* 네비게이션 클릭 동작 */ },
                 onActionClick = { /* 액션 버튼 클릭 동작 */ }
             )
         },
         content = { innerPadding ->
-            Box(modifier = Modifier.padding(innerPadding)) {
+            Column(
+                modifier = Modifier
+                    .padding(innerPadding)
+                    .fillMaxSize()
+            ) {
                 // 메인 콘텐츠
-                ContentScreen2()
+                Box(modifier = Modifier.weight(1f)) {
+                    ContentScreen2(
+                        onSelectDateClicked = {
+                            scope.launch { sheetState.bottomSheetState.expand() }
+                        }
+                    )
+                }
+                // NextButton을 하단에 배치
+                NextButton("예약하기")
             }
-        },
-        bottomBar = {
-            // 하단 바에 NextButton 추가
-            NextButton("예약하기")
         }
     )
 }
 
+
 @Composable
-fun ContentScreen2() {
+fun ContentScreen2(onSelectDateClicked: () -> Unit) {
     var selectedMode by remember { mutableStateOf("온라인") }  // 기본값은 "온라인"
     Column(
         modifier = Modifier
@@ -160,7 +182,7 @@ fun ContentScreen2() {
 
         // 오프라인일 경우에만 예약 일정 및 방문 주소 표시
         if (selectedMode == "오프라인"){
-            OffScreen()
+            OffScreen(onSelectDateClicked)
         }
 
     }
@@ -241,7 +263,7 @@ fun PlusMinusButton() {
 }
 
 @Composable
-fun OffScreen(){
+fun OffScreen(onSelectDateClicked: () -> Unit) {
     Spacer(modifier = Modifier.height(40.dp))
 
     Column(
@@ -253,7 +275,7 @@ fun OffScreen(){
         Spacer(modifier = Modifier.height(16.dp))
 
         Button(
-            onClick = {},
+            onClick = onSelectDateClicked,
             modifier = Modifier
                 .fillMaxWidth()
                 .border(width = 1.dp, color = Color(0xFFE4E5E7), shape = RoundedCornerShape(4.dp)),  // 회색 테두리 추가
@@ -279,7 +301,8 @@ fun OffScreen(){
                     modifier = Modifier.size(24.dp),  // 아이콘 크기 설정
                     tint = Color(0xFFAEB1B7)  // 아이콘 색상
                 )
-            }        }
+            }
+        }
     }
 
     Column(

@@ -19,7 +19,7 @@ import java.time.format.TextStyle
 import java.util.*
 
 @Composable
-fun CustomCalendar() {
+fun CustomCalendar(onDateSelected: (LocalDate) -> Unit) {
     // 현재 월과 선택된 날짜를 저장하는 상태 변수
     var currentMonth by remember { mutableStateOf(YearMonth.now()) }
     var selectedDate by remember { mutableStateOf<LocalDate?>(null) }
@@ -163,8 +163,3 @@ fun CustomCalendar() {
 
 
 
-@Preview(showBackground = true)
-@Composable
-fun Previewcalender() {
-    CustomCalendar()
-}
