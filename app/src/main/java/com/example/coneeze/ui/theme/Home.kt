@@ -41,6 +41,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.coneeze.HomePage.Category
 import com.example.coneeze.R
 
 
@@ -150,147 +151,21 @@ fun HomeScreen() {
                     .height(78.dp),
 
                 ) {
-                Column(
-                    modifier = Modifier
-                        .fillMaxHeight()
-                        .padding(end = 10.dp),
-                    horizontalAlignment = Alignment.CenterHorizontally
-
-
-                ) {
-                    Image(
-                        painter = painterResource(id = R.drawable.gray),  // 이미지 리소스 설정
-                        contentDescription = "배너 사진",
-                        modifier = Modifier
-                            .width(56.dp)
-                            .height(56.dp)
-                    )
-                    Spacer(modifier = Modifier.height(5.dp))
-                    Text(
-                        text = "전체",
-// Body/Caption 12 R
-                        style = TextStyle(
-                            fontSize = 12.sp,
-                            lineHeight = 16.sp,
-                            fontWeight = FontWeight(400),
-                            color = Color(0xFF484B51),
-                        )
-                    )
-                }
+                Category(text = "전체", action = { /*TODO*/ }, image = painterResource(id = R.drawable.gray) )
                 Spacer(modifier = Modifier.weight(1f))
-                Column(
-                    modifier = Modifier
-                        .fillMaxHeight()
-                        .padding(end = 10.dp),
-                    horizontalAlignment = Alignment.CenterHorizontally
-
-
-                ) {
-                    Image(
-                        painter = painterResource(id = R.drawable.gray),  // 이미지 리소스 설정
-                        contentDescription = "배너 사진",
-                        modifier = Modifier
-                            .width(56.dp)
-                            .height(56.dp)
-                    )
-                    Spacer(modifier = Modifier.height(5.dp))
-                    Text(
-                        text = "전체",
-// Body/Caption 12 R
-                        style = TextStyle(
-                            fontSize = 12.sp,
-                            lineHeight = 16.sp,
-                            fontWeight = FontWeight(400),
-                            color = Color(0xFF484B51),
-                        )
-                    )
-                }
+                Category(text = "전체", action = { /*TODO*/ }, image = painterResource(id = R.drawable.gray) )
                 Spacer(modifier = Modifier.weight(1f))
-                Column(
-                    modifier = Modifier
-                        .fillMaxHeight()
-                        .padding(end = 10.dp),
-                    horizontalAlignment = Alignment.CenterHorizontally
-
-
-                ) {
-                    Image(
-                        painter = painterResource(id = R.drawable.gray),  // 이미지 리소스 설정
-                        contentDescription = "배너 사진",
-                        modifier = Modifier
-                            .width(56.dp)
-                            .height(56.dp)
-                    )
-                    Spacer(modifier = Modifier.height(5.dp))
-                    Text(
-                        text = "전체",
-// Body/Caption 12 R
-                        style = TextStyle(
-                            fontSize = 12.sp,
-                            lineHeight = 16.sp,
-                            fontWeight = FontWeight(400),
-                            color = Color(0xFF484B51),
-                        )
-                    )
-                }
+                Category(text = "전체", action = { /*TODO*/ }, image = painterResource(id = R.drawable.gray) )
                 Spacer(modifier = Modifier.weight(1f))
-                Column(
-                    modifier = Modifier
-                        .fillMaxHeight()
-                        .padding(end = 10.dp),
-                    horizontalAlignment = Alignment.CenterHorizontally
-
-
-                ) {
-                    Image(
-                        painter = painterResource(id = R.drawable.gray),  // 이미지 리소스 설정
-                        contentDescription = "배너 사진",
-                        modifier = Modifier
-                            .width(56.dp)
-                            .height(56.dp)
-                    )
-                    Spacer(modifier = Modifier.height(5.dp))
-                    Text(
-                        text = "전체",
-// Body/Caption 12 R
-                        style = TextStyle(
-                            fontSize = 12.sp,
-                            lineHeight = 16.sp,
-                            fontWeight = FontWeight(400),
-                            color = Color(0xFF484B51),
-                        )
-                    )
-                }
+                Category(text = "전체", action = { /*TODO*/ }, image = painterResource(id = R.drawable.gray) )
                 Spacer(modifier = Modifier.weight(1f))
-                Column(
-                    modifier = Modifier
-                        .fillMaxHeight(),
-                    horizontalAlignment = Alignment.CenterHorizontally
+                Category(text = "전체", action = { /*TODO*/ }, image = painterResource(id = R.drawable.gray) )
 
 
-                ) {
-                    Image(
-                        painter = painterResource(id = R.drawable.gray),  // 이미지 리소스 설정
-                        contentDescription = "배너 사진",
-                        modifier = Modifier
-                            .width(56.dp)
-                            .height(56.dp)
-                    )
-                    Spacer(modifier = Modifier.height(5.dp))
-                    Text(
-                        text = "전체",
-// Body/Caption 12 R
-                        style = TextStyle(
-                            fontSize = 12.sp,
-                            lineHeight = 16.sp,
-                            fontWeight = FontWeight(400),
-                            color = Color(0xFF484B51),
-                        )
-                    )
                 }
 
             }
-        }
+
 
         Row(
             modifier = Modifier
@@ -315,7 +190,9 @@ fun HomeScreen() {
                     style = TextStyle(
                         fontSize = 18.sp,
                         lineHeight = 22.sp,
+                        fontFamily = surround,
                         fontWeight = FontWeight(700),
+                        color = Main600
 
                         )
                 )
