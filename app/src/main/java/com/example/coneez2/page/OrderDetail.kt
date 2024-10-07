@@ -49,6 +49,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.coneez2.R
 import com.example.coneez2.components.CustomTopBar
+import com.example.coneez2.components.ScrollableButton
 import com.example.coneez2.ui.theme.Main600
 
 @OptIn(ExperimentalMaterial3Api::class)  // 실험적 API 사용을 명시적으로 허용
@@ -82,7 +83,7 @@ fun OrderDetailScreen() {
 @Composable
 fun OrderDetailContent(){
     Column {
-        ScrollableButtonRow()
+        ScrollableButtonRow1()
 
         OrderCard(R.drawable.coffee1,"2026.11.11", "구매확정", "100% 아라비카 블렌드 바라던허니 스페셜티", "13,800원")
 
@@ -94,7 +95,7 @@ fun OrderDetailContent(){
 }
 
 @Composable
-fun ScrollableButtonRow() {
+fun ScrollableButtonRow1() {
     val selectedButton = remember { mutableStateOf("전체") }
 
     // Horizontal scroll state
@@ -118,37 +119,6 @@ fun ScrollableButtonRow() {
     }
 }
 
-@Composable
-fun ScrollableButton(text: String, selectedButton: MutableState<String>) {
-
-    Button(
-        modifier = Modifier
-            .height(36.dp)
-            .border(
-                width = 1.dp,
-                color = Color(0xFFE4E5E7),
-                shape = RoundedCornerShape(44.dp)
-            )  // 회색 테두리 추가
-            .height(36.dp),  // 버튼 높이를 명시적으로 36dp로 설정
-            contentPadding = PaddingValues(horizontal = 16.dp, vertical = 0.dp),  // 기본 패딩 제거
-        colors = ButtonDefaults.buttonColors(
-            containerColor = if (selectedButton.value == text) Main600 else Color.White,
-            contentColor = if (selectedButton.value == text) Color.White else Color.Black
-
-        ),
-        onClick = { selectedButton.value = text },
-        shape = RoundedCornerShape(44.dp),
-        content = {
-            Text(
-                text = text,
-                style = TextStyle(
-                    fontSize = 14.sp,
-                    fontWeight = FontWeight.SemiBold
-                )
-            )
-        }
-    )
-}
 
 @Composable
 fun OrderCard(@DrawableRes imageRes : Int, Date : String, OrderState :String, Name : String, Price : String){

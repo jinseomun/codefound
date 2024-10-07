@@ -36,6 +36,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.coneez2.R
 import com.example.coneez2.components.CustomTopBar
+import com.example.coneez2.components.Info
 
 @OptIn(ExperimentalMaterial3Api::class)  // 실험적 API 사용을 명시적으로 허용
 @Composable
@@ -259,13 +260,13 @@ fun MoreDetailContent(Date : String, @DrawableRes imageRes2 : Int, Name:String, 
 
                 Spacer(modifier = Modifier.height(10.dp))
 
-                payinfo(front = "총 상품 금액", back = Price)
+                Info(front = "총 상품 금액", back = Price)
 
-                payinfo(front = "배송비", back = "0원")
+                Info(front = "배송비", back = "0원")
 
-                payinfo(front = "할인 쿠폰", back = "-0원")
+                Info(front = "할인 쿠폰", back = "-0원")
 
-                payinfo(front = "결제 수단", back = "가상계좌")
+                Info(front = "결제 수단", back = "가상계좌")
 
                 // 총금액
                 Row(
@@ -303,36 +304,6 @@ fun MoreDetailContent(Date : String, @DrawableRes imageRes2 : Int, Name:String, 
     }
 }
 
-@Composable
-fun payinfo(front : String, back : String){
-    Row(
-        modifier = Modifier
-            .padding(vertical = 4.dp)
-            .fillMaxWidth(),
-        horizontalArrangement = Arrangement.SpaceBetween
-    ) {
-        Text(
-            text = front,
-            style = TextStyle(
-                fontSize = 16.sp,
-                lineHeight = 20.sp,
-                fontWeight = FontWeight.Medium
-            ),
-            color = Color.Gray
-        )
-
-        Text(
-            text = back,
-            style = TextStyle(
-                fontSize = 16.sp,
-                lineHeight = 20.sp,
-                fontWeight = FontWeight.Medium
-            ),
-            color = Color.Gray
-        )
-
-    }
-}
 
 @Preview(showBackground = true)
 @Composable
