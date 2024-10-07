@@ -40,22 +40,7 @@ import androidx.compose.ui.unit.sp
 import com.example.coneez2.R
 import com.example.coneez2.components.TopLogo
 import com.example.coneez2.ui.theme.Main600
-/*
-@Composable
-fun ReservationScreen(modifier: Modifier = Modifier) {
-    Box(
-        modifier = modifier
-            .fillMaxSize()
-    ) {
-        Column {
-            // 상단바
-            TopLogo()
-            //이미지 슬라이드
-            ImageSliderWithDotsIndicator()
-        }
-    }
-}
-*/
+
 @OptIn(ExperimentalMaterial3Api::class)  // 실험적 API 사용을 명시적으로 허용
 @Composable
 fun ReservationScreen(modifier: Modifier = Modifier) {
