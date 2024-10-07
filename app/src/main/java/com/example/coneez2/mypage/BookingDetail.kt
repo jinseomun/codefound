@@ -1,4 +1,4 @@
-package com.example.coneez2.Mypage
+package com.example.coneez2.mypage
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box

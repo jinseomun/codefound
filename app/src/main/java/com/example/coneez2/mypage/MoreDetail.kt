@@ -1,4 +1,4 @@
-package com.example.coneez2.Mypage
+package com.example.coneez2.mypage
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image

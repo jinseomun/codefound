@@ -1,17 +1,28 @@
-package com.example.coneez2.Testingpage
+package com.example.coneez2.testingpage
 
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.coneez2.Resevepage.FirstScreen
+import androidx.compose.ui.unit.dp
+import com.example.coneez2.R
 import com.example.coneez2.components.CustomTopBar
+import com.example.coneez2.components.RoundButton
 
 @OptIn(ExperimentalMaterial3Api::class)  // 실험적 API 사용을 명시적으로 허용
 @Composable
@@ -44,7 +55,29 @@ fun TestScreen(modifier: Modifier = Modifier) {
 
 @Composable
 fun TestContent(){
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(color = Color(0xFFF7F5F3))
+    ){
+        Column(){
+            Image(
+                painter = painterResource(id = R.drawable.testingthum), // 첫 번째 이미지 리소스
+                contentDescription = "testingthum",
+                contentScale = ContentScale.Crop,
+                modifier = Modifier.fillMaxWidth()
+            )
 
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 24.dp),
+                contentAlignment = Alignment.Center
+            ){
+                RoundButton(onClick = {}, "진행하기")
+            }
+        }
+    }
 }
 
 @Preview(showBackground = true)

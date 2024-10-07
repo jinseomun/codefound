@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -112,5 +113,25 @@ fun Bookinginfo(front : String, back : String){
             color = Color.Black
         )
 
+    }
+}
+
+@Composable
+fun RoundButton(onClick: () -> Unit, text: String) {
+    Button(
+        onClick = onClick,  // 클릭 시 동작할 함수
+        modifier = Modifier
+            .width(320.dp)  // 너비 설정
+            .height(48.dp),  // 높이 설정
+        shape = RoundedCornerShape(44.dp),  // 둥근 모서리 처리
+        colors = ButtonDefaults.buttonColors(containerColor = Main600)  // 배경색 설정
+    ) {
+        Text(
+            text = text,  // 버튼 텍스트
+            style = TextStyle(
+                color = Color.White,  // 텍스트 색상
+                fontSize = 16.sp  // 텍스트 크기
+            )
+        )
     }
 }

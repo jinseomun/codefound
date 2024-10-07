@@ -107,4 +107,60 @@ fun PrevNextButton() {
 }
 */
 
+@Composable
+fun PrevNextButton(
+    onPrevClick: () -> Unit,
+    onNextClick: () -> Unit,
+    isPrevEnabled: Boolean = true,
+    isNextEnabled: Boolean = true
+) {
+    Divider(color = Color(0xFFF1F2F3), thickness = 1.dp)
 
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 8.dp, horizontal = 20.dp),
+        contentAlignment = Alignment.Center
+    ) {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            Button(
+                onClick = onPrevClick,
+                modifier = Modifier
+                    .weight(1f)
+                    .height(48.dp),
+                shape = RoundedCornerShape(size = 4.dp),
+                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFF7F5F3)),
+                enabled = isPrevEnabled
+            ) {
+                Text(
+                    text = "이전",
+                    color = Main600,
+                    style = TextStyle(fontWeight = FontWeight.Bold),
+                    fontSize = 14.sp
+                )
+            }
+
+            Spacer(modifier = Modifier.width(8.dp))
+
+            Button(
+                onClick = onNextClick,
+                modifier = Modifier
+                    .weight(2.5f)
+                    .height(48.dp),
+                shape = RoundedCornerShape(size = 4.dp),
+                colors = ButtonDefaults.buttonColors(containerColor = Main600),
+                enabled = isNextEnabled
+            ) {
+                Text(
+                    text = "다음",
+                    color = Color.White,
+                    style = TextStyle(fontWeight = FontWeight.Bold),
+                    fontSize = 14.sp
+                )
+            }
+        }
+    }
+}
