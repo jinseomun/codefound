@@ -1,4 +1,4 @@
-package com.example.coneez2.page
+package com.example.coneez2.Resevepage
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
