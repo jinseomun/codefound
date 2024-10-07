@@ -1,4 +1,4 @@
-package com.example.coneeze.ui.theme
+package com.example.coneeze.HomePage
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -8,17 +8,12 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentHeight
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -30,19 +25,17 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
-import androidx.compose.ui.modifier.modifierLocalConsumer
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.Font
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.coneeze.HomePage.Category
 import com.example.coneeze.R
+import com.example.coneeze.ui.theme.Main600
+import com.example.coneeze.ui.theme.surround
 
 
 @Composable
@@ -167,38 +160,9 @@ fun HomeScreen() {
             }
 
 
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(8.dp)
-                .background(Color(0xFFF1F2F3))
-        ) {}
+       GrayLine()
 
-
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-        ) {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(start = 20.dp, top = 24.dp, bottom = 16.dp)
-            ) {
-                Text(
-                    text = "홍길동 님의 취향에 맞는 커피예요",
-// Headline/Title3 18 EB
-                    style = TextStyle(
-                        fontSize = 18.sp,
-                        lineHeight = 22.sp,
-                        fontFamily = surround,
-                        fontWeight = FontWeight(700),
-                        color = Main600
-
-                        )
-                )
-            }
-
-        }
+        Header("홍길동 님의 취향에 맞는 커피예요")
 
         Row(
             modifier = Modifier.fillMaxWidth()
@@ -263,34 +227,10 @@ fun HomeScreen() {
 
             }
         }
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(8.dp)
-                .background(Color(0xFFF1F2F3))
-        ) {}
 
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-        ) {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(start = 20.dp, top = 24.dp, bottom = 16.dp)
-            ) {
-                Text(
-                    text = "이전 구매 상품과 유사한 상품",
-// Headline/Title3 18 EB
-                    style = TextStyle(
-                        fontSize = 18.sp,
-                        lineHeight = 22.sp,
-                        fontWeight = FontWeight(700),
+        GrayLine()
 
-                        )
-                )
-            }
-        }
+        Header("이전 구매 상품과 유사한 상품")
 
         Row(
             modifier = Modifier.fillMaxWidth()
@@ -406,28 +346,7 @@ fun HomeScreen() {
 
         }
 
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-        ) {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(start = 20.dp, top = 24.dp, bottom = 16.dp)
-            ) {
-                Text(
-                    text = "커니즈 추천 베스트 상품",
-// Headline/Title3 18 EB
-                    style = TextStyle(
-                        fontSize = 18.sp,
-                        lineHeight = 22.sp,
-                        fontWeight = FontWeight(700),
-
-                        )
-                )
-            }
-
-        }
+        Header("커니즈 추천 베스트 상품")
 
         Row(
             modifier = Modifier
