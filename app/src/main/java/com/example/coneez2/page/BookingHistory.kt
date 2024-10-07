@@ -33,6 +33,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.coneez2.components.Bookinginfo
 import com.example.coneez2.components.CustomTopBar
 import com.example.coneez2.components.ScrollableButton
 
@@ -175,36 +176,7 @@ fun ScrollableButtonRow2() {
     }
 }
 
-@Composable
-fun Bookinginfo(front : String, back : String){
-    Row(
-        modifier = Modifier
-            .padding(vertical = 4.dp)
-            .fillMaxWidth(),
-        horizontalArrangement = Arrangement.SpaceBetween
-    ) {
-        Text(
-            text = front,
-            style = TextStyle(
-                fontSize = 16.sp,
-                lineHeight = 20.sp,
-                fontWeight = FontWeight.Medium
-            ),
-            color = Color.Gray
-        )
 
-        Text(
-            text = back,
-            style = TextStyle(
-                fontSize = 16.sp,
-                lineHeight = 20.sp,
-                fontWeight = FontWeight.Medium
-            ),
-            color = Color.Black
-        )
-
-    }
-}
 
 @Preview(showBackground = true)
 @Composable

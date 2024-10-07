@@ -83,3 +83,34 @@ fun Info(front : String, back : String){
 
     }
 }
+
+@Composable
+fun Bookinginfo(front : String, back : String){
+    Row(
+        modifier = Modifier
+            .padding(vertical = 4.dp)
+            .fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceBetween
+    ) {
+        Text(
+            text = front,
+            style = TextStyle(
+                fontSize = 16.sp,
+                lineHeight = 20.sp,
+                fontWeight = FontWeight.Medium
+            ),
+            color = Color.Gray
+        )
+
+        Text(
+            text = back,
+            style = TextStyle(
+                fontSize = 16.sp,
+                lineHeight = 20.sp,
+                fontWeight = FontWeight.Medium
+            ),
+            color = Color.Black
+        )
+
+    }
+}
