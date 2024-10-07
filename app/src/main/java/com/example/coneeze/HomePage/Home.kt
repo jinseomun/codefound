@@ -38,6 +38,17 @@ import com.example.coneeze.ui.theme.Main600
 import com.example.coneeze.ui.theme.surround
 
 
+import com.example.coneeze.data.coffeeImages1
+import com.example.coneeze.data.features1
+import com.example.coneeze.data.names1
+import com.example.coneeze.data.prices1
+
+import com.example.coneeze.data.coffeeImages2
+import com.example.coneeze.data.features2
+import com.example.coneeze.data.names2
+import com.example.coneeze.data.prices2
+
+
 @Composable
 fun HomeScreen() {
     val scrollState = rememberScrollState()
@@ -164,76 +175,23 @@ fun HomeScreen() {
 
         Header("홍길동 님의 취향에 맞는 커피예요")
 
-        RowScroll()
+        RowScroll(
+            names = names1,
+            features = features1,
+            images = coffeeImages1,
+            prices = prices1
+        )
 
         GrayLine()
 
         Header("이전 구매 상품과 유사한 상품")
 
-        Row(
-            modifier = Modifier.fillMaxWidth()
-
-        ) {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(start = 20.dp, bottom = 24.dp)
-            ) {
-                val languages = listOf(
-                    "브라질 산토스 NY2",
-                    "인도네시아 만델링 G1 프리미엄",
-                    "콜롬비아 후일라 수프리모",
-                    "과테말라 안티구아 SHB",
-                    "브라질 FC 세하도 파트로치니오"
-                )
-
-                val features = listOf(
-                    "고소, 담백",
-                    "고소, 깔끔",
-                    "스모키, 코코넛",
-                    "다크초콜릿, 호두",
-                    "부드러움, 캐러멜"
-                )
-                val coffeeImages = listOf(
-                    painterResource(id = R.drawable.brazil),
-                    painterResource(id = R.drawable.brazilfc),
-                    painterResource(id = R.drawable.guatemala),
-                    painterResource(id = R.drawable.indonesia),
-                    painterResource(id = R.drawable.colombia)
-                )
-
-                val prices = listOf(
-                    "5,800원",
-                    "9,200원",
-                    "7,500원",
-                    "7,500원",
-                    "5,900원"
-                )
-
-                Column {
-                    LazyRow(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                        // LazyRow가 화면 가로로 꽉 차도록 설정
-                    ) {
-                        itemsIndexed(languages) { index, language ->
-                            // 언어 리스트와 이미지 리스트를 매칭하여 RowItem에 전달
-                            if (index < coffeeImages.size && index < features.size && index < prices.size) {
-                                RowItem(
-                                    name = language,
-                                    image = coffeeImages[index],
-                                    feature = features[index],
-                                    price = prices[index]
-                                )
-                            }
-                        }
-                    }
-                }
-
-
-            }
-
-        }
+        RowScroll(
+            names = names2,
+            features = features2,
+            images = coffeeImages2,
+            prices = prices2
+        )
 
         ReviewBanner()
 

@@ -13,13 +13,20 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.coneeze.R
 
-import com.example.coneeze.data.names // 데이터 import
-import com.example.coneeze.data.features   // 데이터 import
-import com.example.coneeze.data.coffeeImages  // 데이터 import
-import com.example.coneeze.data.prices    // 데이터 import
+
+import com.example.coneeze.data.coffeeImages1
+import com.example.coneeze.data.features1
+import com.example.coneeze.data.names1
+import com.example.coneeze.data.prices1
+
 
 @Composable
-fun RowScroll() {
+fun RowScroll(
+    names: List<String>,
+    features: List<String>,
+    images: List<Int>,
+    prices: List<String>
+) {
     Row(
         modifier = Modifier.fillMaxWidth()
 
@@ -39,10 +46,10 @@ fun RowScroll() {
                 ) {
                     itemsIndexed(names) { index, language ->
                         // 언어 리스트와 이미지 리스트를 매칭하여 RowItem에 전달
-                        if (index < coffeeImages.size && index < features.size && index < prices.size) {
+                        if (index < images.size && index < features.size && index < prices.size) {
                             RowItem(
                                 name = language,
-                                image = painterResource(id = coffeeImages[index]),
+                                image = painterResource(id = images[index]),
                                 feature = features[index],
                                 price = prices[index]
                             )
@@ -59,5 +66,10 @@ fun RowScroll() {
 @Preview
 @Composable
 fun RowScrollPreview(){
-    RowScroll()
+    RowScroll(
+        names = names1,
+        features = features1,
+        images = coffeeImages1,
+        prices = prices1
+    )
 }
