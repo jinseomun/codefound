@@ -1,7 +1,9 @@
 package com.example.coneez2.components
 
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -159,6 +161,61 @@ fun PrevNextButton(
                     color = Color.White,
                     style = TextStyle(fontWeight = FontWeight.Bold),
                     fontSize = 14.sp
+                )
+            }
+        }
+    }
+}
+
+@Composable
+fun SurveyfinButton(
+    text1: String,
+    text2: String,
+    onText1Click: () -> Unit,  // 첫 번째 버튼 클릭 시 동작
+    onText2Click: () -> Unit   // 두 번째 버튼 클릭 시 동작
+) {
+    Divider(color = Color(0xFFF1F2F3), thickness = 1.dp)  // 하단에 회색 구분선 추가
+
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 8.dp, horizontal = 20.dp), // 상하 좌우 패딩 추가
+        contentAlignment = Alignment.Center // 중앙 정렬
+    ) {
+        Column {
+            // 첫 번째 버튼
+            Button(
+                onClick = onText1Click,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(48.dp),
+                shape = RoundedCornerShape(size = 4.dp),
+                colors = ButtonDefaults.buttonColors(containerColor = Main600)
+            ) {
+                Text(
+                    text = text1,
+                    color = Color.White,
+                    style = TextStyle(fontWeight = FontWeight.Bold),
+                    fontSize = 14.sp // 제목 텍스트 크기 설정
+                )
+            }
+            
+            Spacer(modifier = Modifier.height(8.dp))
+            // 두 번째 버튼
+            Button(
+                onClick = onText2Click,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(48.dp)
+                    .border(width = 1.dp, color = Main600, shape = RoundedCornerShape(4.dp)),  // 테두리 추가
+                shape = RoundedCornerShape(size = 4.dp),
+                colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent)
+            ) {
+                Text(
+                    text = text2,
+                    color = Main600,
+                    style = TextStyle(fontWeight = FontWeight.Bold),
+                    fontSize = 14.sp // 제목 텍스트 크기 설정
                 )
             }
         }
