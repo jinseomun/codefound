@@ -296,55 +296,8 @@ fun HomeScreen() {
             }
 
         }
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-        ) {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 20.dp, bottom = 20.dp)
-                    .height(100.dp)
-                    .background(Color(0xFFEBE5E0))
-            ) {
-                Column(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(top = 20.dp, bottom = 20.dp),
-                    horizontalAlignment = Alignment.CenterHorizontally
 
-
-                ) {
-                    Row() {
-                        Text(
-                            text = "커니즈 런칭 리뷰 이벤트",
-// Headline/Title2 20 EB
-                            style = TextStyle(
-                                fontSize = 20.sp,
-                                lineHeight = 24.sp,
-                                fontWeight = FontWeight(700),
-
-                                )
-                        )
-                    }
-                    Row() {
-                        Text(
-                            text = "전상품 구매 후 리뷰 작성 시 5% 적립금 증정!",
-                            style = TextStyle(
-                                fontSize = 16.sp,
-                                lineHeight = 20.sp,
-                                fontWeight = FontWeight(400),
-                                textAlign = TextAlign.Center,
-                            )
-                        )
-                    }
-
-
-                }
-            }
-
-
-        }
+        ReviewBanner()
 
         Header("커니즈 추천 베스트 상품")
 
@@ -418,70 +371,7 @@ fun HomeScreen() {
     }
 }
 
-@Composable
-fun RowItem(name: String, image: Painter,feature: String, price : String) {
-    Card(
-        modifier = Modifier
-            .padding(end = 10.dp)
-            .width(122.dp)
-            .height(188.dp),  // 각 항목의 너비를 고정
-        colors = CardDefaults.cardColors(
-            containerColor = Color.White
-        ),
 
-        ) {
-        Column(
-        ) {
-            Image(
-                painter = image,  // 이미지 리소스 설정
-                contentDescription = "배너 사진",
-                modifier = Modifier
-                    .width(122.dp)
-                    .height(122.dp)
-            )
-            Text(
-                text = name,
-                modifier = Modifier
-                    .padding(top=8.dp),
-                style = TextStyle(
-                    fontSize = 14.sp,
-                    lineHeight = 18.sp,
-                    fontWeight = FontWeight(600),
-                    ),
-                maxLines = 1,  // 한 줄로 제한
-                overflow = TextOverflow.Ellipsis)
-
-            Text(
-                text = feature,
-
-                // Body/Caption 12 R
-                style = TextStyle(
-                    fontSize = 12.sp,
-                    lineHeight = 16.sp,
-                    fontWeight = FontWeight(400),
-                    color = Color(0xFF60646C)
-                )
-            )
-
-            Text(
-                text = price,
-
-                style = TextStyle(
-                    fontSize = 16.sp,
-                    lineHeight = 20.sp,
-                    fontWeight = FontWeight(600),
-
-                )
-            )
-
-
-
-
-
-
-        }
-    }
-}
 
 @Composable
 fun ColumnItem(name: String, image: Painter,feature: String, price : String) {
