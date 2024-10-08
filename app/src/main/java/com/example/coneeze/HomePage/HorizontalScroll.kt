@@ -33,15 +33,26 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.coneeze.R
+import com.example.coneeze.data.OriginPrices
+import com.example.coneeze.data.Percents
+import com.example.coneeze.data.SaleFeatures
+import com.example.coneeze.data.SaleImages
+import com.example.coneeze.data.SaleNames
+import com.example.coneeze.data.SalePrices
 import com.example.coneeze.data.coffeeImages3
 import com.example.coneeze.data.features3
 import com.example.coneeze.data.names3
 import com.example.coneeze.data.prices3
+import com.example.coneeze.data.tagbackgroundColors
+import com.example.coneeze.data.tags
+import com.example.coneeze.data.tagtextColors
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun HorizontalScroll(
-    page: Int
+    page: Int,
+    pageContent: @Composable (Int) -> Unit
+
 
 ) {
     // state 정의
@@ -70,12 +81,7 @@ fun HorizontalScroll(
                 Orientation.Horizontal
             )
         ) { page ->
-            twobytwo(
-                names = names3,
-                features = features3,
-                images = coffeeImages3,
-                prices = prices3
-            )
+           pageContent(page)
         }
         Spacer(modifier = Modifier.height(16.dp))
 
@@ -106,5 +112,21 @@ fun HorizontalScroll(
 fun HorizontalScrollPreview(){
 
 
-    HorizontalScroll(3)
+    HorizontalScroll(
+        page = 3,
+        pageContent = { page ->
+            // 페이지 내용으로 SaleCategory를 전달
+            SaleCategory(
+                image = SaleImages,
+                name = SaleNames,
+                feature = SaleFeatures,
+                percent = Percents,
+                price = SalePrices,
+                origin_price = OriginPrices,
+                tagCategory = tags,
+                tagBackgroundColor = tagbackgroundColors,
+                tagTextColor = tagtextColors
+            )
+        }
+    )
 }
