@@ -1,5 +1,6 @@
 package com.example.coneeze.HomePage
 
+import KeywordPrice
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -198,6 +199,25 @@ fun HomeScreen() {
         Header("커니즈 추천 베스트 상품")
 
        HorizontalScroll()
+
+        GrayLine()
+
+        Header("선물하기 좋은 상품")
+
+        KeywordPrice()
+
+        Spacer(modifier = Modifier.height(16.dp))
+        RowScroll(
+            names = names1,
+            features = features1,
+            images = coffeeImages1,
+            prices = prices1
+        )
+
+        OnedayBanner()
+
+        Header("특가/혜택 상품")
+
     }
 }
 
