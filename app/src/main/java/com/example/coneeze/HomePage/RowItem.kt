@@ -22,6 +22,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.coneeze.R
+import com.example.coneeze.ui.theme.suit
 
 @Composable
 fun RowItem(name: String, image: Painter, feature: String, price : String) {
@@ -58,6 +59,7 @@ fun RowItem(name: String, image: Painter, feature: String, price : String) {
                 style = TextStyle(
                     fontSize = 14.sp,
                     lineHeight = 18.sp,
+                    fontFamily = suit,
                     fontWeight = FontWeight(600),
                 ),
                 maxLines = 1,  // 한 줄로 제한
@@ -70,6 +72,7 @@ fun RowItem(name: String, image: Painter, feature: String, price : String) {
                 style = TextStyle(
                     fontSize = 12.sp,
                     lineHeight = 16.sp,
+                    fontFamily = suit,
                     fontWeight = FontWeight(400),
                     color = Color(0xFF60646C)
                 )
@@ -81,6 +84,7 @@ fun RowItem(name: String, image: Painter, feature: String, price : String) {
                 style = TextStyle(
                     fontSize = 16.sp,
                     lineHeight = 20.sp,
+                    fontFamily = suit,
                     fontWeight = FontWeight(600),
 
                     )

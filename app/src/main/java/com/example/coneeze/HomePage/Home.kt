@@ -94,6 +94,7 @@ fun HomeScreen() {
                     .fillMaxSize()
                     .padding(paddingValues)
             ) {
+                /*
                 item { ExplainBanner() }
 
                 item { ReserveTest() }
@@ -127,6 +128,9 @@ fun HomeScreen() {
                 }
 
                 item { ReviewBanner() }
+
+                */
+
 
                 item { Header("커니즈 추천 베스트 상품") }
 
@@ -168,7 +172,7 @@ fun HomeScreen() {
 }
 
 @Composable
-@Preview(showBackground = true, widthDp = 400, heightDp = 3000)
+@Preview(showBackground = true, widthDp = 400, heightDp = 2000)
 fun HomePreview() {
     HomeScreen()
 }
