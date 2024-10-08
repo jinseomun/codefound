@@ -18,10 +18,10 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.BottomSheetScaffold
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberBottomSheetScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -55,12 +55,35 @@ fun SecondScreen() {
     BottomSheetScaffold(
         scaffoldState = sheetState,
         sheetContent = {
-            CustomCalendar(
-                onDateSelected = { selectedDate ->
-                    scope.launch { sheetState.bottomSheetState.hide() }
-                    // 날짜를 선택했을 때 처리할 로직 추가 가능
-                }
-            )
+
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(color = Color.White)
+            ) {
+                // 드래그 핸들 표시
+
+                // 달력 (CustomCalendar 컴포저블 호출)
+                CustomCalendar(
+                    onDateSelected = { selectedDate ->
+                        scope.launch { sheetState.bottomSheetState.hide() }
+                        // 날짜 선택 시 추가 동작
+                    }
+                )
+
+                Spacer(modifier = Modifier.height(16.dp))
+
+                // Divider 추가
+                Divider(color = Color.Gray, thickness = 1.dp)
+
+                Spacer(modifier = Modifier
+                    .height(16.dp)
+                    .padding(horizontal = 16.dp)
+                )
+
+
+            }
+
         },
         sheetPeekHeight = 0.dp,
         topBar = {
