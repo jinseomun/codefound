@@ -23,7 +23,11 @@ import androidx.compose.ui.unit.sp
 import com.example.coneez2.ui.theme.Main600
 
 @Composable
-fun ScrollableButton(text: String, selectedButton: MutableState<String>) {
+fun ScrollableButton(
+    text: String,
+    selectedButton: MutableState<String>,
+    fontSize: Int = 14 // 기본 폰트 크기를 14sp로 설정
+) {
 
     Button(
         modifier = Modifier
@@ -46,7 +50,7 @@ fun ScrollableButton(text: String, selectedButton: MutableState<String>) {
             Text(
                 text = text,
                 style = TextStyle(
-                    fontSize = 14.sp,
+                    fontSize = fontSize.sp,
                     fontWeight = FontWeight.SemiBold
                 )
             )

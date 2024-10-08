@@ -3,6 +3,7 @@ package com.example.coneez2.resevepage
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -14,15 +15,17 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.BottomSheetScaffold
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.ModalBottomSheet
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.rememberBottomSheetScaffoldState
+import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -43,83 +46,116 @@ import com.example.coneez2.R
 import com.example.coneez2.components.CustomCalendar
 import com.example.coneez2.components.CustomTopBar
 import com.example.coneez2.components.NextButton
+import com.example.coneez2.components.ScrollableButton
+import com.example.coneez2.ui.theme.Main600
 import kotlinx.coroutines.launch
+
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SecondScreen() {
-    val sheetState = rememberBottomSheetScaffoldState()
+fun SecondScreenWithModalBottomSheet() {
+    var isBottomSheetVisible by remember { mutableStateOf(false) }
     val scope = rememberCoroutineScope()
+    val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
 
-    BottomSheetScaffold(
-        scaffoldState = sheetState,
-        sheetContent = {
-
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .background(color = Color.White)
-            ) {
-                // 드래그 핸들 표시
-
-                // 달력 (CustomCalendar 컴포저블 호출)
-                CustomCalendar(
-                    onDateSelected = { selectedDate ->
-                        scope.launch { sheetState.bottomSheetState.hide() }
-                        // 날짜 선택 시 추가 동작
+    Box(modifier = Modifier.fillMaxSize()) {
+        // ContentScreen2를 항상 표시
+        Scaffold(
+            topBar = {
+                CustomTopBar(
+                    title = "커니즈 서비스",
+                    showNavigationIcon = false,
+                    showActionIcon = true,
+                    onNavigationClick = { /* 네비게이션 클릭 동작 */ },
+                    onActionClick = { /* 액션 버튼 클릭 동작 */ }
+                )
+            },
+            content = { innerPadding ->
+                Column(
+                    modifier = Modifier
+                        .padding(innerPadding)
+                        .fillMaxSize()
+                ) {
+                    // 메인 콘텐츠
+                    Box(modifier = Modifier.weight(1f)) {
+                        ContentScreen2(
+                            onSelectDateClicked = {
+                                isBottomSheetVisible = true // 버튼 클릭 시 ModalBottomSheet 표시
+                            }
+                        )
                     }
-                )
-
-                Spacer(modifier = Modifier.height(16.dp))
-
-                // Divider 추가
-                Divider(color = Color.Gray, thickness = 1.dp)
-
-                Spacer(modifier = Modifier
-                    .height(16.dp)
-                    .padding(horizontal = 16.dp)
-                )
-
-
+                    // NextButton을 하단에 배치
+                    NextButton("예약하기")
+                }
             }
+        )
 
-        },
-        sheetPeekHeight = 0.dp,
-        topBar = {
-            CustomTopBar(
-                title = "커니즈 서비스",
-                showNavigationIcon = false,
-                showActionIcon = true,
-                onNavigationClick = { /* 네비게이션 클릭 동작 */ },
-                onActionClick = { /* 액션 버튼 클릭 동작 */ }
-            )
-        },
-        content = { innerPadding ->
-            Column(
-                modifier = Modifier
-                    .padding(innerPadding)
-                    .fillMaxSize()
+        // ModalBottomSheet를 독립적으로 표시
+        if (isBottomSheetVisible) {
+            ModalBottomSheet(
+                onDismissRequest = { isBottomSheetVisible = false },
+                sheetState = sheetState,
+                containerColor = Color.White,
+                scrimColor = Color.Black.copy(alpha = 0.3f), // 투명도 30%로 설정
+
             ) {
-                // 메인 콘텐츠
-                Box(modifier = Modifier.weight(1f)) {
-                    ContentScreen2(
-                        onSelectDateClicked = {
-                            scope.launch { sheetState.bottomSheetState.expand() }
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .background(color = Color.White)
+                ) {
+
+                    // 달력 (CustomCalendar 컴포저블 호출)
+                    CustomCalendar(
+                        onDateSelected = { selectedDate ->
+                            scope.launch { sheetState.hide() }
+                            isBottomSheetVisible = false // 날짜 선택 후 ModalBottomSheet 닫기
                         }
                     )
+
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    // Divider 추가
+                    Divider(
+                        color = Color(0xFFE4E5E7),
+                        thickness = 1.dp,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 24.dp))
+
+                    Spacer(modifier = Modifier.height(24.dp))
+
+                    Text(
+                        text = "시간 선택",
+                        style = TextStyle(
+                            fontSize = 16.sp,
+                            fontWeight = FontWeight.SemiBold
+                        ),
+                        modifier = Modifier.padding(horizontal = 24.dp)
+                    )
+
+                    Spacer(modifier = Modifier.height(4.dp))
+
+
+                    ScrollableButtonRow_time()
+
+                    Spacer(modifier = Modifier.height(36.dp))
+
+                    SheetButtonRow(onClose = { isBottomSheetVisible = false })
+
+                    Spacer(modifier = Modifier.height(36.dp))
+
                 }
-                // NextButton을 하단에 배치
-                NextButton("예약하기")
             }
         }
-    )
+    }
 }
-
 
 @Composable
 fun ContentScreen2(onSelectDateClicked: () -> Unit) {
     var selectedMode by remember { mutableStateOf("온라인") }  // 기본값은 "온라인"
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -160,17 +196,16 @@ fun ContentScreen2(onSelectDateClicked: () -> Unit) {
                         title = "온라인",
                         isSelected = selectedMode == "온라인",
                         onClick = { selectedMode = "온라인" },
-                        modifier = Modifier.weight(1f) // 남은 공간을 균등하게 차지
-
+                        modifier = Modifier.weight(1f)
                     )
 
-                    Spacer(modifier = Modifier.width(16.dp)) // 버튼 간 간격 설정
+                    Spacer(modifier = Modifier.width(16.dp))
 
                     ModeButton(
                         title = "오프라인",
                         isSelected = selectedMode == "오프라인",
                         onClick = { selectedMode = "오프라인" },
-                        modifier = Modifier.weight(1f) // 남은 공간을 균등하게 차지
+                        modifier = Modifier.weight(1f)
                     )
                 }
             }
@@ -179,20 +214,17 @@ fun ContentScreen2(onSelectDateClicked: () -> Unit) {
         Spacer(modifier = Modifier.height(40.dp))
 
         // "인원수" 텍스트
-        Box(
-        ) {
+        Box {
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-
                 Text(
                     text = "인원수",
                     style = TextStyle(fontSize = 16.sp, fontWeight = FontWeight.Bold),
                     color = Color.Black,
                 )
 
-                // 인원수 조절 버튼
                 Box(
                     modifier = Modifier
                         .fillMaxWidth(),
@@ -203,11 +235,9 @@ fun ContentScreen2(onSelectDateClicked: () -> Unit) {
             }
         }
 
-        // 오프라인일 경우에만 예약 일정 및 방문 주소 표시
         if (selectedMode == "오프라인"){
             OffScreen(onSelectDateClicked)
         }
-
     }
 }
 
@@ -341,13 +371,89 @@ fun OffScreen(onSelectDateClicked: () -> Unit) {
         Spacer(modifier = Modifier.height(8.dp))
         Text(text = "서울시 서초구 강남대로 545-4, 8층 커니즈 교육센터", color = Color.Gray)
     }
-
-
 }
 
+@Composable
+fun ScrollableButtonRow_time() {
+    val selectedButton = remember { mutableStateOf("") }
+
+    // Horizontal scroll state
+    val scrollState = rememberScrollState()
+
+    // Row with horizontal scroll enabled
+    Row(
+        modifier = Modifier
+            .horizontalScroll(scrollState) // Row가 좌우로 스크롤 가능하도록 설정
+            .padding(horizontal = 20.dp, vertical = 8.dp)
+    ) {
+        ScrollableButton("10:00", selectedButton, fontSize = 16)
+        Spacer(modifier = Modifier.width(8.dp))
+        ScrollableButton("10:30", selectedButton, fontSize = 16)
+        Spacer(modifier = Modifier.width(8.dp))
+        ScrollableButton("11:00", selectedButton, fontSize = 16)
+        Spacer(modifier = Modifier.width(8.dp))
+        ScrollableButton("11:30", selectedButton, fontSize = 16)
+        Spacer(modifier = Modifier.width(8.dp))
+        ScrollableButton("12:00", selectedButton, fontSize = 16)
+    }
+}
+
+@Composable
+fun SheetButtonRow(onClose: () -> Unit) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 24.dp),
+        horizontalArrangement = Arrangement.SpaceBetween // 버튼들 사이에 간격 추가
+    ) {
+        Button(
+            onClick = { onClose() }, // 닫기 버튼 클릭 시 onClose 호출
+            modifier = Modifier
+                .height(54.dp)
+                .weight(1f)
+                .border(
+                    width = 1.dp,
+                    color = Main600,
+                    shape = RoundedCornerShape(4.dp)
+                ),  // 회색 테두리 추가
+            shape = RoundedCornerShape(4.dp),  // 둥근 모서리 정도를 명시적으로 설정
+            colors = ButtonDefaults.buttonColors(containerColor = Color.White)
+        ) {
+            Text(
+                text = "닫기",
+                color = Main600,
+                style = TextStyle(fontWeight = FontWeight.Bold),
+                fontSize = 16.sp
+            )
+        }
+
+        Spacer(modifier = Modifier.width(16.dp))
+
+        Button(
+            onClick = { onClose() }, // 확인 버튼 클릭 시 onClose 호출
+            modifier = Modifier
+                .height(54.dp)
+                .weight(1f)
+                .border(
+                    width = 1.dp,
+                    color = Main600,
+                    shape = RoundedCornerShape(4.dp)
+                ),  // 회색 테두리 추가
+            shape = RoundedCornerShape(4.dp),  // 둥근 모서리 정도를 명시적으로 설정
+            colors = ButtonDefaults.buttonColors(containerColor = Main600)
+        ) {
+            Text(
+                text = "확인",
+                color = Color.White,
+                style = TextStyle(fontWeight = FontWeight.Bold),
+                fontSize = 16.sp
+            )
+        }
+    }
+}
 
 @Preview(showBackground = true)
 @Composable
 fun Preview2() {
-    SecondScreen()
+    SecondScreenWithModalBottomSheet()
 }
