@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.rememberScrollState
@@ -61,12 +62,10 @@ import com.example.coneeze.data.prices2
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen() {
-    val scrollState = rememberScrollState()
-
     Scaffold(
-        topBar = { // TopBar
+        topBar = {
             TopAppBar(
-                title = { Text(text = "" )},
+                title = { Text(text = "") },
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(56.dp)
@@ -79,102 +78,97 @@ fun HomeScreen() {
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Image(
-                            painter = painterResource(id = R.drawable.logo),  // 이미지 리소스 설정
+                            painter = painterResource(id = R.drawable.logo),
                             contentDescription = "커니즈 로고",
                             modifier = Modifier
                                 .width(137.dp)
                                 .height(24.dp)
                         )
                     }
-                }
-                ,
+                },
             )
         },
-
-        content = {
-            Column(
+        content = { paddingValues ->
+            LazyColumn(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(it)
-                    .verticalScroll(scrollState)
+                    .padding(paddingValues)
             ) {
+                item { ExplainBanner() }
 
+                item { ReserveTest() }
 
-                ExplainBanner()
+                item { Category() }
 
+                item { GrayLine() }
 
-                ReserveTest()
+                item { Header("홍길동 님의 취향에 맞는 커피예요") }
 
-                Category()
+                item {
+                    RowScroll(
+                        names = names1,
+                        features = features1,
+                        images = coffeeImages1,
+                        prices = prices1
+                    )
+                }
 
-                GrayLine()
+                item { GrayLine() }
 
-                Header("홍길동 님의 취향에 맞는 커피예요")
+                item { Header("이전 구매 상품과 유사한 상품") }
 
-                RowScroll(
-                    names = names1,
-                    features = features1,
-                    images = coffeeImages1,
-                    prices = prices1
-                )
+                item {
+                    RowScroll(
+                        names = names2,
+                        features = features2,
+                        images = coffeeImages2,
+                        prices = prices2
+                    )
+                }
 
-                GrayLine()
+                item { ReviewBanner() }
 
-                Header("이전 구매 상품과 유사한 상품")
+                item { Header("커니즈 추천 베스트 상품") }
 
-                RowScroll(
-                    names = names2,
-                    features = features2,
-                    images = coffeeImages2,
-                    prices = prices2
-                )
+                item { HorizontalScroll() }
 
-                ReviewBanner()
+                item { GrayLine() }
 
-                Header("커니즈 추천 베스트 상품")
+                item { Header("선물하기 좋은 상품") }
 
-                HorizontalScroll()
+                item { KeywordPrice() }
 
-                GrayLine()
+                item { Spacer(modifier = Modifier.height(16.dp)) }
 
-                Header("선물하기 좋은 상품")
+                item {
+                    RowScroll(
+                        names = names1,
+                        features = features1,
+                        images = coffeeImages1,
+                        prices = prices1
+                    )
+                }
 
-                KeywordPrice()
+                item { OnedayBanner() }
 
-                Spacer(modifier = Modifier.height(16.dp))
-                RowScroll(
-                    names = names1,
-                    features = features1,
-                    images = coffeeImages1,
-                    prices = prices1
-                )
-
-                OnedayBanner()
-
-                Header("특가/혜택 상품")
-
+                item { Header("특가/혜택 상품") }
             }
         },
         bottomBar = {
-            BottomAppBar(
-            ) {
+            BottomAppBar {
                 IconButton(onClick = {}) {
-
+                    // 버튼 1
                 }
                 IconButton(onClick = {}) {
-
+                    // 버튼 2
                 }
             }
         }
     )
-
 }
 
 @Composable
-@Preview(showBackground = true)
+@Preview(showBackground = true, widthDp = 400, heightDp = 3000)
 fun HomePreview() {
-
     HomeScreen()
 }
-
-
