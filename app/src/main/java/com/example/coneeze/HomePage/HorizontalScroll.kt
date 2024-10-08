@@ -40,13 +40,16 @@ import com.example.coneeze.data.prices3
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun HorizontalScroll() {
+fun HorizontalScroll(
+    page: Int
+
+) {
     // state 정의
     val state = rememberPagerState(
         initialPage = 0,
         initialPageOffsetFraction = 0f
     ) {
-       3 // provide pageCount
+       page // provide pageCount
     }
 
     Column(
@@ -82,7 +85,7 @@ fun HorizontalScroll() {
             horizontalArrangement = Arrangement.Center //내부 요소들을 중앙정렬
         ) {
 
-                repeat(3) { index ->
+                repeat(page) { index ->
                     val color = if (state.currentPage == index) Color.Black else Color.Gray
                     Box(
                         modifier = Modifier
@@ -103,5 +106,5 @@ fun HorizontalScroll() {
 fun HorizontalScrollPreview(){
 
 
-    HorizontalScroll()
+    HorizontalScroll(3)
 }

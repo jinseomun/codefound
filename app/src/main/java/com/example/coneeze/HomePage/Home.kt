@@ -134,7 +134,7 @@ fun HomeScreen() {
 
                 item { Header("커니즈 추천 베스트 상품") }
 
-                item { HorizontalScroll() }
+                item { HorizontalScroll(3) }
 
                 item { GrayLine() }
 
