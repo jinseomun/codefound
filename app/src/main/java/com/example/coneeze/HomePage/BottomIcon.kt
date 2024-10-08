@@ -14,6 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
@@ -26,12 +27,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.coneeze.R
 import com.example.coneeze.ui.theme.Gray10
+import com.example.coneeze.ui.theme.Main600
 import com.example.coneeze.ui.theme.suit
 
 @Composable
 fun BottomIcon(
     image: Painter,
     text: String,
+    selected: Boolean,
     action: () -> Unit
 ) {
     Button(
@@ -59,7 +62,13 @@ fun BottomIcon(
 
                 modifier = Modifier
                     .width(32.dp)
-                    .height(32.dp)
+                    .height(32.dp),
+
+                colorFilter = if(selected){
+                    ColorFilter.tint(Main600)
+                } else{
+                    null
+                }
 
             )
 
@@ -72,7 +81,7 @@ fun BottomIcon(
                     lineHeight = 16.sp,
                     fontFamily = suit,
                     fontWeight = FontWeight(400),
-                    color = Gray10,
+                    color = if (selected) Main600 else Gray10,
                     textAlign = TextAlign.Center,
                 )
             )
@@ -86,6 +95,7 @@ fun BottomIconPreview(){
     BottomIcon(
         image = painterResource(id = R.drawable.coffee),
         text = "예약",
-        action = {}
+        action = {},
+        selected = true
     )
 }
