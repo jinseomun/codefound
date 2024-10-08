@@ -2,6 +2,8 @@ package com.example.coneeze.HomePage
 
 import KeywordPrice
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -20,6 +22,7 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -33,6 +36,7 @@ import com.example.coneeze.data.SalePrices
 
 
 import com.example.coneeze.data.coffeeImages1
+import com.example.coneeze.data.coffeeImages2
 import com.example.coneeze.data.coffeeImages3
 import com.example.coneeze.data.features1
 import com.example.coneeze.data.names1
@@ -47,6 +51,7 @@ import com.example.coneeze.data.prices3
 import com.example.coneeze.data.tagbackgroundColors
 import com.example.coneeze.data.tags
 import com.example.coneeze.data.tagtextColors
+import com.example.coneeze.ui.theme.Gray10
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -84,7 +89,7 @@ fun HomeScreen() {
                     .fillMaxSize()
                     .padding(paddingValues)
             ) {
-                /*
+
                 item { ExplainBanner() }
 
                 item { ReserveTest() }
@@ -116,7 +121,7 @@ fun HomeScreen() {
                         prices = prices2
                     )
                 }
-*/
+
                 item { ReviewBanner() }
 
 
@@ -179,20 +184,22 @@ fun HomeScreen() {
             }
         },
         bottomBar = {
-            BottomAppBar {
-                IconButton(onClick = {}) {
-                    // 버튼 1
-                }
-                IconButton(onClick = {}) {
-                    // 버튼 2
-                }
+            BottomAppBar(
+                modifier = Modifier
+                    .height(80.dp) // 크기 설정
+                    .border(2.dp, Gray10),
+                containerColor = Color.White
+
+                // 테두리 설정
+            ) {
+                BottomIconRow()
             }
         }
     )
 }
 
 @Composable
-@Preview(showBackground = true, widthDp = 400, heightDp = 2000)
+@Preview(showBackground = true)
 fun HomePreview() {
     HomeScreen()
 }
