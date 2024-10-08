@@ -74,41 +74,8 @@ fun HomeScreen() {
             )
         }
 
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-        ) {
-            Image(
-                painter = painterResource(id = R.drawable.grandma),  // 이미지 리소스 설정
-                contentDescription = "배너 사진",
-                modifier = Modifier
-                    .fillMaxWidth() //가로 꽉 채우면 늘어나서
-                    .aspectRatio(2942f / 1961f) // 그에 맞춰서 세로 크기도 늘리기
-            )
-            Text(
-                text = "에티오피아 고산지대의\n향기로움을 맛보세요",
-                style = TextStyle(
-                    fontSize = 22.sp,
-                    lineHeight = 28.sp,
-                    fontWeight = FontWeight(800),
-                    color = Color.White,
-                ),
-                modifier = Modifier
-                    .padding(start = 28.dp, top = 130.dp)
-            )
-            Text(
-                text = "에티오피아 예가체프 G1",
-// Body/Body3 14 R
-                style = TextStyle(
-                    fontSize = 14.sp,
-                    lineHeight = 18.sp,
-                    fontWeight = FontWeight(400),
-                    color = Color.White,
-                ),
-                modifier = Modifier
-                    .padding(start = 28.dp, top = 190.dp)
-            )
-        }
+        ExplainBanner()
+
 
         Row(
             modifier = Modifier
