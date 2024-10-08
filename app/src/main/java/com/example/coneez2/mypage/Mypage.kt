@@ -32,12 +32,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.coneez2.R
 import com.example.coneez2.components.TopLogo
 
 @OptIn(ExperimentalMaterial3Api::class)  // 실험적 API 사용을 명시적으로 허용
 @Composable
-fun MypageScreen() {
+fun MypageScreen(navController: NavController) {
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
 
     Scaffold(
@@ -174,5 +176,6 @@ fun TextAndIcon(text : String){
 @Preview(showBackground = true)
 @Composable
 fun Previewmypage() {
-    MypageScreen()
+    val navController = rememberNavController()
+    MypageScreen(navController)
 }

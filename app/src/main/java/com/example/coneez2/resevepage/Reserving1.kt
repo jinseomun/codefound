@@ -37,6 +37,8 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.coneez2.R
 import com.example.coneez2.components.CustomTopBar
 import com.example.coneez2.components.NextButton
@@ -44,7 +46,7 @@ import com.example.coneez2.ui.theme.Main600
 
 @OptIn(ExperimentalMaterial3Api::class)  // 실험적 API 사용을 명시적으로 허용
 @Composable
-fun FirstScreen() {
+fun FirstScreen(navController: NavController) {
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
 
     Scaffold(
@@ -55,7 +57,7 @@ fun FirstScreen() {
                 showNavigationIcon = false, // 네비게이션 아이콘을 보여줌
                 showActionIcon = true,    // 액션 아이콘을 숨김
                 onNavigationClick = { /* 네비게이션 클릭 동작 */ },
-                onActionClick = { /* 액션 버튼 클릭 동작 */ }
+                onActionClick = { navController.popBackStack("reservation", inclusive = false)  }
             )
         },
         content = { innerPadding ->
@@ -66,7 +68,8 @@ fun FirstScreen() {
         },
         bottomBar = {
             // 하단 바에 NextButton 추가
-            NextButton("다음"){}
+            NextButton(onClick = {navController.navigate("reserving2") }, "다음"
+            )
         }
     )
 }
@@ -166,5 +169,6 @@ fun ServiceButton(title: String, description: String) {
 @Preview(showBackground = true)
 @Composable
 fun Preview1() {
-    FirstScreen()
+    val navController = rememberNavController()
+    FirstScreen(navController = navController)
 }

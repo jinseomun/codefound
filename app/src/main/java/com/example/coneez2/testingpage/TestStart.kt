@@ -20,13 +20,15 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.coneez2.R
 import com.example.coneez2.components.CustomTopBar
 import com.example.coneez2.components.RoundButton
 
 @OptIn(ExperimentalMaterial3Api::class)  // 실험적 API 사용을 명시적으로 허용
 @Composable
-fun TestScreen(modifier: Modifier = Modifier) {
+fun TestScreen(navController: NavController, modifier: Modifier = Modifier) {
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
 
     Scaffold(
@@ -43,7 +45,7 @@ fun TestScreen(modifier: Modifier = Modifier) {
         content = { innerPadding ->
             Box(modifier = Modifier.padding(innerPadding)) {
                 // 메인 콘텐츠
-                TestContent()
+                TestContent(navController)
             }
 
         },
@@ -54,7 +56,7 @@ fun TestScreen(modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun TestContent(){
+fun TestContent(navController: NavController){
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -74,7 +76,7 @@ fun TestContent(){
                     .padding(top = 24.dp),
                 contentAlignment = Alignment.Center
             ){
-                RoundButton(onClick = {}, "진행하기")
+                RoundButton(onClick = {navController.navigate("survey") }, "진행하기")
             }
         }
     }
@@ -83,5 +85,6 @@ fun TestContent(){
 @Preview(showBackground = true)
 @Composable
 fun PreviewTest() {
-    TestScreen()
+    val navController = rememberNavController()
+    TestScreen(navController)
 }

@@ -30,6 +30,8 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.coneez2.R
 import com.example.coneez2.components.RoundButton
 import com.example.coneez2.components.TopLogo
@@ -37,7 +39,7 @@ import com.example.coneez2.ui.theme.Main600
 
 @OptIn(ExperimentalMaterial3Api::class)  // 실험적 API 사용을 명시적으로 허용
 @Composable
-fun ReservationScreen(modifier: Modifier = Modifier) {
+fun ReservationScreen(navController: NavController, modifier: Modifier = Modifier) {
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
 
     Scaffold(
@@ -48,7 +50,7 @@ fun ReservationScreen(modifier: Modifier = Modifier) {
         content = { innerPadding ->
             Box(modifier = Modifier.padding(innerPadding)) {
                 // 메인 콘텐츠
-                ImageSliderWithDotsIndicator()
+                ImageSliderWithDotsIndicator(navController)
             }
         },
         bottomBar = {
@@ -59,7 +61,7 @@ fun ReservationScreen(modifier: Modifier = Modifier) {
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun ImageSliderWithDotsIndicator() {
+fun ImageSliderWithDotsIndicator(navController: NavController) {
     val pagerState = rememberPagerState(pageCount = { 4 }) // 페이지 개수를 4로 설정
     Box(
         modifier = Modifier
@@ -132,15 +134,15 @@ fun ImageSliderWithDotsIndicator() {
                     .padding(top = 24.dp),
                 contentAlignment = Alignment.Center
             ){
-                RoundButton(onClick = {}, "예약하기")
+                RoundButton(onClick = {navController.navigate("reserving1") }, "예약하기")
             }
         }
     }
 }
 
-
 @Preview(showBackground = true)
 @Composable
 fun PreviewReservation() {
-    ReservationScreen()
+    val navController = rememberNavController()
+    ReservationScreen(navController)
 }

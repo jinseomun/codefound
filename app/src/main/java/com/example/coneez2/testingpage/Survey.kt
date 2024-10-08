@@ -31,6 +31,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.coneez2.components.CustomTopBar
 import com.example.coneez2.components.PrevNextButton
 import com.example.coneez2.ui.theme.Main600
@@ -38,7 +40,7 @@ import com.example.coneez2.ui.theme.cafeFontFamily
 
 @OptIn(ExperimentalMaterial3Api::class)  // 실험적 API 사용을 명시적으로 허용
 @Composable
-fun SurveyScreen() {
+fun SurveyScreen(navController: NavController) {
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
 
     val questions = listOf(
@@ -65,7 +67,7 @@ fun SurveyScreen() {
                 showNavigationIcon = false, // 네비게이션 아이콘을 보여줌
                 showActionIcon = true,    // 액션 아이콘을 숨김
                 onNavigationClick = { /* 네비게이션 클릭 동작 */ },
-                onActionClick = { /* 액션 버튼 클릭 동작 */ }
+                onActionClick = { navController.navigate("teststart") }
             )
         },
         content = { innerPadding ->
@@ -89,7 +91,7 @@ fun SurveyScreen() {
                         contentAlignment = Alignment.Center
                     ) {
                         Button(
-                            onClick = { /* 결과보기 클릭 시 동작 */ },
+                            onClick = { navController.navigate("result")  },
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .height(48.dp),
@@ -196,5 +198,6 @@ fun SurveyButton(
 @Preview(showBackground = true)
 @Composable
 fun PreviewSurvey() {
-    SurveyScreen()
+    val navController = rememberNavController()
+    SurveyScreen(navController)
 }

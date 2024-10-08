@@ -33,20 +33,22 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.coneez2.R
 import com.example.coneez2.components.CustomTopBar
 import com.example.coneez2.components.Info
 
 @OptIn(ExperimentalMaterial3Api::class)  // 실험적 API 사용을 명시적으로 허용
 @Composable
-fun MoreDetailScreen() {
+fun MoreDetailScreen(navController: NavController) {
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
 
     Scaffold(
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
             CustomTopBar(
-                title = "주문 내역",
+                title = "주문 상세",
                 showNavigationIcon = true, // 네비게이션 아이콘을 보여줌
                 showActionIcon = false,    // 액션 아이콘을 숨김
                 onNavigationClick = { /* 네비게이션 클릭 동작 */ },
@@ -307,5 +309,6 @@ fun MoreDetailContent(Date : String, @DrawableRes imageRes2 : Int, Name:String, 
 @Preview(showBackground = true)
 @Composable
 fun Previewmoredetail() {
-    MoreDetailScreen()
+    val navController = rememberNavController()
+    MoreDetailScreen(navController)
 }

@@ -47,6 +47,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.coneez2.R
 import com.example.coneez2.components.CustomCalendar
 import com.example.coneez2.components.CustomTopBar
@@ -61,7 +63,7 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SecondScreenWithModalBottomSheet() {
+fun SecondScreenWithModalBottomSheet(navController: NavController) {
     var isBottomSheetVisible by remember { mutableStateOf(false) }
     var isPopupVisible by remember { mutableStateOf(false) } // 팝업 표시 여부
     val scope = rememberCoroutineScope()
@@ -76,7 +78,7 @@ fun SecondScreenWithModalBottomSheet() {
                     showNavigationIcon = false,
                     showActionIcon = true,
                     onNavigationClick = { /* 네비게이션 클릭 동작 */ },
-                    onActionClick = { /* 액션 버튼 클릭 동작 */ }
+                    onActionClick = { navController.popBackStack("reservation", inclusive = false) }
                 )
             },
             content = { innerPadding ->
@@ -94,9 +96,10 @@ fun SecondScreenWithModalBottomSheet() {
                         )
                     }
                     // NextButton을 하단에 배치
-                    NextButton("예약하기"){
-                        isPopupVisible = true // 버튼 클릭 시 팝업 표시
-                    }
+                    NextButton(
+                        onClick = { isPopupVisible = true},
+                        "예약하기"
+                    )
                 }
             }
         )
@@ -149,7 +152,7 @@ fun SecondScreenWithModalBottomSheet() {
                         Spacer(modifier = Modifier.height(24.dp))
 
                         Button(
-                            onClick = { isPopupVisible = false },
+                            onClick = { navController.navigate("reservation")  },
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .padding(horizontal = 16.dp)
@@ -533,5 +536,6 @@ fun SheetButtonRow(onClose: () -> Unit) {
 @Preview(showBackground = true)
 @Composable
 fun Preview2() {
-    SecondScreenWithModalBottomSheet()
+    val navController = rememberNavController()
+    SecondScreenWithModalBottomSheet(navController = navController)
 }

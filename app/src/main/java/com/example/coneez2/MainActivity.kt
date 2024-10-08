@@ -9,6 +9,8 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.navigation.compose.rememberNavController
+import com.example.coneez2.components.NavGraph
 import com.example.coneez2.resevepage.SecondScreenWithModalBottomSheet
 import com.example.coneez2.ui.theme.Coneez2Theme
 
@@ -22,10 +24,16 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    SecondScreenWithModalBottomSheet()
+                    MyApp()
                 }
             }
         }
     }
 }
 
+
+@Composable
+fun MyApp() {
+    val navController = rememberNavController()
+    NavGraph(navController = navController)
+}
