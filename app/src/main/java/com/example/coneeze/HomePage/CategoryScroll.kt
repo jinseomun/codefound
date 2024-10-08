@@ -12,7 +12,7 @@ import androidx.compose.ui.unit.dp
 import com.example.coneeze.R
 
 @Composable
-fun Category(){
+fun CategoryScroll(){
 Row(
 modifier = Modifier
 .fillMaxWidth()
