@@ -39,7 +39,7 @@ import com.example.coneez2.ui.theme.Main600
 
 @OptIn(ExperimentalMaterial3Api::class)  // 실험적 API 사용을 명시적으로 허용
 @Composable
-fun ReservationScreen(navController: NavController, modifier: Modifier = Modifier) {
+fun ReservationScreen(navController: NavController) {
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
 
     Scaffold(

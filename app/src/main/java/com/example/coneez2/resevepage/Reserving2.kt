@@ -33,7 +33,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -62,7 +61,6 @@ import com.example.coneez2.ui.theme.cafeFontFamily
 import java.time.LocalDate
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
-import java.util.UUID
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -70,7 +68,6 @@ import java.util.UUID
 fun SecondScreenWithModalBottomSheet(navController: NavController) {
     var isBottomSheetVisible by remember { mutableStateOf(false) }
     var isPopupVisible by remember { mutableStateOf(false) } // 팝업 표시 여부
-    val scope = rememberCoroutineScope()
     val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
 
     // 상태 변수들
@@ -79,9 +76,7 @@ fun SecondScreenWithModalBottomSheet(navController: NavController) {
     var selectedDate by rememberSaveable { mutableStateOf<LocalDate?>(null) }
 
     // 예약 데이터 저장을 위한 상태 변수
-    var progressMethod by remember { mutableStateOf("") }
-    var numberOfReservations by remember { mutableStateOf(1) }
-    var bookingDate by remember { mutableStateOf<LocalDate?>(null) }
+
     val date = LocalDate.now(ZoneId.of("Asia/Seoul")) // 한국 시간대로 설정
 
     Box(modifier = Modifier.fillMaxSize()) {

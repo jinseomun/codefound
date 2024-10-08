@@ -28,7 +28,7 @@ import com.example.coneez2.components.RoundButton
 
 @OptIn(ExperimentalMaterial3Api::class)  // 실험적 API 사용을 명시적으로 허용
 @Composable
-fun TestScreen(navController: NavController, modifier: Modifier = Modifier) {
+fun TestScreen(navController: NavController) {
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
 
     Scaffold(

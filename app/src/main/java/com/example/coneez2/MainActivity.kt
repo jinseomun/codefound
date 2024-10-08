@@ -6,12 +6,10 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
 import com.example.coneez2.components.NavGraph
-import com.example.coneez2.resevepage.SecondScreenWithModalBottomSheet
 import com.example.coneez2.ui.theme.Coneez2Theme
 
 class MainActivity : ComponentActivity() {
