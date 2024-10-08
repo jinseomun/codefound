@@ -26,42 +26,55 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.example.coneez2.components.BookingRepository
 import com.example.coneez2.components.Bookinginfo
 import com.example.coneez2.components.CustomTopBar
 import com.example.coneez2.components.Info
 
-@OptIn(ExperimentalMaterial3Api::class)  // 실험적 API 사용을 명시적으로 허용
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun BookingDetailScreen(navController: NavController) {
+fun BookingDetailScreen(navController: NavController, bookingId: String?) {
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
+
+    // 예약 목록 (실제로는 ViewModel이나 Repository에서 데이터를 가져옵니다)
+    val bookings = BookingRepository.bookings
+
+
+    // 예약 ID로 해당 예약을 찾습니다.
+    val booking = bookings.find { it.bookingId == bookingId }
 
     Scaffold(
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
             CustomTopBar(
                 title = "예약 상세",
-                showNavigationIcon = true, // 네비게이션 아이콘을 보여줌
-                showActionIcon = false,    // 액션 아이콘을 숨김
-                onNavigationClick = { /* 네비게이션 클릭 동작 */ },
+                showNavigationIcon = true,
+                showActionIcon = false,
+                onNavigationClick = { navController.navigate("예약내역") },
                 onActionClick = { /* 액션 버튼 클릭 동작 */ }
             )
         },
         content = { innerPadding ->
             Box(modifier = Modifier.padding(innerPadding)) {
-                // 메인 콘텐츠
-                BookingDetailContent()
+                booking?.let {
+                    // 예약 상세 정보를 표시합니다.
+                    BookingDetailContent(it)
+                } ?: run {
+                    // 예약 정보를 찾을 수 없는 경우 메시지를 표시합니다.
+                    Text("예약 정보를 찾을 수 없습니다.")
+                }
             }
         },
         bottomBar = {
-            // 하단 바에 NextButton 추가
+            // 하단 바 추가 가능
         }
     )
 }
 
 @Composable
-fun BookingDetailContent() {
+fun BookingDetailContent(booking: Booking) {
     Column {
-        //첫 박스
+        // 첫 번째 박스
         Box(
             modifier = Modifier
                 .padding(horizontal = 20.dp)
@@ -69,25 +82,21 @@ fun BookingDetailContent() {
                 .fillMaxWidth(),
         ) {
             Column {
-                Box(
-                    modifier = Modifier
-                ) {
-                    Text(
-                        text = "기본 정보",
-                        style = TextStyle(
-                            fontSize = 18.sp,
-                            fontWeight = FontWeight.Bold
-                        )
+                Text(
+                    text = "기본 정보",
+                    style = TextStyle(
+                        fontSize = 18.sp,
+                        fontWeight = FontWeight.Bold
                     )
-                }
+                )
                 Spacer(modifier = Modifier.height(16.dp))
-                Bookinginfo(front = "예약 번호", back = "123456789")
-                Bookinginfo(front = "예약 상태", back = "예약 신청")
+                Bookinginfo(front = "예약 번호", back = booking.bookingId)
+                Bookinginfo(front = "예약 상태", back = BOOKING_STATE)
             }
         }
-        Divider(color = Color(0xFFF1F2F3), thickness = 1.dp)  // 하단에 회색 구분선 추가
+        Divider(color = Color(0xFFF1F2F3), thickness = 1.dp)
 
-        //둘째 박스
+        // 두 번째 박스
         Box(
             modifier = Modifier
                 .padding(horizontal = 20.dp)
@@ -95,27 +104,24 @@ fun BookingDetailContent() {
                 .fillMaxWidth(),
         ) {
             Column {
-                Box(
-                    modifier = Modifier
-                ) {
-                    Text(
-                        text = "예약 상세 정보",
-                        style = TextStyle(
-                            fontSize = 18.sp,
-                            fontWeight = FontWeight.Bold
-                        )
+                Text(
+                    text = "예약 상세 정보",
+                    style = TextStyle(
+                        fontSize = 18.sp,
+                        fontWeight = FontWeight.Bold
                     )
-                }
+                )
                 Spacer(modifier = Modifier.height(16.dp))
-                Bookinginfo(front = "예약 서비스명", back = "향기로운 커피 원데이 클래스")
-                Bookinginfo(front = "예약 일자", back = "2026.11.11")
-                Bookinginfo(front = "진행 방식", back = "오프라인")
-                Bookinginfo(front = "예약 인원수", back = "6명")
+                Bookinginfo(front = "예약 서비스명", back = booking.serviceName)
+                Bookinginfo(front = "예약 일자", back = booking.bookingDate)
+                Bookinginfo(front = "진행 방식", back = booking.progressMethod) // 필요한 경우 Booking 클래스에 추가
+                Bookinginfo(front = "예약 인원수", back = booking.numberOfReservations)
             }
         }
 
-        Divider(color = Color(0xFFF1F2F3), thickness = 1.dp)  // 하단에 회색 구분선 추가
+        Divider(color = Color(0xFFF1F2F3), thickness = 1.dp)
 
+        // 세 번째 박스
         Box(
             modifier = Modifier
                 .padding(horizontal = 20.dp)
@@ -123,26 +129,22 @@ fun BookingDetailContent() {
                 .fillMaxWidth(),
         ) {
             Column {
-                Box(
-                    modifier = Modifier
-                ) {
-                    Text(
-                        text = "결제 정보",
-                        style = TextStyle(
-                            fontSize = 18.sp,
-                            fontWeight = FontWeight.Bold
-                        )
+                Text(
+                    text = "결제 정보",
+                    style = TextStyle(
+                        fontSize = 18.sp,
+                        fontWeight = FontWeight.Bold
                     )
-                }
+                )
                 Spacer(modifier = Modifier.height(16.dp))
-                Info(front = "결제 수단", back = "가상 계좌")
-                Info(front = "결제 상태", back = "결제 완료")
-                Info(front = "결제 일시", back = "2026.11.11")
+                Info(front = "결제 수단", back = PAYMENT_METHOD)
+                Info(front = "결제 상태", back = PAYMENT_STATUS)
+                Info(front = "결제 일시", back = booking.date)
 
-                // 총금액
+                // 총 결제 금액
                 Row(
                     modifier = Modifier
-                        .padding(vertical = 4.dp)
+                        .padding(vertical = 0.dp)
                         .fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically
@@ -158,7 +160,7 @@ fun BookingDetailContent() {
                     )
 
                     Text(
-                        text = "20,000원",
+                        text = TOTAL_AMOUNT,
                         style = TextStyle(
                             fontSize = 22.sp,
                             lineHeight = 20.sp,
@@ -166,22 +168,16 @@ fun BookingDetailContent() {
                         ),
                         color = Color.Black
                     )
-
                 }
             }
-
         }
     }
 }
 
-@Composable
-fun BookingDetailCard() {
-
-}
-
 @Preview(showBackground = true)
 @Composable
-fun Previewbookingdetail() {
+fun PreviewBookingDetail() {
     val navController = rememberNavController()
-    BookingDetailScreen(navController)
+    val sampleBookingId = "123456789" // 실제 예약 데이터에 있는 bookingId를 사용하세요
+    BookingDetailScreen(navController = navController, bookingId = sampleBookingId)
 }

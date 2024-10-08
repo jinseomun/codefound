@@ -2,8 +2,10 @@ package com.example.coneez2.components
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.navArgument
 import com.example.coneez2.mypage.BookingDetailScreen
 import com.example.coneez2.mypage.BookingHistoryScreen
 import com.example.coneez2.mypage.MoreDetailScreen
@@ -18,7 +20,7 @@ import com.example.coneez2.testingpage.TestScreen
 
 @Composable
 fun NavGraph(navController: NavHostController) {
-    NavHost(navController = navController, startDestination = "마이페이지") {
+    NavHost(navController = navController, startDestination = "reserving2") {
         composable("reservation") { ReservationScreen(navController)}
         composable("reserving1") { FirstScreen(navController) }
         composable("reserving2") { SecondScreenWithModalBottomSheet(navController) }
@@ -27,10 +29,20 @@ fun NavGraph(navController: NavHostController) {
         composable("result") { ResultScreen(navController) }
         composable("마이페이지") { MypageScreen(navController) }
         composable("주문내역") { OrderDetailScreen(navController) }
-        composable("주문상세") { MoreDetailScreen(navController) }
+        composable(
+            route = "주문상세/{orderId}",
+            arguments = listOf(navArgument("orderId") { type = NavType.StringType })
+        ) { backStackEntry ->
+            val orderId = backStackEntry.arguments?.getString("orderId")
+            MoreDetailScreen(navController, orderId) }
         composable("예약내역") { BookingHistoryScreen(navController) }
-        composable("예약상세") { BookingDetailScreen(navController) }
-
+        composable(
+            route = "예약상세/{bookingId}",
+            arguments = listOf(navArgument("bookingId") { type = NavType.StringType })
+        ) { backStackEntry ->
+            val bookingId = backStackEntry.arguments?.getString("bookingId")
+            BookingDetailScreen(navController, bookingId)
+        }
 
 
     }

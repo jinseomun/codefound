@@ -2,6 +2,7 @@ package com.example.coneez2.mypage
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -13,19 +14,20 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowRight
-import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -47,10 +49,41 @@ import com.example.coneez2.R
 import com.example.coneez2.components.CustomTopBar
 import com.example.coneez2.components.ScrollableButton
 
+data class Order(
+    val orderId: String,
+    val date: String,
+    val orderState: String,
+    val name: String,
+    val price: String,
+    @DrawableRes val imageRes: Int
+)
+
 @OptIn(ExperimentalMaterial3Api::class)  // 실험적 API 사용을 명시적으로 허용
 @Composable
 fun OrderDetailScreen(navController: NavController) {
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
+
+    val selectedButton = remember { mutableStateOf("전체") }
+
+    val orders = listOf(
+        Order(
+            orderId = "2024111109162123456",
+            date = "2026.11.11",
+            orderState = "구매 확정",
+            name = "100% 아라비카 블렌드 바라던허니 스페셜티",
+            price = "13,800원",
+            imageRes = R.drawable.coffee1
+        ),
+        Order(
+            orderId = "2024111109162123457",
+            date = "2026.11.02",
+            orderState = "배송 완료",
+            name = "에티오피아 코케허니 예가체프G1 스페셜티",
+            price = "12,200원",
+            imageRes = R.drawable.coffee2
+        ),
+    )
+
 
     Scaffold(
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
@@ -59,14 +92,29 @@ fun OrderDetailScreen(navController: NavController) {
                 title = "주문 내역",
                 showNavigationIcon = true, // 네비게이션 아이콘을 보여줌
                 showActionIcon = false,    // 액션 아이콘을 숨김
-                onNavigationClick = { /* 네비게이션 클릭 동작 */ },
+                onNavigationClick = { navController.navigate("마이페이지") },
                 onActionClick = { /* 액션 버튼 클릭 동작 */ }
             )
         },
         content = { innerPadding ->
             Box(modifier = Modifier.padding(innerPadding)) {
-                // 메인 콘텐츠
-                OrderDetailContent()
+                Column {
+                    // 2. selectedButton을 ScrollableButtonRow1에 전달합니다.
+                    ScrollableButtonRow1(selectedButton)
+
+                    // 3. selectedButton의 값에 따라 주문 목록을 필터링합니다.
+                    val filteredOrders = if (selectedButton.value == "전체") {
+                        orders
+                    } else {
+                        orders.filter { it.orderState == selectedButton.value }
+                    }
+
+                    LazyColumn {
+                        items(filteredOrders) { order ->
+                            OrderCard(order, navController)
+                        }
+                    }
+                }
             }
         },
         bottomBar = {
@@ -76,23 +124,7 @@ fun OrderDetailScreen(navController: NavController) {
 }
 
 @Composable
-fun OrderDetailContent(){
-    Column {
-        ScrollableButtonRow1()
-
-        OrderCard(R.drawable.coffee1,"2026.11.11", "구매확정", "100% 아라비카 블렌드 바라던허니 스페셜티", "13,800원")
-
-        Divider(color = Color(0xFFF1F2F3), thickness = 1.dp)  // 하단에 회색 구분선 추가
-
-        OrderCard(R.drawable.coffee2,"2026.11.02", "배송완료", "에티오피아 코케허니 예가체프G1 스페셜티", "12,200원")
-
-    }
-}
-
-@Composable
-fun ScrollableButtonRow1() {
-    val selectedButton = remember { mutableStateOf("전체") }
-
+fun ScrollableButtonRow1(selectedButton: MutableState<String>) {
     // Horizontal scroll state
     val scrollState = rememberScrollState()
 
@@ -116,7 +148,7 @@ fun ScrollableButtonRow1() {
 
 
 @Composable
-fun OrderCard(@DrawableRes imageRes : Int, Date : String, OrderState :String, Name : String, Price : String){
+fun OrderCard(order: Order, navController: NavController) {
     Box(
         modifier = Modifier
             .padding(horizontal = 20.dp)
@@ -127,13 +159,12 @@ fun OrderCard(@DrawableRes imageRes : Int, Date : String, OrderState :String, Na
         Column {
             //첫줄
             Row(
-                modifier = Modifier
-                    .fillMaxWidth(),
+                modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
-                    text = Date,
+                    text = order.date,
                     style = TextStyle(
                         fontSize = 22.sp,
                         fontWeight = FontWeight.Bold
@@ -142,7 +173,10 @@ fun OrderCard(@DrawableRes imageRes : Int, Date : String, OrderState :String, Na
 
                 //주문상세
                 Row(
-                    verticalAlignment = Alignment.CenterVertically
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier.clickable(onClick = {
+                        navController.navigate("주문상세/${order.orderId}")
+                    })
                 ) {
                     Text(
                         text = "주문상세",
@@ -152,18 +186,12 @@ fun OrderCard(@DrawableRes imageRes : Int, Date : String, OrderState :String, Na
                         ),
                         color = Color.Gray
                     )
-                    IconButton(
-                        onClick = { },
-                        modifier = Modifier.size(24.dp),  // 버튼 크기를 명시적으로 설정
-
-                    ) {
-                        Icon(
-                            imageVector = Icons.Filled.KeyboardArrowRight,  // 네비게이션 아이콘 (왼쪽 아이콘)
-                            contentDescription = "Back",
-                            modifier = Modifier.size(24.dp),
-                            tint = Color.LightGray
-                        )
-                    }
+                    Icon(
+                        imageVector = Icons.Filled.KeyboardArrowRight,  // 네비게이션 아이콘 (왼쪽 아이콘)
+                        contentDescription = "Next",
+                        modifier = Modifier.size(24.dp),
+                        tint = Color.LightGray
+                    )
 
                 }
             }
@@ -172,7 +200,7 @@ fun OrderCard(@DrawableRes imageRes : Int, Date : String, OrderState :String, Na
             //구매확정
             Box {
                 Text(
-                    text = OrderState,
+                    text = order.orderState,
                     style = TextStyle(
                         fontSize = 14.sp,
                         fontWeight = FontWeight.Medium
@@ -185,7 +213,7 @@ fun OrderCard(@DrawableRes imageRes : Int, Date : String, OrderState :String, Na
 
             Row {
                 Image(
-                    painter = painterResource(id = imageRes),
+                    painter = painterResource(id = order.imageRes),
                     contentDescription = "oreder1",
                     contentScale = ContentScale.Crop,
                     modifier = Modifier
@@ -197,7 +225,7 @@ fun OrderCard(@DrawableRes imageRes : Int, Date : String, OrderState :String, Na
 
                 Column {
                     Text(
-                        text = Name,
+                        text = order.name,
                         style = TextStyle(
                             fontSize = 15.sp,
                             lineHeight = 18.sp,
@@ -224,7 +252,7 @@ fun OrderCard(@DrawableRes imageRes : Int, Date : String, OrderState :String, Na
                     Spacer(modifier = Modifier.height(1.dp))
 
                     Text(
-                        text = Price,
+                        text = order.price,
                         style = TextStyle(
                             fontSize = 15.sp,
                             lineHeight = 18.sp,
@@ -232,7 +260,7 @@ fun OrderCard(@DrawableRes imageRes : Int, Date : String, OrderState :String, Na
                             color = Color(0xFF303236),
                         ),
 
-                    )
+                        )
 
                 }
 

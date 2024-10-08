@@ -1,6 +1,5 @@
 package com.example.coneez2.mypage
 
-import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -41,8 +40,28 @@ import com.example.coneez2.components.Info
 
 @OptIn(ExperimentalMaterial3Api::class)  // 실험적 API 사용을 명시적으로 허용
 @Composable
-fun MoreDetailScreen(navController: NavController) {
+fun MoreDetailScreen(navController: NavController, orderId: String?) {
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
+    val orders = listOf(
+        Order(
+            orderId = "2024111109162123456",
+            date = "2026.11.11",
+            orderState = "구매확정",
+            name = "100% 아라비카 블렌드 바라던허니 스페셜티",
+            price = "13,800원",
+            imageRes = R.drawable.coffee1
+        ),
+        Order(
+            orderId = "2024111109162123457",
+            date = "2026.11.02",
+            orderState = "배송완료",
+            name = "에티오피아 코케허니 예가체프G1 스페셜티",
+            price = "12,200원",
+            imageRes = R.drawable.coffee2
+        ),
+    )
+
+    val order = orders.find { it.orderId == orderId }
 
     Scaffold(
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
@@ -51,14 +70,17 @@ fun MoreDetailScreen(navController: NavController) {
                 title = "주문 상세",
                 showNavigationIcon = true, // 네비게이션 아이콘을 보여줌
                 showActionIcon = false,    // 액션 아이콘을 숨김
-                onNavigationClick = { /* 네비게이션 클릭 동작 */ },
+                onNavigationClick = { navController.navigate("주문내역")  },
                 onActionClick = { /* 액션 버튼 클릭 동작 */ }
             )
         },
         content = { innerPadding ->
             Box(modifier = Modifier.padding(innerPadding)) {
-                // 메인 콘텐츠
-                MoreDetailContent("2026.11.11", R.drawable.coffee1, "100% 아라비카 블렌드 바라던허니 스페셜티", "13,800원")
+                order?.let {
+                    MoreDetailContent(it)
+                } ?: run {
+                    Text("주문 정보를 찾을 수 없습니다.")
+                }
             }
         },
         bottomBar = {
@@ -68,7 +90,7 @@ fun MoreDetailScreen(navController: NavController) {
 }
 
 @Composable
-fun MoreDetailContent(Date : String, @DrawableRes imageRes2 : Int, Name:String, Price : String) {
+fun MoreDetailContent(order: Order) {
     Column() {
 
         //첫 박스
@@ -82,7 +104,7 @@ fun MoreDetailContent(Date : String, @DrawableRes imageRes2 : Int, Name:String, 
                     .padding(horizontal = 20.dp, vertical = 24.dp)
             ) {
                 Text(
-                    text = Date,
+                    text = order.date,
                     style = TextStyle(
                         fontSize = 22.sp,
                         fontWeight = FontWeight.Bold
@@ -92,7 +114,7 @@ fun MoreDetailContent(Date : String, @DrawableRes imageRes2 : Int, Name:String, 
                 Spacer(modifier = Modifier.height(6.dp))
 
                 Text(
-                    text = "주문번호 2024111109162123456",
+                    text = "주문번호 ${order.orderId}",
                     style = TextStyle(
                         fontSize = 14.sp,
                         fontWeight = FontWeight.Medium
@@ -126,7 +148,7 @@ fun MoreDetailContent(Date : String, @DrawableRes imageRes2 : Int, Name:String, 
                 Spacer(modifier = Modifier.height(14.dp))
 
                 Text(
-                    text = "홍길동",
+                    text = order.name,
                     style = TextStyle(
                         fontSize = 16.sp,
                         lineHeight = 20.sp,
@@ -183,7 +205,7 @@ fun MoreDetailContent(Date : String, @DrawableRes imageRes2 : Int, Name:String, 
 
                 Row {
                     Image(
-                        painter = painterResource(id = imageRes2),
+                        painter = painterResource(id = order.imageRes),
                         contentDescription = "oreder1",
                         contentScale = ContentScale.Crop,
                         modifier = Modifier
@@ -195,7 +217,7 @@ fun MoreDetailContent(Date : String, @DrawableRes imageRes2 : Int, Name:String, 
 
                     Column {
                         Text(
-                            text = Name,
+                            text = order.name,
                             style = TextStyle(
                                 fontSize = 15.sp,
                                 lineHeight = 18.sp,
@@ -222,7 +244,7 @@ fun MoreDetailContent(Date : String, @DrawableRes imageRes2 : Int, Name:String, 
                         Spacer(modifier = Modifier.height(1.dp))
 
                         Text(
-                            text = Price,
+                            text = order.price,
                             style = TextStyle(
                                 fontSize = 15.sp,
                                 lineHeight = 18.sp,
@@ -261,7 +283,7 @@ fun MoreDetailContent(Date : String, @DrawableRes imageRes2 : Int, Name:String, 
 
                 Spacer(modifier = Modifier.height(10.dp))
 
-                Info(front = "총 상품 금액", back = Price)
+                Info(front = "총 상품 금액", back = order.price)
 
                 Info(front = "배송비", back = "0원")
 
@@ -288,7 +310,7 @@ fun MoreDetailContent(Date : String, @DrawableRes imageRes2 : Int, Name:String, 
                     )
 
                     Text(
-                        text = Price,
+                        text = order.price,
                         style = TextStyle(
                             fontSize = 18.sp,
                             lineHeight = 20.sp,
@@ -310,5 +332,7 @@ fun MoreDetailContent(Date : String, @DrawableRes imageRes2 : Int, Name:String, 
 @Composable
 fun Previewmoredetail() {
     val navController = rememberNavController()
-    MoreDetailScreen(navController)
+    val sampleOrderId = "2024111109162123456"
+
+    MoreDetailScreen(navController = navController, orderId = sampleOrderId)
 }

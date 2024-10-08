@@ -23,7 +23,9 @@ import java.time.format.TextStyle
 import java.util.*
 
 @Composable
-fun CustomCalendar(onDateSelected: (LocalDate) -> Unit) {
+fun CustomCalendar(
+    onDateSelected: (LocalDate) -> Unit
+) {
     // 현재 월과 선택된 날짜를 저장하는 상태 변수
     var currentMonth by remember { mutableStateOf(YearMonth.now()) }
     var selectedDate by remember { mutableStateOf<LocalDate?>(null) }
@@ -142,8 +144,12 @@ fun CustomCalendar(onDateSelected: (LocalDate) -> Unit) {
                                 color = if (selectedDate != null && selectedDate == date) Color.LightGray else Color.Transparent,
                                 shape = CircleShape
                             )
-                            .clickable { if (date != null && date.month == currentMonth.month) selectedDate = date } // 현재 달만 선택 가능하도록 수정
-                    ) {
+                            .clickable {
+                                if (date != null && date.month == currentMonth.month) {
+                                    selectedDate = date
+                                    onDateSelected(date) // 콜백 호출 추가
+                                }
+                            }                    ) {
                         Text(
                             text = dateText,
                             fontSize = 16.sp,

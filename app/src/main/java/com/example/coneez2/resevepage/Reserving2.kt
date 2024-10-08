@@ -18,7 +18,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
@@ -35,6 +34,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -50,15 +50,19 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.coneez2.R
+import com.example.coneez2.components.BookingRepository
 import com.example.coneez2.components.CustomCalendar
 import com.example.coneez2.components.CustomTopBar
 import com.example.coneez2.components.NextButton
 import com.example.coneez2.components.ScrollableButton
+import com.example.coneez2.mypage.Booking
 import com.example.coneez2.ui.theme.Main600
 import com.example.coneez2.ui.theme.Main800
 import com.example.coneez2.ui.theme.cafeFontFamily
-import kotlinx.coroutines.launch
-
+import java.time.LocalDate
+import java.time.ZoneId
+import java.time.format.DateTimeFormatter
+import java.util.UUID
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -68,6 +72,17 @@ fun SecondScreenWithModalBottomSheet(navController: NavController) {
     var isPopupVisible by remember { mutableStateOf(false) } // 팝업 표시 여부
     val scope = rememberCoroutineScope()
     val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
+
+    // 상태 변수들
+    var selectedMode by remember { mutableStateOf("온라인") } // 진행 방식
+    var numberOfPeople by remember { mutableStateOf(1) } // 인원수
+    var selectedDate by rememberSaveable { mutableStateOf<LocalDate?>(null) }
+
+    // 예약 데이터 저장을 위한 상태 변수
+    var progressMethod by remember { mutableStateOf("") }
+    var numberOfReservations by remember { mutableStateOf(1) }
+    var bookingDate by remember { mutableStateOf<LocalDate?>(null) }
+    val date = LocalDate.now(ZoneId.of("Asia/Seoul")) // 한국 시간대로 설정
 
     Box(modifier = Modifier.fillMaxSize()) {
         // ContentScreen2를 항상 표시
@@ -90,16 +105,38 @@ fun SecondScreenWithModalBottomSheet(navController: NavController) {
                     // 메인 콘텐츠
                     Box(modifier = Modifier.weight(1f)) {
                         ContentScreen2(
+                            selectedMode = selectedMode,
+                            onModeSelected = { selectedMode = it },
+                            numberOfPeople = numberOfPeople,
+                            onNumberOfPeopleChange = { numberOfPeople = it },
+                            selectedDate = selectedDate,
                             onSelectDateClicked = {
-                                isBottomSheetVisible = true // 버튼 클릭 시 ModalBottomSheet 표시
+                                isBottomSheetVisible = true
                             }
                         )
                     }
                     // NextButton을 하단에 배치
                     NextButton(
-                        onClick = { isPopupVisible = true},
+                        onClick = {
+                            println("Selected Date: $selectedDate") // 디버깅용 로그
+
+                            // 예약하기 버튼 클릭 시 데이터 저장 로직
+                            if (selectedMode == "온라인") {
+                                saveReservation(selectedMode, numberOfPeople, date)
+                            } else if (selectedMode == "오프라인") {
+                                if (selectedDate != null) {
+                                    saveReservation(selectedMode, numberOfPeople, selectedDate)
+                                } else {
+                                    // 날짜를 선택하지 않았을 때 에러 처리
+                                    // 스낵바 또는 토스트로 메시지 표시 가능
+                                    return@NextButton
+                                }
+                            }
+                            isPopupVisible = true
+                        },
                         "예약하기"
                     )
+
                 }
             }
         )
@@ -152,7 +189,7 @@ fun SecondScreenWithModalBottomSheet(navController: NavController) {
                         Spacer(modifier = Modifier.height(24.dp))
 
                         Button(
-                            onClick = { navController.navigate("reservation")  },
+                            onClick = { navController.navigate("예약내역")  },
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .padding(horizontal = 16.dp)
@@ -189,9 +226,8 @@ fun SecondScreenWithModalBottomSheet(navController: NavController) {
 
                     // 달력 (CustomCalendar 컴포저블 호출)
                     CustomCalendar(
-                        onDateSelected = { selectedDate ->
-                            scope.launch { sheetState.hide() }
-                            isBottomSheetVisible = false // 날짜 선택 후 ModalBottomSheet 닫기
+                        onDateSelected = { date ->
+                            selectedDate = date
                         }
                     )
 
@@ -234,9 +270,14 @@ fun SecondScreenWithModalBottomSheet(navController: NavController) {
 }
 
 @Composable
-fun ContentScreen2(onSelectDateClicked: () -> Unit) {
-    var selectedMode by remember { mutableStateOf("온라인") }  // 기본값은 "온라인"
-
+fun ContentScreen2(
+    selectedMode: String,
+    onModeSelected: (String) -> Unit,
+    numberOfPeople: Int,
+    onNumberOfPeopleChange: (Int) -> Unit,
+    selectedDate: LocalDate?,
+    onSelectDateClicked: () -> Unit
+) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -271,12 +312,12 @@ fun ContentScreen2(onSelectDateClicked: () -> Unit) {
                 // 온라인/오프라인 버튼
                 Row(
                     modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween // 버튼들 사이에 간격 추가
+                    horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     ModeButton(
                         title = "온라인",
                         isSelected = selectedMode == "온라인",
-                        onClick = { selectedMode = "온라인" },
+                        onClick = { onModeSelected("온라인") },
                         modifier = Modifier.weight(1f)
                     )
 
@@ -285,7 +326,7 @@ fun ContentScreen2(onSelectDateClicked: () -> Unit) {
                     ModeButton(
                         title = "오프라인",
                         isSelected = selectedMode == "오프라인",
-                        onClick = { selectedMode = "오프라인" },
+                        onClick = { onModeSelected("오프라인") },
                         modifier = Modifier.weight(1f)
                     )
                 }
@@ -311,14 +352,21 @@ fun ContentScreen2(onSelectDateClicked: () -> Unit) {
                         .fillMaxWidth(),
                     contentAlignment = Alignment.CenterEnd
                 ) {
-                    PlusMinusButton()
+                    PlusMinusButton(
+                        numberOfPeople = numberOfPeople,
+                        onNumberOfPeopleChange = onNumberOfPeopleChange
+                    )
                 }
             }
         }
 
-        if (selectedMode == "오프라인"){
-            OffScreen(onSelectDateClicked)
+        if (selectedMode == "오프라인") {
+            OffScreen(
+                selectedDate = selectedDate,
+                onSelectDateClicked = onSelectDateClicked
+            )
         }
+
     }
 }
 
@@ -343,35 +391,34 @@ fun ModeButton(title: String, isSelected: Boolean, onClick: () -> Unit,  modifie
 
 //인원 변경 버튼
 @Composable
-fun PlusMinusButton() {
-    var numberOfPeople by remember { mutableStateOf(1) }  // 기본값은 1명
-
+fun PlusMinusButton(
+    numberOfPeople: Int,
+    onNumberOfPeopleChange: (Int) -> Unit
+) {
     Row(
-        verticalAlignment = Alignment.CenterVertically, // 수직 중앙 정렬
+        verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier
             .border(
-                width = 1.dp, // 테두리 두께
-                color = Color(0xFFE4E5E7), // 테두리 색상
-                shape = RoundedCornerShape(4.dp) // 테두리 모서리 둥글게 설정
+                width = 1.dp,
+                color = Color(0xFFE4E5E7),
+                shape = RoundedCornerShape(4.dp)
             )
-
     ) {
         Button(
-            onClick = { if (numberOfPeople > 1) numberOfPeople-- },
+            onClick = { if (numberOfPeople > 1) onNumberOfPeopleChange(numberOfPeople - 1) },
             colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent),
             modifier = Modifier.width(60.dp),
-            contentPadding = PaddingValues(0.dp) // 기본 패딩을 0으로 설정
+            contentPadding = PaddingValues(0.dp)
         ) {
             Box(contentAlignment = Alignment.Center) {
                 Image(
-                    painter = painterResource(id = R.drawable.minus), // 로컬 리소스에서 아이콘 불러오기
+                    painter = painterResource(id = R.drawable.minus),
                     contentDescription = "Minus",
-                    modifier = Modifier.size(24.dp) // 아이콘 크기 설정
+                    modifier = Modifier.size(24.dp)
                 )
             }
         }
 
-        // 인원수 텍스트
         Text(
             text = "$numberOfPeople",
             fontSize = 18.sp,
@@ -380,16 +427,16 @@ fun PlusMinusButton() {
         )
 
         Button(
-            onClick = { numberOfPeople++ },
-            colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent), // 배경색 설정
+            onClick = { onNumberOfPeopleChange(numberOfPeople + 1) },
+            colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent),
             modifier = Modifier.width(60.dp),
-            contentPadding = PaddingValues(0.dp) // 기본 패딩을 0으로 설정
+            contentPadding = PaddingValues(0.dp)
         ) {
             Box(contentAlignment = Alignment.Center) {
                 Image(
-                    painter = painterResource(id = R.drawable.plus), // 로컬 리소스에서 아이콘 불러오기
+                    painter = painterResource(id = R.drawable.plus),
                     contentDescription = "Plus",
-                    modifier = Modifier.size(24.dp) // 아이콘 크기 설정
+                    modifier = Modifier.size(24.dp)
                 )
             }
         }
@@ -397,7 +444,10 @@ fun PlusMinusButton() {
 }
 
 @Composable
-fun OffScreen(onSelectDateClicked: () -> Unit) {
+fun OffScreen(
+    selectedDate: LocalDate?,
+    onSelectDateClicked: () -> Unit
+) {
     Spacer(modifier = Modifier.height(40.dp))
 
     Column(
@@ -412,28 +462,27 @@ fun OffScreen(onSelectDateClicked: () -> Unit) {
             onClick = onSelectDateClicked,
             modifier = Modifier
                 .fillMaxWidth()
-                .border(width = 1.dp, color = Color(0xFFE4E5E7), shape = RoundedCornerShape(4.dp)),  // 회색 테두리 추가
-            shape = RoundedCornerShape(4.dp),  // 둥근 모서리 정도를 명시적으로 설정
+                .border(width = 1.dp, color = Color(0xFFE4E5E7), shape = RoundedCornerShape(4.dp)),
+            shape = RoundedCornerShape(4.dp),
             colors = ButtonDefaults.buttonColors(containerColor = Color.White)
         ) {
             Row(
                 modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween, // 좌우로 텍스트와 아이콘 배치
-                verticalAlignment = Alignment.CenterVertically // 수직으로 중앙 정렬
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
-                    text = "일정을 선택해 주세요.",
+                    text = selectedDate?.toString() ?: "일정을 선택해 주세요.",
                     fontSize = 16.sp,
-                    color = Color(0xFFAEB1B7),
-                    modifier = Modifier.weight(1f) // 텍스트가 남은 공간을 차지하도록
+                    color = if (selectedDate != null) Color.Black else Color(0xFFAEB1B7),
+                    modifier = Modifier.weight(1f)
                 )
 
-                // 아이콘 추가
                 Icon(
-                    painter = painterResource(id = R.drawable.calendar),  // 로컬 리소스에서 아이콘 불러오기
+                    painter = painterResource(id = R.drawable.calendar),
                     contentDescription = "Calendar Icon",
-                    modifier = Modifier.size(24.dp),  // 아이콘 크기 설정
-                    tint = Color(0xFFAEB1B7)  // 아이콘 색상
+                    modifier = Modifier.size(24.dp),
+                    tint = Color(0xFFAEB1B7)
                 )
             }
         }
@@ -525,7 +574,7 @@ fun SheetButtonRow(onClose: () -> Unit) {
         ) {
             Text(
                 text = "확인",
-                color = Color.White,
+                color    = Color.White,
                 style = TextStyle(fontWeight = FontWeight.Bold),
                 fontSize = 16.sp
             )
@@ -533,6 +582,27 @@ fun SheetButtonRow(onClose: () -> Unit) {
     }
 }
 
+fun generateBookingId(): String {
+    val randomNumber = (100_000_000..999_999_999).random()
+    return randomNumber.toString()
+}
+
+fun saveReservation(method: String, people: Int, date: LocalDate?) {
+    val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+    val currentDate = LocalDate.now(ZoneId.of("Asia/Seoul")).format(formatter)
+    val bookingDate = date?.format(formatter) ?: ""
+
+    val booking = Booking(
+        bookingId = generateBookingId(),
+        date = currentDate,
+        serviceName = "향기로운 커피 원데이 클래스",
+        bookingDate = bookingDate,
+        progressMethod = method,
+        numberOfReservations = "${people}명"
+    )
+
+    BookingRepository.addBooking(booking)
+}
 @Preview(showBackground = true)
 @Composable
 fun Preview2() {
