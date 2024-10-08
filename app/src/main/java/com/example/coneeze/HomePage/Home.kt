@@ -77,41 +77,8 @@ fun HomeScreen() {
         ExplainBanner()
 
 
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-        ) {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(start = 30.dp, end = 30.dp, top = 24.dp, bottom = 20.dp),
+       ReserveTest()
 
-                ) {
-                Image(
-                    painter = painterResource(id = R.drawable.reservation),  // 이미지 리소스 설정
-                    contentDescription = "배너 사진",
-                    modifier = Modifier
-                        .width(155.dp)
-                        .height(100.dp)
-                        .aspectRatio(155f / 100f)
-
-
-                )
-                Spacer(modifier = Modifier.weight(1f))
-
-
-                Image(
-                    painter = painterResource(id = R.drawable.test),  // 이미지 리소스 설정
-                    contentDescription = "배너 사진",
-                    modifier = Modifier
-                        .width(155.dp)
-                        .height(100.dp)
-
-                )
-
-            }
-
-        }
         Row(
             modifier = Modifier
                 .fillMaxWidth()
