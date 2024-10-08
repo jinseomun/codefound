@@ -66,7 +66,7 @@ fun FirstScreen() {
         },
         bottomBar = {
             // 하단 바에 NextButton 추가
-            NextButton("다음")
+            NextButton("다음"){}
         }
     )
 }

@@ -3,6 +3,7 @@ package com.example.coneez2.resevepage
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -17,8 +18,11 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -39,6 +43,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -48,6 +53,8 @@ import com.example.coneez2.components.CustomTopBar
 import com.example.coneez2.components.NextButton
 import com.example.coneez2.components.ScrollableButton
 import com.example.coneez2.ui.theme.Main600
+import com.example.coneez2.ui.theme.Main800
+import com.example.coneez2.ui.theme.cafeFontFamily
 import kotlinx.coroutines.launch
 
 
@@ -56,6 +63,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun SecondScreenWithModalBottomSheet() {
     var isBottomSheetVisible by remember { mutableStateOf(false) }
+    var isPopupVisible by remember { mutableStateOf(false) } // 팝업 표시 여부
     val scope = rememberCoroutineScope()
     val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
 
@@ -86,10 +94,80 @@ fun SecondScreenWithModalBottomSheet() {
                         )
                     }
                     // NextButton을 하단에 배치
-                    NextButton("예약하기")
+                    NextButton("예약하기"){
+                        isPopupVisible = true // 버튼 클릭 시 팝업 표시
+                    }
                 }
             }
         )
+
+        // 예약 완료 팝업
+        if (isPopupVisible) {
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(Color.Black.copy(alpha = 0.5f)) // 반투명 배경
+                    .clickable { isPopupVisible = false }, // 클릭 시 팝업 닫기
+                contentAlignment = Alignment.Center
+            ) {
+                Card(
+                    shape = RoundedCornerShape(16.dp),
+                    modifier = Modifier
+                        .width(320.dp)
+                        .height(210.dp),
+                    colors = CardDefaults.cardColors(
+                        containerColor = Color.White, // 원하는 배경색 설정
+                    ),
+
+                ) {
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        modifier = Modifier
+                            .fillMaxSize()
+                    ) {
+                        Spacer(modifier = Modifier.height(30.dp))
+
+                        Image(
+                            painter = painterResource(id = R.drawable.check_circle),
+                            contentDescription = "완료 아이콘",
+                            modifier = Modifier.size(48.dp)
+                        )
+
+                        Spacer(modifier = Modifier.height(12.dp))
+
+                        Text(
+                            text = "예약이 완료되었습니다.",
+                            style = TextStyle(
+                                fontWeight = FontWeight.Bold,
+                                fontSize = 20.sp,
+                                color = Main800,
+                                fontFamily = cafeFontFamily,
+                            ),
+                            textAlign = TextAlign.Center
+                        )
+
+                        Spacer(modifier = Modifier.height(24.dp))
+
+                        Button(
+                            onClick = { isPopupVisible = false },
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(horizontal = 16.dp)
+                                .height(48.dp)
+                                .border(width = 1.dp, color = Color(0xFFE4E5E7), shape = RoundedCornerShape(4.dp)),  // 회색 테두리 추가
+                            shape = RoundedCornerShape(4.dp),
+                            colors = ButtonDefaults.buttonColors(containerColor = Main600)
+                        ) {
+                            Text(
+                                text = "확인",
+                                color = Color.White,
+                                style = TextStyle(fontWeight = FontWeight.Bold)
+                            )
+                        }
+                    }
+                }
+            }
+        }
 
         // ModalBottomSheet를 독립적으로 표시
         if (isBottomSheetVisible) {

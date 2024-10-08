@@ -27,7 +27,7 @@ import com.example.coneez2.ui.theme.Main600
 
 
 @Composable
-fun NextButton(text : String) {
+fun NextButton(text : String, onClick: () -> Unit) {
     Divider(color = Color(0xFFF1F2F3), thickness = 1.dp)  // 하단에 회색 구분선 추가
 
     // 버튼을 중앙에 정렬하기 위해 Box와 fillMaxWidth() 사용
@@ -38,7 +38,7 @@ fun NextButton(text : String) {
         contentAlignment = Alignment.Center // 중앙 정렬
     ) {
         Button(
-            onClick = { /*TODO*/ },
+            onClick = onClick,
             modifier = Modifier
                 .fillMaxWidth()
                 .height(48.dp),
