@@ -116,10 +116,10 @@ fun HomeScreen() {
                         prices = prices2
                     )
                 }
-
+*/
                 item { ReviewBanner() }
 
-                */
+
 
 
                 item { Header("커니즈 추천 베스트 상품") }
@@ -174,6 +174,8 @@ fun HomeScreen() {
                         )
                     }
                 )}
+
+                item { Footer()}
             }
         },
         bottomBar = {
