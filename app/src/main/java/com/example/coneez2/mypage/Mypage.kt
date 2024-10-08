@@ -1,6 +1,7 @@
 package com.example.coneez2.mypage
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -50,7 +51,7 @@ fun MypageScreen(navController: NavController) {
         content = { innerPadding ->
             Box(modifier = Modifier.padding(innerPadding)) {
                 // 메인 콘텐츠
-                Mypagecontent()
+                Mypagecontent(navController)
             }
         },
         bottomBar = {
@@ -60,7 +61,7 @@ fun MypageScreen(navController: NavController) {
 }
 
 @Composable
-fun Mypagecontent(){
+fun Mypagecontent(navController: NavController){
     Column {
         Row(
             modifier = Modifier
@@ -118,9 +119,9 @@ fun Mypagecontent(){
             )
         }
 
-        TextAndIcon(text = "주문 내역")
+        TextAndIcon(text = "주문 내역", onClick = {navController.navigate("주문내역")})
 
-        TextAndIcon(text = "예약 내역")
+        TextAndIcon(text = "예약 내역", onClick = {navController.navigate("주문내역")})
 
         Box(
             modifier = Modifier
@@ -143,12 +144,13 @@ fun Mypagecontent(){
 }
 
 @Composable
-fun TextAndIcon(text : String){
+fun TextAndIcon(text : String, onClick: () -> Unit){
     Box(
         modifier = Modifier
             .fillMaxWidth()
             .height(52.dp)
-            .padding(horizontal = 20.dp),
+            .padding(horizontal = 20.dp)
+            .clickable(onClick = onClick), // Box에 클릭 이벤트 추가
         contentAlignment = Alignment.CenterStart
     ) {
         Row(

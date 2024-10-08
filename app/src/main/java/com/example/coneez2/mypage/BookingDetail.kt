@@ -24,13 +24,15 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.coneez2.components.Bookinginfo
 import com.example.coneez2.components.CustomTopBar
 import com.example.coneez2.components.Info
 
 @OptIn(ExperimentalMaterial3Api::class)  // 실험적 API 사용을 명시적으로 허용
 @Composable
-fun BookingDetailScreen() {
+fun BookingDetailScreen(navController: NavController) {
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
 
     Scaffold(
@@ -180,5 +182,6 @@ fun BookingDetailCard() {
 @Preview(showBackground = true)
 @Composable
 fun Previewbookingdetail() {
-    BookingDetailScreen()
+    val navController = rememberNavController()
+    BookingDetailScreen(navController)
 }
