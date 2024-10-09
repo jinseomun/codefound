@@ -20,7 +20,7 @@ import com.example.coneez2.testingpage.TestScreen
 
 @Composable
 fun NavGraph(navController: NavHostController) {
-    NavHost(navController = navController, startDestination = "reserving2") {
+    NavHost(navController = navController, startDestination = "reservation") {
         composable("reservation") { ReservationScreen(navController)}
         composable("reserving1") { FirstScreen(navController) }
         composable("reserving2") { SecondScreenWithModalBottomSheet(navController) }
