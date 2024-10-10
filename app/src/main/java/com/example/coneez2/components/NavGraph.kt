@@ -6,6 +6,8 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import com.example.coneez2.login.LoginScreen
+import com.example.coneez2.login.SignupScreen
 import com.example.coneez2.mypage.BookingDetailScreen
 import com.example.coneez2.mypage.BookingHistoryScreen
 import com.example.coneez2.mypage.MoreDetailScreen
@@ -21,6 +23,8 @@ import com.example.coneez2.testingpage.TestScreen
 @Composable
 fun NavGraph(navController: NavHostController) {
     NavHost(navController = navController, startDestination = "reservation") {
+        composable("로그인") { LoginScreen(navController)}
+        composable("회원가입") { SignupScreen(navController)}
         composable("reservation") { ReservationScreen(navController)}
         composable("reserving1") { FirstScreen(navController) }
         composable("reserving2") { SecondScreenWithModalBottomSheet(navController) }

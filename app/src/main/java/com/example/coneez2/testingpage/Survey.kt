@@ -140,11 +140,9 @@ fun SurveyContent(
                     fontSize = 28.sp,
                     textAlign = TextAlign.Center,
                     fontWeight = FontWeight(700),
-                    color = Main600,
-                ),
-
-
+                    color = Main600,),
                 )
+
         }
 
         // 선택지들
