@@ -42,7 +42,9 @@ import com.example.coneeze.ui.theme.suit
 
 @Composable
 fun TapMenu2(
-    first: Int
+    first: Int,
+    onSelect: (Int) -> Unit // 탭 선택 시 호출될 콜백 추가
+
 ) {
     // 누른 버튼의 인덱스를 기억하는 상태
     var selectedIndex by remember { mutableStateOf(first) }  // 초기값은 선택되지 않은 상태 (-1)
@@ -64,6 +66,8 @@ fun TapMenu2(
             isSelected = (0 == selectedIndex), // 현재 인덱스가 선택된 인덱스와 같은지 확인
         ) {
             selectedIndex = 0 // 버튼을 클릭하면 선택된 인덱스 변경
+            onSelect(0) // 선택된 인덱스를 onSelect 콜백으로 전달
+
         }
         Spacer(modifier = Modifier.weight(1f))
 
@@ -73,6 +77,8 @@ fun TapMenu2(
             isSelected = (1 == selectedIndex), // 현재 인덱스가 선택된 인덱스와 같은지 확인
         ) {
             selectedIndex = 1 // 버튼을 클릭하면 선택된 인덱스 변경
+            onSelect(1) // 선택된 인덱스를 onSelect 콜백으로 전달
+
         }
         Spacer(modifier = Modifier.weight(1f))
         TapMenuButton(
@@ -81,6 +87,8 @@ fun TapMenu2(
             isSelected = (2 == selectedIndex), // 현재 인덱스가 선택된 인덱스와 같은지 확인
         ) {
             selectedIndex = 2 // 버튼을 클릭하면 선택된 인덱스 변경
+            onSelect(2) // 선택된 인덱스를 onSelect 콜백으로 전달
+
         }
         Spacer(modifier = Modifier.weight(1f))
     }
@@ -138,12 +146,4 @@ fun TapMenuButton(
             }
         }
     }
-}
-
-@Preview
-@Composable
-fun TapMenu2Preview() {
-    TapMenu2(
-        first = 0
-    )
 }

@@ -31,7 +31,6 @@ fun PagerWithDotsIndicator(
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .background(color = Color(0xFFF7F5F3))
     ) {
         Column {
             // 페이저

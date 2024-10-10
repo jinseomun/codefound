@@ -1,6 +1,7 @@
 package com.example.coneeze.login
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -24,6 +25,11 @@ import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -36,6 +42,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.coneeze.R
 import com.example.coneeze.ui.theme.Main600
+import kotlinx.coroutines.delay
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -51,12 +58,13 @@ fun LoginScreen(navController: NavController) {
             Box(modifier = Modifier.padding(innerPadding)) {
                 // 메인 콘텐츠
                 LoginContent(navController)
+
+
             }
 
         },
         bottomBar = {
             // 하단 바에 NextButton 추가
-            LoginRow()
         }
     )
 }
@@ -68,7 +76,6 @@ fun LoginContent(navController: NavController) {
             .fillMaxSize()
     ) {
         Column(
-            modifier = Modifier.fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Spacer(modifier = Modifier.height(120.dp))
@@ -99,7 +106,9 @@ fun LoginContent(navController: NavController) {
 
             LoginField(navController)
 
-            Spacer(modifier = Modifier.height(160.dp))
+
+            LoginRow(navController)
+
 
         }
     }
@@ -168,7 +177,7 @@ fun LoginField(navController: NavController) {
             Spacer(modifier = Modifier.height(36.dp))
 
             Button(
-                onClick = { navController.navigate("result")  },
+                onClick = { navController.navigate("홈") },
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(48.dp),
@@ -214,10 +223,18 @@ fun LoginField(navController: NavController) {
 }
 
 @Composable
-fun LoginRow(){
+fun LoginRow(navController: NavController) {
+
+    var kakaoImage by remember { mutableStateOf(false) }
+    var naverImage by remember { mutableStateOf(false) }
+    var googleImage by remember { mutableStateOf(false) }
+    var appleImage by remember { mutableStateOf(false) }
+
     Column {
         Row(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(bottom = 20.dp),
             horizontalArrangement = Arrangement.Center,
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -225,7 +242,11 @@ fun LoginRow(){
                 painter = painterResource(id = R.drawable.kakao),
                 contentDescription = "logo",
                 contentScale = ContentScale.Crop,
-                modifier = Modifier.width(65.dp)
+                modifier = Modifier
+                    .width(65.dp)
+                    .clickable {
+                        kakaoImage = true // 로딩 이미지 표시
+                    }
             )
 
             Spacer(modifier = Modifier.width(10.dp))
@@ -234,7 +255,11 @@ fun LoginRow(){
                 painter = painterResource(id = R.drawable.naver),
                 contentDescription = "logo",
                 contentScale = ContentScale.Crop,
-                modifier = Modifier.width(65.dp)
+                modifier = Modifier
+                    .width(65.dp)
+                    .clickable {
+                        naverImage = true // 로딩 이미지 표시
+                    }
             )
 
             Spacer(modifier = Modifier.width(10.dp))
@@ -243,7 +268,11 @@ fun LoginRow(){
                 painter = painterResource(id = R.drawable.google),
                 contentDescription = "logo",
                 contentScale = ContentScale.Crop,
-                modifier = Modifier.width(65.dp)
+                modifier = Modifier
+                    .width(65.dp)
+                    .clickable {
+                        googleImage = true // 로딩 이미지 표시
+                    }
             )
 
             Spacer(modifier = Modifier.width(10.dp))
@@ -252,11 +281,98 @@ fun LoginRow(){
                 painter = painterResource(id = R.drawable.apple),
                 contentDescription = "logo",
                 contentScale = ContentScale.Crop,
-                modifier = Modifier.width(65.dp)
+                modifier = Modifier
+                    .width(65.dp)
+                    .clickable {
+                        appleImage = true // 로딩 이미지 표시
+                    }
             )
         }
 
         Spacer(modifier = Modifier.height(40.dp))
+
+        if (kakaoImage) {
+            Box(
+                modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.kakao_screen), // 보여줄 이미지
+                    contentDescription = "Kakao Loading",
+                    contentScale = ContentScale.Crop
+                )
+
+                LaunchedEffect(Unit) {
+                    delay(2000) // 2초 딜레이
+                    navController.navigate("홈") {
+                        popUpTo("login_screen") { inclusive = true }
+                    }
+                    kakaoImage = false // 상태 초기화 (필요시)
+                }
+            }
+        }
+
+        if (naverImage) {
+            Box(
+                modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.naver_screen), // 보여줄 이미지
+                    contentDescription = "Kakao Loading",
+                    contentScale = ContentScale.Crop
+                )
+
+                LaunchedEffect(Unit) {
+                    delay(2000) // 2초 딜레이
+                    navController.navigate("홈") {
+                        popUpTo("login_screen") { inclusive = true }
+                    }
+                    naverImage = false // 상태 초기화 (필요시)
+                }
+            }
+        }
+        if (googleImage) {
+            Box(
+                modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.google_screen), // 보여줄 이미지
+                    contentDescription = "Kakao Loading",
+                    contentScale = ContentScale.Crop
+                )
+
+                LaunchedEffect(Unit) {
+                    delay(2000) // 2초 딜레이
+                    navController.navigate("홈") {
+                        popUpTo("login_screen") { inclusive = true }
+                    }
+                    googleImage = false // 상태 초기화 (필요시)
+                }
+            }
+
+            if (appleImage) {
+                Box(
+                    modifier = Modifier.fillMaxSize(),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Image(
+                        painter = painterResource(id = R.drawable.apple_screen), // 보여줄 이미지
+                        contentDescription = "Kakao Loading",
+                        contentScale = ContentScale.Crop
+                    )
+
+                    LaunchedEffect(Unit) {
+                        delay(2000) // 2초 딜레이
+                        navController.navigate("홈") {
+                            popUpTo("login_screen") { inclusive = true }
+                        }
+                        appleImage = false // 상태 초기화 (필요시)
+                    }
+                }
+            }
+        }
 
     }
 }

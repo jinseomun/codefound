@@ -54,7 +54,7 @@ fun SignupScreen(navController: NavController) {
                 title = "회원가입",
                 showNavigationIcon = true, // 네비게이션 아이콘을 보여줌
                 showActionIcon = false,    // 액션 아이콘을 숨김
-                onNavigationClick = { /* 네비게이션 클릭 동작 */ },
+                onNavigationClick = {navController.navigate("로그인") },
                 onActionClick = {  }
             )
         },
@@ -67,7 +67,7 @@ fun SignupScreen(navController: NavController) {
         },
         bottomBar = {
             // 하단 바에 NextButton 추가
-            NextButton(onClick = { navController.navigate("로그인")  }, text = "회원가입")
+            NextButton(onClick = { navController.navigate("홈")  }, text = "회원가입")
         }
     )
 }
