@@ -32,7 +32,7 @@ fun NavGraph(navController: NavHostController) {
         composable("홈") { HomeScreen(navController)}
         composable("카테고리") { CategoryScreen(navController)}
         composable(
-            route = "detail/{image}/{name}/{price}",
+            route = "디테일/{image}/{name}/{price}",
             arguments = listOf(
                 navArgument("image") { type = NavType.IntType },
                 navArgument("name") { type = NavType.StringType },
@@ -42,7 +42,9 @@ fun NavGraph(navController: NavHostController) {
             val image = backStackEntry.arguments?.getInt("image")
             val name = backStackEntry.arguments?.getString("name") ?: "Unknown"
             val price = backStackEntry.arguments?.getString("price") ?: "0원"
-            DetailScreen(navController = navController, image = image, name = name, price = price)
+            if (image != null) {
+                DetailScreen(navController = navController, image = image, name = name, price = price)
+            }
         }
         composable("reservation") { ReservationScreen(navController)}
         composable("reserving1") { FirstScreen(navController) }

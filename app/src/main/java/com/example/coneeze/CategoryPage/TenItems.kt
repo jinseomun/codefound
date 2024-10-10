@@ -7,8 +7,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.example.coneeze.HomePage.twobyone
 import com.example.coneeze.HomePage.twobytwo
 import com.example.coneeze.data.coffeeImages3
@@ -18,12 +17,13 @@ import com.example.coneeze.data.prices3
 
 
 @Composable
-fun TenItems() {
+fun TenItems(navController: NavController) {
 
     Column(
         modifier = Modifier.fillMaxWidth()
     ) {
         twobytwo(
+            navController = navController,
             names = names3,
             features = features3,
             images = coffeeImages3,
@@ -31,6 +31,7 @@ fun TenItems() {
         )
         Spacer(modifier = Modifier.weight(1f))
         twobytwo(
+            navController = navController,
             names = names3,
             features = features3,
             images = coffeeImages3,
@@ -40,11 +41,13 @@ fun TenItems() {
 
         Spacer(modifier = Modifier.weight(1f))
         twobyone(
+            navController = navController,
             names = names3,
-            features = features3,
             images = coffeeImages3,
+            features = features3,
             prices = prices3
         )
+
 
         Spacer(modifier = Modifier.weight(1f))
 
@@ -52,8 +55,3 @@ fun TenItems() {
 }
 
 
-@Preview
-@Composable
-fun TenItemsPreview(){
-    TenItems()
-}

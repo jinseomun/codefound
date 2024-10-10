@@ -22,6 +22,7 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.coneeze.R
 import com.example.coneeze.ui.theme.Black30
 import com.example.coneeze.ui.theme.Gray600
@@ -29,14 +30,14 @@ import com.example.coneeze.ui.theme.GrayLine
 import com.example.coneeze.ui.theme.NumberGray
 import com.example.coneeze.ui.theme.suit
 @Composable
-fun DetailInfo() {
+fun DetailInfo(image: Int, name: String, price: String) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
     ) {
         // 상단 이미지
         Image(
-            painter = painterResource(id = R.drawable.kenya),
+            painter = painterResource(id = image),
             contentDescription = null,
             modifier = Modifier
                 .fillMaxWidth()
@@ -55,7 +56,7 @@ fun DetailInfo() {
                 // 제품명 텍스트
                 Row(modifier = Modifier.fillMaxWidth()) {
                     Text(
-                        text = "케냐 AA PLUS 아이히더 프리미엄",
+                        text = name,
                         style = TextStyle(
                             fontSize = 16.sp,
                             lineHeight = 20.sp,
@@ -106,7 +107,7 @@ fun DetailInfo() {
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     Text(
-                        text = "12,700원",
+                        text = price,
                         style = TextStyle(
                             fontSize = 18.sp,
                             lineHeight = 22.sp,
@@ -206,8 +207,3 @@ fun DetailInfo() {
         }
 
 
-@Preview(showBackground = true)
-@Composable
-fun DetailInfoPreview() {
-    DetailInfo()
-}

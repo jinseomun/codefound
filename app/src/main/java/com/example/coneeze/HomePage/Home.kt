@@ -103,7 +103,7 @@ fun HomeScreen(navController: NavController) {
 
                 item { ReserveTest(navController) }
 
-                item { CategoryScroll() }
+                item { CategoryScroll(navController) }
 
                 item { GrayLine() }
 
@@ -142,6 +142,7 @@ fun HomeScreen(navController: NavController) {
                     pageCount = 3,
                     pageContent = { page ->
                         twobytwo(
+                            navController = navController,
                             names = names3,
                             features = features3,
                             images = coffeeImages3,

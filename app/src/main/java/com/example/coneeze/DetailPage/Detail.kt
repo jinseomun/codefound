@@ -28,7 +28,7 @@ import com.example.coneeze.ui.theme.Gray10
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DetailScreen(navController: NavController){
+fun DetailScreen(navController: NavController, image: Int, name: String, price: String) {
     var selectedIndex by remember { mutableStateOf(0) }
 
     Scaffold(
@@ -37,7 +37,7 @@ fun DetailScreen(navController: NavController){
                 title = "",
                 showNavigationIcon = true, // 네비게이션 아이콘을 보여줌
                 showActionIcon = false,    // 액션 아이콘을 숨김
-                onNavigationClick = { navController.navigate("카테고리") },
+                onNavigationClick = { navController.popBackStack()},
                 onActionClick = { /* 액션 버튼 클릭 동작 */ }
             )
         },
@@ -50,7 +50,7 @@ fun DetailScreen(navController: NavController){
 
                 item { TapMenu2(datas = TapNames2) }
 
-                item { DetailInfo() }
+                item { DetailInfo(image, name, price) }
 
                 item { GrayLine() }
 
@@ -85,10 +85,3 @@ fun DetailScreen(navController: NavController){
 }
 
 
-
-@Preview(showBackground = true)
-@Composable
-fun DetailScreenPreview(){
-    val navController = rememberNavController()
-    DetailScreen(navController)
-}

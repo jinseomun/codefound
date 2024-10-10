@@ -7,9 +7,11 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 
 @Composable
 fun twobyone(
+    navController: NavController,
     names: List<String>,
     images: List<Int>,
     features: List<String>,
@@ -23,6 +25,7 @@ fun twobyone(
         // 첫 번째 아이템
         if (names.isNotEmpty() && images.isNotEmpty() && features.isNotEmpty() && prices.isNotEmpty()) {
             HorizontalItem(
+                navController = navController,  // navController 전달
                 name = names[0],
                 feature = features[0],
                 image = images[0],
@@ -35,6 +38,7 @@ fun twobyone(
         // 두 번째 아이템
         if (names.size > 1 && images.size > 1 && features.size > 1 && prices.size > 1) {
             HorizontalItem(
+                navController = navController,  // navController 전달
                 name = names[1],
                 feature = features[1],
                 image = images[1],

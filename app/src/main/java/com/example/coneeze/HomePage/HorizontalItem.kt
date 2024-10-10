@@ -1,6 +1,7 @@
 package com.example.coneeze.HomePage
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -20,15 +21,25 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.coneeze.R
 
 
 @Composable
-fun HorizontalItem(name: String, image: Int, feature: String, price: String) {
+fun HorizontalItem(
+    navController: NavController,
+    name: String,
+    image: Int,
+    feature: String,
+    price: String
+) {
     Card(
         modifier = Modifier
             .width(155.dp)
-            .height(219.dp),  // 각 항목의 너비를 고정
+            .height(219.dp)
+            .clickable {
+                navController.navigate("디테일/$image/$name/$price")
+            },  // 각 항목의 너비를 고정
         colors = CardDefaults.cardColors(
             containerColor = Color.White
         ),
@@ -88,8 +99,3 @@ fun HorizontalItem(name: String, image: Int, feature: String, price: String) {
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun HorizontalItemPreview(){
-    HorizontalItem(name = "강아지", image = 2, feature = "짱귀여움" , price = "1000원" )
-}

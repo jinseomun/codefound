@@ -12,6 +12,7 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.example.coneeze.R
 
 import com.example.coneeze.data.coffeeImages3
@@ -21,6 +22,7 @@ import com.example.coneeze.data.prices3
 
 @Composable
 fun twobytwo(
+    navController: NavController,
     names: List<String>,
     features: List<String>,
     images: List<Int>,
@@ -33,6 +35,7 @@ fun twobytwo(
 
     Column() {
         twobyone(
+            navController = navController,
             names = nameChunks.getOrNull(0) ?: emptyList(),
             features = featureChunks.getOrNull(0) ?: emptyList(),
             images = imageChunks.getOrNull(0) ?: emptyList(),
@@ -42,6 +45,7 @@ fun twobytwo(
         Spacer(modifier = Modifier.height(24.dp))
 
         twobyone(
+            navController = navController,
             names = nameChunks.getOrNull(1) ?: emptyList(),
             features = featureChunks.getOrNull(1) ?: emptyList(),
             images = imageChunks.getOrNull(1) ?: emptyList(),
@@ -50,14 +54,3 @@ fun twobytwo(
     }
 }
 
-
-@Preview (showBackground = true)
-@Composable
-fun twobytwoPreview(){
-    twobytwo(
-        names = names3,
-        features = features3,
-        images = coffeeImages3,
-        prices = prices3
-    )
-}

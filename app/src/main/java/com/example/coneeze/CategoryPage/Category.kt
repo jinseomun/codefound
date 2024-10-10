@@ -57,7 +57,7 @@ fun CategoryScreen(navController: NavController) {
                     number = "10"
                 )}
 
-                item {TenItems()}
+                item {TenItems(navController)}
 
 
 
