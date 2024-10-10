@@ -1,12 +1,16 @@
 package com.example.coneez2.login
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.material3.Checkbox
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -15,7 +19,7 @@ import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MonotonicFrameClock
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -23,6 +27,7 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -31,6 +36,10 @@ import androidx.navigation.compose.rememberNavController
 import com.example.coneez2.components.CustomTopBar
 import com.example.coneez2.ui.theme.Main600
 import com.example.coneez2.ui.theme.cafeFontFamily
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
+import com.example.coneez2.components.NextButton
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -58,6 +67,7 @@ fun SignupScreen(navController: NavController) {
         },
         bottomBar = {
             // 하단 바에 NextButton 추가
+            NextButton(onClick = { navController.navigate("로그인")  }, text = "회원가입")
         }
     )
 }
@@ -85,8 +95,13 @@ fun SignupContent(){
             )
         }
 
-        
         Inuput_Signup()
+
+        Spacer(modifier = Modifier.height(28.dp))
+
+
+        PrivacyAgreementRow()
+
     }
 }
 
@@ -95,8 +110,8 @@ fun SignupContent(){
 fun Inuput_Signup() {
     Column(
         modifier = Modifier
-            .padding(horizontal = 30.dp)
-            .padding(top = 30.dp)
+            .padding(horizontal = 28.dp)
+            .padding(top = 28.dp)
 
     ) {
         Text(
@@ -120,7 +135,7 @@ fun Inuput_Signup() {
             )
         )
 
-        Spacer(modifier = Modifier.height(24.dp))
+        Spacer(modifier = Modifier.height(28.dp))
 
         Text(
             text = "비밀번호",
@@ -165,9 +180,86 @@ fun Inuput_Signup() {
             )
         )
 
+        Spacer(modifier = Modifier.height(28.dp))
+
+        Text(
+            text = "이름",
+            color = Color.Gray,
+            modifier = Modifier.padding(start = 8.dp)
+        )
+        TextField(
+            value = "",
+            onValueChange = {},
+            placeholder = {
+                Text(text = "이름을 입력해 주세요.", color = Color.LightGray)
+            },
+            modifier = Modifier
+                .fillMaxWidth(),
+
+            colors = TextFieldDefaults.textFieldColors(
+                containerColor = Color.Transparent,
+                focusedIndicatorColor = Main600,      // 포커스된 상태의 하단 바 색상
+                unfocusedIndicatorColor = Color(0xFFF1F2F3)     // 포커스 해제된 상태의 하단 바 색상
+
+            )
+        )
+
+        Spacer(modifier = Modifier.height(28.dp))
+
+        Text(
+            text = "연락처",
+            color = Color.Gray,
+            modifier = Modifier.padding(start = 8.dp)
+        )
+        TextField(
+            value = "",
+            onValueChange = {},
+            placeholder = {
+                Text(text = "연락처를 입력해 주세요.", color = Color.LightGray)
+            },
+            modifier = Modifier
+                .fillMaxWidth(),
+
+            colors = TextFieldDefaults.textFieldColors(
+                containerColor = Color.Transparent,
+                focusedIndicatorColor = Main600,      // 포커스된 상태의 하단 바 색상
+                unfocusedIndicatorColor = Color(0xFFF1F2F3)     // 포커스 해제된 상태의 하단 바 색상
+
+            )
+        )
     }
 }
 
+@Composable
+fun PrivacyAgreementRow() {
+    var isChecked by remember { mutableStateOf(false) }
+
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 18.dp)
+    ) {
+        Checkbox(
+            checked = isChecked,
+            onCheckedChange = { isChecked = it } // 체크박스 상태 변경
+        )
+
+        Text(
+            text = "[필수] 개인정보처리방침에 동의합니다.",
+        )
+
+        Spacer(modifier = Modifier.width(24.dp))
+
+
+        Text(
+            text = "약관보기",
+            color = Color(0xFF60646C),
+            textDecoration = TextDecoration.Underline, // 밑줄 추가
+            modifier = Modifier.clickable { /* 약관보기 동작 추가 */ }
+        )
+    }
+}
 
 @Preview(showBackground = true)
 @Composable
