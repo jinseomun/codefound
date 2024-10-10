@@ -56,7 +56,7 @@ fun DetailScreen(){
 
                 item { GrayLine() }
 
-                item { Section( text = "상품 상세", number = "") }
+                item { DetailExplain() }
 
 
 
@@ -82,7 +82,7 @@ fun DetailScreen(){
 
 
 
-@Preview(showBackground = true, heightDp = 1600)
+@Preview(showBackground = true)
 @Composable
 fun DetailScreenPreview(){
 
