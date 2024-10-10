@@ -16,14 +16,18 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
+import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -33,8 +37,32 @@ import androidx.navigation.compose.rememberNavController
 import com.example.coneez2.R
 import com.example.coneez2.ui.theme.Main600
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LoginScreen(navController: NavController) {
+    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
+
+    Scaffold(
+        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
+        topBar = {
+
+        },
+        content = { innerPadding ->
+            Box(modifier = Modifier.padding(innerPadding)) {
+                // 메인 콘텐츠
+                LoginContent(navController)
+            }
+
+        },
+        bottomBar = {
+            // 하단 바에 NextButton 추가
+            LoginRow()
+        }
+    )
+}
+
+@Composable
+fun LoginContent(navController: NavController) {
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -69,12 +97,9 @@ fun LoginScreen(navController: NavController) {
 
             Spacer(modifier = Modifier.height(60.dp))
 
-            LoginContent(navController)
+            LoginField(navController)
 
             Spacer(modifier = Modifier.height(160.dp))
-
-
-            LoginRow()
 
         }
     }
@@ -83,7 +108,7 @@ fun LoginScreen(navController: NavController) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LoginContent(navController: NavController) {
+fun LoginField(navController: NavController) {
     Box(
         modifier = Modifier
             .padding(horizontal = 20.dp)
@@ -180,44 +205,49 @@ fun LoginContent(navController: NavController) {
 
 @Composable
 fun LoginRow(){
-    Row(
-        modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.Center,
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Image(
-            painter = painterResource(id = R.drawable.kakao),
-            contentDescription = "logo",
-            contentScale = ContentScale.Crop,
-            modifier = Modifier.width(65.dp)
-        )
+    Column {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.Center,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Image(
+                painter = painterResource(id = R.drawable.kakao),
+                contentDescription = "logo",
+                contentScale = ContentScale.Crop,
+                modifier = Modifier.width(65.dp)
+            )
 
-        Spacer(modifier = Modifier.width(10.dp))
+            Spacer(modifier = Modifier.width(10.dp))
 
-        Image(
-            painter = painterResource(id = R.drawable.naver),
-            contentDescription = "logo",
-            contentScale = ContentScale.Crop,
-            modifier = Modifier.width(65.dp)
-        )
+            Image(
+                painter = painterResource(id = R.drawable.naver),
+                contentDescription = "logo",
+                contentScale = ContentScale.Crop,
+                modifier = Modifier.width(65.dp)
+            )
 
-        Spacer(modifier = Modifier.width(10.dp))
+            Spacer(modifier = Modifier.width(10.dp))
 
-        Image(
-            painter = painterResource(id = R.drawable.google),
-            contentDescription = "logo",
-            contentScale = ContentScale.Crop,
-            modifier = Modifier.width(65.dp)
-        )
+            Image(
+                painter = painterResource(id = R.drawable.google),
+                contentDescription = "logo",
+                contentScale = ContentScale.Crop,
+                modifier = Modifier.width(65.dp)
+            )
 
-        Spacer(modifier = Modifier.width(10.dp))
+            Spacer(modifier = Modifier.width(10.dp))
 
-        Image(
-            painter = painterResource(id = R.drawable.apple),
-            contentDescription = "logo",
-            contentScale = ContentScale.Crop,
-            modifier = Modifier.width(65.dp)
-        )
+            Image(
+                painter = painterResource(id = R.drawable.apple),
+                contentDescription = "logo",
+                contentScale = ContentScale.Crop,
+                modifier = Modifier.width(65.dp)
+            )
+        }
+
+        Spacer(modifier = Modifier.height(40.dp))
+
     }
 }
 
