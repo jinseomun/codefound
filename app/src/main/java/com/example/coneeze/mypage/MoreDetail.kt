@@ -37,11 +37,16 @@ import androidx.navigation.compose.rememberNavController
 import com.example.coneeze.R
 import com.example.coneeze.components.CustomTopBar
 import com.example.coneeze.components.Info
+import com.example.coneeze.components.Order
+import com.example.coneeze.components.OrderRepository
 
 @OptIn(ExperimentalMaterial3Api::class)  // 실험적 API 사용을 명시적으로 허용
 @Composable
 fun MoreDetailScreen(navController: NavController, orderId: String?) {
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
+
+    val order = OrderRepository.orders.find { it.orderId == orderId }
+
     val orders = listOf(
         Order(
             orderId = "2024111109162123456",
@@ -60,8 +65,6 @@ fun MoreDetailScreen(navController: NavController, orderId: String?) {
             imageRes = R.drawable.coffee2
         ),
     )
-
-    val order = orders.find { it.orderId == orderId }
 
     Scaffold(
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),

@@ -2,6 +2,7 @@ package com.example.coneeze.mypage
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
@@ -20,6 +21,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowRight
+import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
@@ -28,8 +30,10 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -46,52 +50,29 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.coneeze.R
+import com.example.coneeze.components.BottomIconRow
 import com.example.coneeze.components.CustomTopBar
+import com.example.coneeze.components.Order
+import com.example.coneeze.components.OrderRepository
 import com.example.coneeze.components.ScrollableButton
+import com.example.coneeze.ui.theme.Gray10
 
-data class Order(
-    val orderId: String,
-    val date: String,
-    val orderState: String,
-    val name: String,
-    val price: String,
-    @DrawableRes val imageRes: Int
-)
-
-@OptIn(ExperimentalMaterial3Api::class)  // 실험적 API 사용을 명시적으로 허용
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun OrderDetailScreen(navController: NavController) {
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
 
     val selectedButton = remember { mutableStateOf("전체") }
 
-    val orders = listOf(
-        Order(
-            orderId = "2024111109162123456",
-            date = "2026.11.11",
-            orderState = "구매 확정",
-            name = "100% 아라비카 블렌드 바라던허니 스페셜티",
-            price = "13,800원",
-            imageRes = R.drawable.coffee1
-        ),
-        Order(
-            orderId = "2024111109162123457",
-            date = "2026.11.02",
-            orderState = "배송 완료",
-            name = "에티오피아 코케허니 예가체프G1 스페셜티",
-            price = "12,200원",
-            imageRes = R.drawable.coffee2
-        ),
-    )
-
+    var selectedIndex by remember { mutableStateOf(2) }
 
     Scaffold(
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
             CustomTopBar(
                 title = "주문 내역",
-                showNavigationIcon = true, // 네비게이션 아이콘을 보여줌
-                showActionIcon = false,    // 액션 아이콘을 숨김
+                showNavigationIcon = true,
+                showActionIcon = false,
                 onNavigationClick = { navController.navigate("마이페이지") },
                 onActionClick = { /* 액션 버튼 클릭 동작 */ }
             )
@@ -99,14 +80,12 @@ fun OrderDetailScreen(navController: NavController) {
         content = { innerPadding ->
             Box(modifier = Modifier.padding(innerPadding)) {
                 Column {
-                    // 2. selectedButton을 ScrollableButtonRow1에 전달합니다.
                     ScrollableButtonRow1(selectedButton)
 
-                    // 3. selectedButton의 값에 따라 주문 목록을 필터링합니다.
                     val filteredOrders = if (selectedButton.value == "전체") {
-                        orders
+                        OrderRepository.orders
                     } else {
-                        orders.filter { it.orderState == selectedButton.value }
+                        OrderRepository.orders.filter { it.orderState == selectedButton.value }
                     }
 
                     LazyColumn {
@@ -118,11 +97,25 @@ fun OrderDetailScreen(navController: NavController) {
             }
         },
         bottomBar = {
-            // 하단 바에 NextButton 추가
+            BottomAppBar(
+                modifier = Modifier
+                    .height(80.dp) // 크기 설정
+                    .border(2.dp, Gray10),
+                containerColor = Color.White
+
+                // 테두리 설정
+            ) {
+                BottomIconRow(
+                    navController = navController,
+                    selectedIndex = selectedIndex,
+                    onItemSelected = { index ->
+                        selectedIndex = index
+                    }
+                )
+            }
         }
     )
 }
-
 @Composable
 fun ScrollableButtonRow1(selectedButton: MutableState<String>) {
     // Horizontal scroll state

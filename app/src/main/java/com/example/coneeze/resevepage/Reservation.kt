@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -89,15 +90,19 @@ fun ImageSliderWithDotsIndicator(navController: NavController) {
     val pagerState = rememberPagerState(pageCount = { 4 }) // 페이지 개수를 4로 설정
     Box(
         modifier = Modifier
-            .fillMaxWidth()
-            .height(680.dp)
+            .fillMaxSize()
             .background(color = Color(0xFFF7F5F3))
     ) {
-        Column {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+        ) {
             // 이미지 슬라이더 부분
             HorizontalPager(
                 state = pagerState,
-                modifier = Modifier.fillMaxWidth() // 전체 크기 채우기
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(500.dp)
             ) { page ->
                 when (page) {
                     0 -> Image(
@@ -154,8 +159,9 @@ fun ImageSliderWithDotsIndicator(navController: NavController) {
             //예약하기 버튼
             Box(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 24.dp),
+                    .fillMaxSize()
+                    .padding(bottom = 20.dp)
+                ,
                 contentAlignment = Alignment.Center
             ){
                 RoundButton(onClick = {navController.navigate("reserving1") }, "예약하기")

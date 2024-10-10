@@ -1,5 +1,6 @@
 package com.example.coneeze.mypage
 
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
@@ -8,6 +9,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -16,6 +18,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowRight
+import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -25,8 +28,10 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -42,8 +47,10 @@ import com.example.coneeze.components.BOOKING_STATE
 import com.example.coneeze.components.Booking
 import com.example.coneeze.components.BookingRepository
 import com.example.coneeze.components.Bookinginfo
+import com.example.coneeze.components.BottomIconRow
 import com.example.coneeze.components.CustomTopBar
 import com.example.coneeze.components.ScrollableButton
+import com.example.coneeze.ui.theme.Gray10
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -54,6 +61,8 @@ fun BookingHistoryScreen(navController: NavController) {
     val selectedButton = remember { mutableStateOf("전체") }
 
     val bookings = BookingRepository.bookings
+
+    var selectedIndex by remember { mutableStateOf(2) }
 
 
     Scaffold(
@@ -75,6 +84,22 @@ fun BookingHistoryScreen(navController: NavController) {
         },
         bottomBar = {
             // 하단 바 추가 가능
+                BottomAppBar(
+                    modifier = Modifier
+                        .height(80.dp) // 크기 설정
+                        .border(2.dp, Gray10),
+                    containerColor = Color.White
+
+                    // 테두리 설정
+                ) {
+                    BottomIconRow(
+                        navController = navController,
+                        selectedIndex = selectedIndex,
+                        onItemSelected = { index ->
+                            selectedIndex = index
+                        }
+                    )
+                }
         }
     )
 }
