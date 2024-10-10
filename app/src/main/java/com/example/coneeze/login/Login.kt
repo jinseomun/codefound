@@ -129,9 +129,15 @@ fun LoginField(navController: NavController) {
                 },
                 modifier = Modifier
                     .fillMaxWidth(),
-                colors = TextFieldDefaults.textFieldColors(
-                    containerColor = Color.Transparent
+
+                colors = TextFieldDefaults.colors(
+                    focusedContainerColor = Color.Transparent,
+                    unfocusedContainerColor = Color.Transparent,
+                    focusedIndicatorColor = Main600,       // 포커스된 상태의 하단 바 색상
+                    unfocusedIndicatorColor = Color(0xFFF1F2F3)  // 포커스 해제된 상태의 하단 바 색상
                 )
+
+
             )
 
             Spacer(modifier = Modifier.height(24.dp))
@@ -150,9 +156,13 @@ fun LoginField(navController: NavController) {
                 modifier = Modifier
                     .fillMaxWidth(),
 
-                colors = TextFieldDefaults.textFieldColors(
-                    containerColor = Color.Transparent
+                colors = TextFieldDefaults.colors(
+                    focusedContainerColor = Color.Transparent,
+                    unfocusedContainerColor = Color.Transparent,
+                    focusedIndicatorColor = Main600,       // 포커스된 상태의 하단 바 색상
+                    unfocusedIndicatorColor = Color(0xFFF1F2F3)  // 포커스 해제된 상태의 하단 바 색상
                 )
+
             )
 
             Spacer(modifier = Modifier.height(36.dp))

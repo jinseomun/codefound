@@ -1,5 +1,5 @@
 [versions]
-agp = "8.3.1"
+agp = "8.3.2"
 kotlin = "1.9.0"
 coreKtx = "1.13.1"
 junit = "4.13.2"
@@ -7,10 +7,10 @@ junitVersion = "1.2.1"
 espressoCore = "3.6.1"
 lifecycleRuntimeKtx = "2.8.6"
 activityCompose = "1.9.2"
-composeBom = "2023.08.00"
+composeBom = "2024.09.03"
 nav = "2.8.2"
 navigationRuntimeKtx = "2.8.2"
-composeFoundation = "1.5.0"  # Compose Foundation 라이브러리 버전
+composeFoundation = "1.7.3"  # Compose Foundation 라이브러리 버전
 
 
 
@@ -32,6 +32,7 @@ androidx-material3 = { group = "androidx.compose.material3", name = "material3" 
 navigation-fragment-ktx = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "nav" }
 navigation-ui-ktx = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "nav" }
 navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "nav" }
+androidx-compose-foundation = { group = "androidx.compose.foundation", name = "foundation", version.ref = "composeFoundation" }
 androidx-navigation-runtime-ktx = { group = "androidx.navigation", name = "navigation-runtime-ktx", version.ref = "navigationRuntimeKtx" }
 
 [plugins]

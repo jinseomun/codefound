@@ -2,7 +2,6 @@ package com.example.coneeze.HomePage
 
 import KeywordPrice
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 
 import androidx.compose.foundation.layout.Row
@@ -15,7 +14,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -26,7 +24,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
+import com.example.coneeze.components.PagerWithDotsIndicator
 import com.example.coneeze.R
+import com.example.coneeze.components.BottomIconRow
 import com.example.coneeze.data.OriginPrices
 import com.example.coneeze.data.Percents
 import com.example.coneeze.data.SaleFeatures
@@ -56,7 +58,7 @@ import com.example.coneeze.ui.theme.Gray10
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreen() {
+fun HomeScreen(navController: NavController) {
     Scaffold(
         topBar = {
             TopAppBar(
@@ -129,8 +131,8 @@ fun HomeScreen() {
 
                 item { Header("커니즈 추천 베스트 상품") }
 
-                item { HorizontalScroll(
-                    page = 3,
+                item { PagerWithDotsIndicator(
+                    pageCount = 3,
                     pageContent = { page ->
                         twobytwo(
                             names = names3,
@@ -162,8 +164,8 @@ fun HomeScreen() {
 
                 item { Header("특가/혜택 상품") }
 
-                item{ HorizontalScroll(
-                    page = 3,
+                item{ PagerWithDotsIndicator(
+                    pageCount = 3,
                     pageContent = { page ->
                         // 페이지 내용으로 SaleCategory를 전달
                         SaleCategory(
@@ -178,7 +180,8 @@ fun HomeScreen() {
                             tagTextColor = tagtextColors
                         )
                     }
-                )}
+                )
+                }
 
                 item { Footer()}
             }
@@ -201,5 +204,6 @@ fun HomeScreen() {
 @Composable
 @Preview(showBackground = true)
 fun HomePreview() {
-    HomeScreen()
+    val navController = rememberNavController()
+    HomeScreen(navController = navController)
 }

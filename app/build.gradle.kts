@@ -62,6 +62,7 @@ dependencies {
     implementation(libs.navigation.fragment.ktx)
     implementation(libs.navigation.ui.ktx)
     implementation(libs.navigation.compose)
+    implementation(libs.androidx.compose.foundation)
     implementation(libs.androidx.navigation.runtime.ktx) // Compose를 사용하는 경우 추가
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

@@ -1,14 +1,11 @@
 package com.example.coneeze.CategoryPage
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -16,11 +13,9 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.coneeze.HomePage.BottomIconRow
 import com.example.coneeze.HomePage.CategoryScroll
@@ -28,14 +23,13 @@ import com.example.coneeze.HomePage.ExplainBanner
 import com.example.coneeze.HomePage.Footer
 import com.example.coneeze.HomePage.GrayLine
 import com.example.coneeze.HomePage.Header
-import com.example.coneeze.HomePage.HorizontalScroll
 import com.example.coneeze.HomePage.OnedayBanner
 import com.example.coneeze.HomePage.ReserveTest
 import com.example.coneeze.HomePage.ReviewBanner
 import com.example.coneeze.HomePage.RowScroll
 import com.example.coneeze.HomePage.SaleCategory
 import com.example.coneeze.HomePage.twobytwo
-import com.example.coneeze.R
+import com.example.coneeze.components.PagerWithDotsIndicator
 import com.example.coneeze.data.OriginPrices
 import com.example.coneeze.data.Percents
 import com.example.coneeze.data.SaleFeatures
@@ -122,8 +116,8 @@ fun CategoryScreen() {
                 item { Header("커니즈 추천 베스트 상품") }
 
                 item {
-                    HorizontalScroll(
-                        page = 3,
+                    PagerWithDotsIndicator(
+                        pageCount = 3,
                         pageContent = { page ->
                             twobytwo(
                                 names = names3,
@@ -157,8 +151,8 @@ fun CategoryScreen() {
                 item { Header("특가/혜택 상품") }
 
                 item {
-                    HorizontalScroll(
-                        page = 3,
+                    PagerWithDotsIndicator(
+                        pageCount = 3,
                         pageContent = { page ->
                             // 페이지 내용으로 SaleCategory를 전달
                             SaleCategory(
@@ -192,4 +186,10 @@ fun CategoryScreen() {
             }
         }
     )
+}
+
+@Preview(showBackground = true)
+@Composable
+fun Previewcategory() {
+    CategoryScreen()
 }
