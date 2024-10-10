@@ -19,6 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "coneez2"
+rootProject.name = "coneeze"
 include(":app")
  

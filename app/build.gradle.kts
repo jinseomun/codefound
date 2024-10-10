@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.coneez2"
+    namespace = "com.example.coneeze"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.coneez2"
+        applicationId = "com.example.coneeze"
         minSdk = 26
         targetSdk = 34
         versionCode = 1
