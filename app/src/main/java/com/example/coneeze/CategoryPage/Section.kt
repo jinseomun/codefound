@@ -20,7 +20,10 @@ import com.example.coneeze.ui.theme.suit
 
 
 @Composable
-fun AllItems(){
+fun Section(
+    text: String,
+    number : String
+){
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -28,7 +31,7 @@ fun AllItems(){
             .padding(start = 20.dp, top = 24.dp, end = 20.dp, bottom = 24.dp)
     ) {
         Text(
-            text = "전체 상품",
+            text = text,
 
             // Headline/Subtitle2 16 SB
             style = TextStyle(
@@ -42,7 +45,7 @@ fun AllItems(){
         Spacer(modifier = Modifier.width(4.dp))
 
         Text(
-            text = "10",
+            text = number,
 
             // Headline/Subtitle2 16 SB
             style = TextStyle(
@@ -60,6 +63,6 @@ fun AllItems(){
 
 @Preview (showBackground = true)
 @Composable
-fun AllItemsPreview(){
-AllItems()
+fun SectionPreview(){
+Section(text="전체", number = "10")
 }

@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
@@ -33,7 +32,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.coneeze.data.TapNames1
-import com.example.coneeze.data.TapNames2
 import com.example.coneeze.ui.theme.Main600
 import com.example.coneeze.ui.theme.TapGray
 import com.example.coneeze.ui.theme.suit
@@ -41,7 +39,7 @@ import com.example.coneeze.ui.theme.suit
 
 
 @Composable
-fun TapMenu(
+fun TapMenu1(
     datas:List<String>
 ) {
     // 누른 버튼의 인덱스를 기억하는 상태
@@ -113,7 +111,9 @@ fun TapMenuButton(
                         end = Offset(size.width, lineY), // 끝점 좌표
                         strokeWidth = 2.dp.toPx() // 2dp 굵기 적용
                     )
-                },
+                }
+                .padding(start = 4.dp, end =4.dp)
+            ,
             contentAlignment = Alignment.Center // Box 내부에서 텍스트를 중앙에 배치
         ) {
             Text(
@@ -135,8 +135,8 @@ fun TapMenuButton(
 
 @Preview
 @Composable
-fun TapMenuPreview(){
-    TapMenu(
+fun TapMenu1Preview(){
+    TapMenu1(
         datas = TapNames1
     )
 }

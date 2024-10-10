@@ -89,9 +89,12 @@ fun CategoryScreen() {
                     .padding(paddingValues)
             ) {
 
-                item { TapMenu(datas = TapNames1) }
+                item { TapMenu1(datas = TapNames1) }
 
-                item { AllItems()}
+                item { Section(
+                    text = "전체",
+                    number = "10"
+                )}
 
                 item {TenItems()}
 
