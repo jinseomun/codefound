@@ -23,6 +23,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.coneeze.components.BottomIconRow
+import com.example.coneeze.components.CustomTopBar
 import com.example.coneeze.data.TapNames1
 import com.example.coneeze.ui.theme.Gray10
 
@@ -34,14 +35,12 @@ fun CategoryScreen(navController: NavController) {
 
     Scaffold(
         topBar = {
-            TopAppBar(
-                title = { Text(text = "") },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(56.dp),
-                navigationIcon = {
-                    BackTopBar()
-                },
+            CustomTopBar(
+                title = "",
+                showNavigationIcon = true, // 네비게이션 아이콘을 보여줌
+                showActionIcon = false,    // 액션 아이콘을 숨김
+                onNavigationClick = { navController.navigate("홈") },
+                onActionClick = { /* 액션 버튼 클릭 동작 */ }
             )
         },
         content = { paddingValues ->

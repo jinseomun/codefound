@@ -43,7 +43,7 @@ fun TapMenu1(
     datas:List<String>
 ) {
     // 누른 버튼의 인덱스를 기억하는 상태
-    var selectedIndex by remember { mutableStateOf(-1) }  // 초기값은 선택되지 않은 상태 (-1)
+    var selectedIndex by remember { mutableStateOf(0) }  // 초기값은 선택되지 않은 상태 (-1)
 
     Row(modifier = Modifier.fillMaxWidth()) {
         Row(
