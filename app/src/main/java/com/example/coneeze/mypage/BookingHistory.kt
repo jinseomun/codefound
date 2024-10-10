@@ -38,24 +38,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.example.coneeze.components.BOOKING_STATE
+import com.example.coneeze.components.Booking
 import com.example.coneeze.components.BookingRepository
 import com.example.coneeze.components.Bookinginfo
 import com.example.coneeze.components.CustomTopBar
 import com.example.coneeze.components.ScrollableButton
-
-data class Booking(
-    val bookingId: String,
-    val date: String,
-    val serviceName: String,
-    val bookingDate: String,
-    val progressMethod: String,        // 진행 방식 (e.g., "오프라인", "온라인")
-    val numberOfReservations: String   // 예약 인원수 (e.g., "6명")
-)
-
-const val PAYMENT_METHOD = "가상 계좌"
-const val PAYMENT_STATUS = "결제 완료"
-const val BOOKING_STATE = "예약 신청"
-const val TOTAL_AMOUNT = "20,000원"
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

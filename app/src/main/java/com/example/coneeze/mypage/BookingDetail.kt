@@ -26,10 +26,15 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.example.coneeze.components.BOOKING_STATE
+import com.example.coneeze.components.Booking
 import com.example.coneeze.components.BookingRepository
 import com.example.coneeze.components.Bookinginfo
 import com.example.coneeze.components.CustomTopBar
 import com.example.coneeze.components.Info
+import com.example.coneeze.components.PAYMENT_METHOD
+import com.example.coneeze.components.PAYMENT_STATUS
+import com.example.coneeze.components.TOTAL_AMOUNT
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

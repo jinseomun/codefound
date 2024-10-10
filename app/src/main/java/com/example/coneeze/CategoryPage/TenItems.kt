@@ -11,14 +11,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.coneeze.HomePage.twobyone
 import com.example.coneeze.HomePage.twobytwo
-import com.example.coneeze.data.coffeImages4
 import com.example.coneeze.data.coffeeImages3
 import com.example.coneeze.data.features3
-import com.example.coneeze.data.features4
 import com.example.coneeze.data.names3
-import com.example.coneeze.data.names4
 import com.example.coneeze.data.prices3
-import com.example.coneeze.data.prices4
 
 
 @Composable
@@ -44,10 +40,10 @@ fun TenItems() {
 
         Spacer(modifier = Modifier.weight(1f))
         twobyone(
-            names = names4,
-            features = features4,
-            images = coffeImages4,
-            prices = prices4
+            names = names3,
+            features = features3,
+            images = coffeeImages3,
+            prices = prices3
         )
 
         Spacer(modifier = Modifier.weight(1f))

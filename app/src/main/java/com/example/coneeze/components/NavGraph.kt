@@ -7,7 +7,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.example.coneeze.CategoryPage.CategoryScreen
+import com.example.coneeze.DetailPage.DetailScreen
 import com.example.coneeze.HomePage.HomeScreen
+import com.example.coneeze.R
 import com.example.coneeze.login.LoginScreen
 import com.example.coneeze.login.SignupScreen
 import com.example.coneeze.mypage.BookingDetailScreen
@@ -29,6 +31,19 @@ fun NavGraph(navController: NavHostController) {
         composable("회원가입") { SignupScreen(navController)}
         composable("홈") { HomeScreen(navController)}
         composable("카테고리") { CategoryScreen(navController)}
+        composable(
+            route = "detail/{image}/{name}/{price}",
+            arguments = listOf(
+                navArgument("image") { type = NavType.IntType },
+                navArgument("name") { type = NavType.StringType },
+                navArgument("price") { type = NavType.StringType }
+            )
+        ) { backStackEntry ->
+            val image = backStackEntry.arguments?.getInt("image")
+            val name = backStackEntry.arguments?.getString("name") ?: "Unknown"
+            val price = backStackEntry.arguments?.getString("price") ?: "0원"
+            DetailScreen(navController = navController, image = image, name = name, price = price)
+        }
         composable("reservation") { ReservationScreen(navController)}
         composable("reserving1") { FirstScreen(navController) }
         composable("reserving2") { SecondScreenWithModalBottomSheet(navController) }
