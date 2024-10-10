@@ -57,6 +57,7 @@ import com.example.coneeze.mypage.Booking
 import com.example.coneeze.ui.theme.Main600
 import com.example.coneeze.ui.theme.Main800
 import com.example.coneeze.ui.theme.cafeFontFamily
+import com.example.coneeze.R
 import java.time.LocalDate
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
