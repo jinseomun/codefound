@@ -4,6 +4,7 @@ package com.example.coneeze.resevepage
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -16,11 +17,17 @@ import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -33,14 +40,17 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.coneeze.R
+import com.example.coneeze.components.BottomIconRow
 import com.example.coneeze.components.RoundButton
 import com.example.coneeze.components.TopLogo
+import com.example.coneeze.ui.theme.Gray10
 import com.example.coneeze.ui.theme.Main600
 
 @OptIn(ExperimentalMaterial3Api::class)  // 실험적 API 사용을 명시적으로 허용
 @Composable
 fun ReservationScreen(navController: NavController) {
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
+    var selectedIndex by remember { mutableStateOf(1) }
 
     Scaffold(
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
@@ -54,7 +64,21 @@ fun ReservationScreen(navController: NavController) {
             }
         },
         bottomBar = {
-            // 하단 바에 NextButton 추가
+            BottomAppBar(
+                modifier = Modifier
+                    .height(80.dp) // 크기 설정
+                    .border(2.dp, Gray10),
+                containerColor = Color.White
+
+                // 테두리 설정
+            ) {
+                BottomIconRow(
+                    navController = navController,
+                    selectedIndex = selectedIndex,
+                    onItemSelected = { index ->
+                        selectedIndex = index
+                    }
+                )            }
         }
     )
 }

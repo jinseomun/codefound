@@ -18,10 +18,12 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.coneeze.R
 
 @Composable
-fun ReserveTest(){
+fun ReserveTest(navController: NavController){
 Row(
 modifier = Modifier
 .fillMaxWidth()
@@ -34,7 +36,7 @@ modifier = Modifier
         ) {
         Button(
             contentPadding = PaddingValues(0.dp),
-            onClick = {},
+            onClick = {navController.navigate("reservation")},
             // 내용에 맞게 버튼 크기 조정
             colors = ButtonDefaults.buttonColors(
                 Color.Transparent,  // 버튼 배경을 투명하게 설정
@@ -58,7 +60,7 @@ modifier = Modifier
         Spacer(modifier = Modifier.weight(1f))
         Button(
             contentPadding = PaddingValues(0.dp),
-            onClick = {},
+            onClick = {navController.navigate("테스트시작")},
             // 내용에 맞게 버튼 크기 조정
             colors = ButtonDefaults.buttonColors(
                 Color.Transparent,  // 버튼 배경을 투명하게 설정
@@ -85,7 +87,8 @@ modifier = Modifier
 @Preview
 @Composable
 fun ReserveTestPreview(){
-    ReserveTest()
+    val navController = rememberNavController()
+    ReserveTest(navController)
 }
 
 

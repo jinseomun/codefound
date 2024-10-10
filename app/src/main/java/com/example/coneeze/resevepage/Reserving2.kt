@@ -184,7 +184,7 @@ fun SecondScreenWithModalBottomSheet(navController: NavController) {
                         Spacer(modifier = Modifier.height(24.dp))
 
                         Button(
-                            onClick = { navController.navigate("예약내역")  },
+                            onClick = { navController.navigate("홈")  },
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .padding(horizontal = 16.dp)

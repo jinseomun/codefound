@@ -4,9 +4,11 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -25,8 +27,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.example.coneeze.HomePage.RowScroll
 import com.example.coneeze.components.CustomTopBar
 import com.example.coneeze.components.SurveyfinButton
+import com.example.coneeze.data.coffeeImages1
+import com.example.coneeze.data.features1
+import com.example.coneeze.data.names1
+import com.example.coneeze.data.prices1
 import com.example.coneeze.ui.theme.Main600
 import com.example.coneeze.ui.theme.cafeFontFamily
 
@@ -40,9 +47,9 @@ fun ResultScreen(navController: NavController) {
         topBar = {
             CustomTopBar(
                 title = "결과",
-                showNavigationIcon = false, // 네비게이션 아이콘을 보여줌
+                showNavigationIcon = true, // 네비게이션 아이콘을 보여줌
                 showActionIcon = false,    // 액션 아이콘을 숨김
-                onNavigationClick = { /* 네비게이션 클릭 동작 */ },
+                onNavigationClick = {navController.navigate("테스트시작") },
                 onActionClick = { /* 액션 버튼 클릭 동작 */ }
             )
         },
@@ -57,7 +64,7 @@ fun ResultScreen(navController: NavController) {
             SurveyfinButton(
                 text1 = "다시하기",
                 text2 = "더 많은 커피 보러가기",
-                onText1Click = { navController.navigate("teststart")},
+                onText1Click = { navController.navigate("테스트시작")},
             ) {
                 
             }
@@ -104,19 +111,36 @@ fun ResultContent(){
         Box(
             modifier = Modifier
                 .padding(top = 40.dp)
-                .padding(horizontal = 20.dp)
                 .fillMaxWidth(),
         ) {
-            Text(
-                text = " 홍길동 님의 취향에 맞는 커피는?",
-                style = TextStyle(
-                    fontFamily = cafeFontFamily,
-                    fontSize = 18.sp,
-                    textAlign = TextAlign.Center,
-                    fontWeight = FontWeight(700),
-                    color = Main600,
-                ),
-            )
+
+            Column {
+                Text(
+                    modifier = Modifier.padding(20.dp),
+                    text = " 홍길동 님의 취향에 맞는 커피는?",
+                    style = TextStyle(
+                        fontFamily = cafeFontFamily,
+                        fontSize = 18.sp,
+                        textAlign = TextAlign.Center,
+                        fontWeight = FontWeight(700),
+                        color = Main600,
+                    ),
+                )
+
+                LazyColumn(
+                    modifier = Modifier
+                        .fillMaxSize()
+                ) {
+                    item {
+                        RowScroll(
+                            names = names1,
+                            features = features1,
+                            images = coffeeImages1,
+                            prices = prices1
+                        )
+                    }
+                }
+            }
 
         }
 

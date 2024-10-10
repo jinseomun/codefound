@@ -23,14 +23,14 @@ import com.example.coneeze.testingpage.TestScreen
 
 @Composable
 fun NavGraph(navController: NavHostController) {
-    NavHost(navController = navController, startDestination = "로그인") {
+    NavHost(navController = navController, startDestination = "홈") {
         composable("로그인") { LoginScreen(navController)}
         composable("회원가입") { SignupScreen(navController)}
         composable("홈") { HomeScreen(navController)}
         composable("reservation") { ReservationScreen(navController)}
         composable("reserving1") { FirstScreen(navController) }
         composable("reserving2") { SecondScreenWithModalBottomSheet(navController) }
-        composable("teststart") { TestScreen(navController) }
+        composable("테스트시작") { TestScreen(navController) }
         composable("survey") { SurveyScreen(navController) }
         composable("result") { ResultScreen(navController) }
         composable("마이페이지") { MypageScreen(navController) }

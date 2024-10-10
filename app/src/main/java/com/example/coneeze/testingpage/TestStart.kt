@@ -38,7 +38,7 @@ fun TestScreen(navController: NavController) {
                 title = "셀프테스트",
                 showNavigationIcon = true, // 네비게이션 아이콘을 보여줌
                 showActionIcon = false,    // 액션 아이콘을 숨김
-                onNavigationClick = { /* 네비게이션 클릭 동작 */ },
+                onNavigationClick = { navController.navigate("홈") },
                 onActionClick = { /* 액션 버튼 클릭 동작 */ }
             )
         },

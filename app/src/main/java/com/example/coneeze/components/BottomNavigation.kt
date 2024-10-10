@@ -26,15 +26,20 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.coneeze.R
 import com.example.coneeze.ui.theme.Gray10
 import com.example.coneeze.ui.theme.Main600
 import com.example.coneeze.ui.theme.suit
 
 @Composable
-fun BottomIconRow() {
+fun BottomIconRow(
+    navController: NavController,
+    selectedIndex: Int,
+    onItemSelected: (Int) -> Unit
+) {
     // 상태 변수로 현재 선택된 버튼의 인덱스를 저장 (초기값은 0 -> 첫 번째 버튼이 선택된 상태)
-    var selectedIndex by remember { mutableStateOf(0) }
 
     Row(
         modifier = Modifier.fillMaxWidth(),
@@ -46,21 +51,39 @@ fun BottomIconRow() {
             image = painterResource(id = R.drawable.home),
             text = "홈",
             selected = selectedIndex == 0, // 첫 번째 버튼이 선택되어 있는지 확인
-            action = { selectedIndex = 0 } // 클릭하면 첫 번째 버튼이 선택됨
+            action = {
+                onItemSelected(0)
+                navController.navigate("홈") {
+                    popUpTo(navController.graph.startDestinationId)
+                    launchSingleTop = true
+                }
+            } // 클릭하면 첫 번째 버튼이 선택됨
         )
         Spacer(modifier = Modifier.weight(1f))
         BottomIcon(
             image = painterResource(id = R.drawable.coffee),
             text = "예약",
             selected = selectedIndex == 1, // 두 번째 버튼이 선택되어 있는지 확인
-            action = { selectedIndex = 1 } // 클릭하면 두 번째 버튼이 선택됨
+            action = {
+                onItemSelected(1)
+                navController.navigate("reservation") {
+                    popUpTo(navController.graph.startDestinationId)
+                    launchSingleTop = true
+                }
+            } // 클릭하면 두 번째 버튼이 선택됨
         )
         Spacer(modifier = Modifier.weight(1f))
         BottomIcon(
             image = painterResource(id = R.drawable.my),
             text = "마이페이지",
             selected = selectedIndex == 2, // 세 번째 버튼이 선택되어 있는지 확인
-            action = { selectedIndex = 2 } // 클릭하면 세 번째 버튼이 선택됨
+            action = {
+                onItemSelected(2)
+                navController.navigate("마이페이지") {
+                    popUpTo(navController.graph.startDestinationId)
+                    launchSingleTop = true
+                }
+            } // 클릭하면 세 번째 버튼이 선택됨
         )
         Spacer(modifier = Modifier.weight(1f))
     }
@@ -125,8 +148,3 @@ fun BottomIcon(
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun BottomIconRowPreview() {
-    BottomIconRow()
-}
