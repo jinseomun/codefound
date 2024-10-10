@@ -15,6 +15,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -77,12 +78,13 @@ fun DetailInfo() {
                 ) {
                     repeat(5) {
                         Image(
-                            painter = painterResource(id = R.drawable.star),
+                            painter = painterResource(id = R.drawable.yellow_star),
                             contentDescription = "star",
                             modifier = Modifier
                                 .width(12.dp)
                                 .height(12.dp)
-                                .padding(1.dp)  // 별 사이에 간격 추가
+                                .padding(1.dp),
+                            colorFilter = androidx.compose.ui.graphics.ColorFilter.tint(Black30)// 별 사이에 간격 추가
                         )
                     }
 
