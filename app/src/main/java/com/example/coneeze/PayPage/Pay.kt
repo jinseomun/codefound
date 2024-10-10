@@ -45,7 +45,7 @@ fun PayScreen(){
                 item { HeaderWithIcon(text = "배송 정보", icon = painterResource(id = R.drawable.up))}
                 item { DeliveryInfo() }
                 item { GrayLine()}
-                item{ HeaderWithIcon(text = "주문 상품 정보", icon = painterResource(id = R.drawable.downicon)) }
+                item{ ItemInfo() }
                 item { GrayLine() }
                 item { HeaderWithIcon(text = "결제 수단", icon = painterResource(id = R.drawable.up))}
                 item { CardSelect() }
