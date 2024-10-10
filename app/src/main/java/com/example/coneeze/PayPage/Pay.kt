@@ -1,7 +1,7 @@
-package com.example.coneeze.ReviewPage
+package com.example.coneeze.PayPage
 
+import CardSelect
 import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -15,34 +15,26 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.coneeze.CategoryPage.BackTopBar
 import com.example.coneeze.CategoryPage.Section
+import com.example.coneeze.CategoryPage.TapMenu1
+import com.example.coneeze.CategoryPage.TenItems
 import com.example.coneeze.DetailPage.BottomButtonBar
-import com.example.coneeze.DetailPage.DetailExplain
-import com.example.coneeze.DetailPage.DetailInfo
-import com.example.coneeze.DetailPage.TapMenu2
 import com.example.coneeze.HomePage.BottomIconRow
 import com.example.coneeze.HomePage.GrayLine
-import com.example.coneeze.HomePage.ReviewBanner
-import com.example.coneeze.data.TapNames2
+import com.example.coneeze.R
+import com.example.coneeze.data.TapNames1
 import com.example.coneeze.ui.theme.Gray10
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ReviewScreen(){
+fun PayScreen(){
     Scaffold(
         topBar = {
-            TopAppBar(
-                title = { Text(text = "") },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(56.dp),
-                navigationIcon = {
-                    BackTopBar(keyword="")
-                },
-            )
+            BackTopBar(keyword = "결제하기")
         },
         content = { paddingValues ->
             LazyColumn(
@@ -50,38 +42,40 @@ fun ReviewScreen(){
                     .fillMaxSize()
                     .padding(paddingValues)
             ) {
-
-                item { TapMenu2(first = 1) }
-
-                item { Section("별점", "")}
-
-                item { Rating() }
-
-                item { ReviewBanner() }
-
+                item { HeaderWithIcon(text = "배송 정보", icon = painterResource(id = R.drawable.up))}
+                item { DeliveryInfo() }
                 item { GrayLine()}
-
-                item { ReviewHeader() }
-
-                item{ CustomerReviews()}
-
-                item{ MoreReview() }
-
+                item{ HeaderWithIcon(text = "주문 상품 정보", icon = painterResource(id = R.drawable.downicon)) }
+                item { GrayLine() }
+                item { HeaderWithIcon(text = "결제 수단", icon = painterResource(id = R.drawable.up))}
+                item { CardSelect() }
+                item { GrayLine() }
+                item { FinalPay() }
+                item { GrayLine() }
+                item{ Agreement()}
 
             }
         },
         bottomBar = {
-            BottomButtonBar()
+            BottomAppBar(
+                modifier = Modifier
+                    .height(80.dp) // 크기 설정
+                    .border(2.dp, Gray10),
+                containerColor = Color.White
+
+                // 테두리 설정
+            ) {
+                BottomButtonBar()
+            }
         }
     )
+
 }
 
 
 
-
-
-@Preview
+@Preview(showBackground = true)
 @Composable
-fun ReviewScreenPreview(){
-ReviewScreen()
+fun PayScreenPreview(){
+PayScreen()
 }

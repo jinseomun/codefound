@@ -29,9 +29,11 @@ modifier = Modifier
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(start = 30.dp, end = 30.dp, top = 24.dp, bottom = 20.dp),
+            .padding(top = 24.dp, bottom = 20.dp),
 
         ) {
+        Spacer(modifier = Modifier.weight(1f))
+
         Button(
             contentPadding = PaddingValues(0.dp),
             onClick = {},
@@ -78,6 +80,8 @@ modifier = Modifier
                 .height(100.dp)
 
         )}
+
+        Spacer(modifier = Modifier.weight(1f))
     }
 }
 }

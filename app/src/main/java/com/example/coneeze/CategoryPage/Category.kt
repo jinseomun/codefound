@@ -78,7 +78,7 @@ fun CategoryScreen() {
                     .fillMaxWidth()
                     .height(56.dp),
                 navigationIcon = {
-                    BackTopBar()
+                    BackTopBar(keyword="")
                 },
             )
         },
