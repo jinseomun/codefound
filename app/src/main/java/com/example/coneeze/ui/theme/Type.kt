@@ -38,3 +38,15 @@ val Typography = Typography(
 val cafeFontFamily = FontFamily(
     Font(R.font.cafe24ssurround, FontWeight.Normal)
 )
+
+val suit = FontFamily(
+    Font(R.font.suit),
+)
+val surround = FontFamily(
+    Font(R.font.surround),
+)
+
+val gowun_batang = FontFamily(
+    Font(R.font.gowun_batang)
+)
+
