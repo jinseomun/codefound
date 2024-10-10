@@ -13,14 +13,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.coneeze.R
+import com.example.coneeze.ui.theme.suit
 
 
 @Composable
@@ -41,6 +44,7 @@ fun HorizontalItem(name: String, image: Int, feature: String, price: String) {
 
         ) {
         Column(
+
         ) {
             Image(
                 painter = painterResource(id = image),  // 이미지 리소스 설정
@@ -57,6 +61,7 @@ fun HorizontalItem(name: String, image: Int, feature: String, price: String) {
                 style = TextStyle(
                     fontSize = 14.sp,
                     lineHeight = 18.sp,
+                    fontFamily =suit,
                     fontWeight = FontWeight(600),
                 ),
                 maxLines = 1,  // 한 줄로 제한
@@ -69,6 +74,7 @@ fun HorizontalItem(name: String, image: Int, feature: String, price: String) {
                 style = TextStyle(
                     fontSize = 12.sp,
                     lineHeight = 16.sp,
+                    fontFamily =suit,
                     fontWeight = FontWeight(400),
                     color = Color(0xFF60646C)
                 )
@@ -77,16 +83,24 @@ fun HorizontalItem(name: String, image: Int, feature: String, price: String) {
             Text(
                 text = price,
 
+
                 style = TextStyle(
                     fontSize = 16.sp,
                     lineHeight = 20.sp,
+                    fontFamily =suit,
                     fontWeight = FontWeight(600),
 
-                    )
+                    ),
+
+                modifier = Modifier
+                    .padding(top=2.dp),
+                textAlign = TextAlign.Center
             )
         }
     }
 }
+
+
 
 @Preview(showBackground = true)
 @Composable

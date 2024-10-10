@@ -21,6 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.coneeze.HomePage.BottomIconRow
 import com.example.coneeze.HomePage.CategoryScroll
@@ -34,6 +35,7 @@ import com.example.coneeze.HomePage.ReserveTest
 import com.example.coneeze.HomePage.ReviewBanner
 import com.example.coneeze.HomePage.RowScroll
 import com.example.coneeze.HomePage.SaleCategory
+import com.example.coneeze.HomePage.twobyone
 import com.example.coneeze.HomePage.twobytwo
 import com.example.coneeze.R
 import com.example.coneeze.data.OriginPrices
@@ -42,18 +44,23 @@ import com.example.coneeze.data.SaleFeatures
 import com.example.coneeze.data.SaleImages
 import com.example.coneeze.data.SaleNames
 import com.example.coneeze.data.SalePrices
+import com.example.coneeze.data.TapNames1
+import com.example.coneeze.data.coffeImages4
 import com.example.coneeze.data.coffeeImages1
 import com.example.coneeze.data.coffeeImages2
 import com.example.coneeze.data.coffeeImages3
 import com.example.coneeze.data.features1
 import com.example.coneeze.data.features2
 import com.example.coneeze.data.features3
+import com.example.coneeze.data.features4
 import com.example.coneeze.data.names1
 import com.example.coneeze.data.names2
 import com.example.coneeze.data.names3
+import com.example.coneeze.data.names4
 import com.example.coneeze.data.prices1
 import com.example.coneeze.data.prices2
 import com.example.coneeze.data.prices3
+import com.example.coneeze.data.prices4
 import com.example.coneeze.data.tagbackgroundColors
 import com.example.coneeze.data.tags
 import com.example.coneeze.data.tagtextColors
@@ -82,101 +89,15 @@ fun CategoryScreen() {
                     .padding(paddingValues)
             ) {
 
-                item { ExplainBanner() }
+                item { TapMenu(datas = TapNames1) }
 
-                item { ReserveTest() }
+                item { AllItems()}
 
-                item { CategoryScroll() }
-
-                item { GrayLine() }
-
-                item { Header("홍길동 님의 취향에 맞는 커피예요") }
-
-                item {
-                    RowScroll(
-                        names = names1,
-                        features = features1,
-                        images = coffeeImages1,
-                        prices = prices1
-                    )
-                }
-
-                item { GrayLine() }
-
-                item { Header("이전 구매 상품과 유사한 상품") }
-
-                item {
-                    RowScroll(
-                        names = names2,
-                        features = features2,
-                        images = coffeeImages2,
-                        prices = prices2
-                    )
-                }
-
-                item { ReviewBanner() }
+                item {TenItems()}
 
 
 
 
-                item { Header("커니즈 추천 베스트 상품") }
-
-                item {
-                    HorizontalScroll(
-                        page = 3,
-                        pageContent = { page ->
-                            twobytwo(
-                                names = names3,
-                                features = features3,
-                                images = coffeeImages3,
-                                prices = prices3
-                            )
-                        }
-                    )
-                }
-
-                item { GrayLine() }
-
-                item { Header("선물하기 좋은 상품") }
-
-
-
-                item { Spacer(modifier = Modifier.height(16.dp)) }
-
-                item {
-                    RowScroll(
-                        names = names1,
-                        features = features1,
-                        images = coffeeImages1,
-                        prices = prices1
-                    )
-                }
-
-                item { OnedayBanner() }
-
-                item { Header("특가/혜택 상품") }
-
-                item {
-                    HorizontalScroll(
-                        page = 3,
-                        pageContent = { page ->
-                            // 페이지 내용으로 SaleCategory를 전달
-                            SaleCategory(
-                                image = SaleImages,
-                                name = SaleNames,
-                                feature = SaleFeatures,
-                                percent = Percents,
-                                price = SalePrices,
-                                origin_price = OriginPrices,
-                                tagCategory = tags,
-                                tagBackgroundColor = tagbackgroundColors,
-                                tagTextColor = tagtextColors
-                            )
-                        }
-                    )
-                }
-
-                item { Footer() }
             }
         },
         bottomBar = {
@@ -192,4 +113,12 @@ fun CategoryScreen() {
             }
         }
     )
+}
+
+
+
+@Preview
+@Composable
+fun CategoryScreenPreview(){
+    CategoryScreen()
 }
