@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
@@ -39,6 +40,7 @@ import com.example.coneeze.ui.theme.cafeFontFamily
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.text.input.KeyboardType
 import com.example.coneeze.components.NextButton
 
 
@@ -127,6 +129,8 @@ fun Inuput_Signup() {
             },
             modifier = Modifier
                 .fillMaxWidth(),
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
+
             colors = TextFieldDefaults.colors(
                 focusedContainerColor = Color.Transparent,
                 unfocusedContainerColor = Color.Transparent,
@@ -150,6 +154,7 @@ fun Inuput_Signup() {
             },
             modifier = Modifier
                 .fillMaxWidth(),
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
 
             colors = TextFieldDefaults.colors(
                 focusedContainerColor = Color.Transparent,
@@ -170,6 +175,7 @@ fun Inuput_Signup() {
             },
             modifier = Modifier
                 .fillMaxWidth(),
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
 
             colors = TextFieldDefaults.colors(
                 focusedContainerColor = Color.Transparent,
@@ -194,6 +200,7 @@ fun Inuput_Signup() {
             },
             modifier = Modifier
                 .fillMaxWidth(),
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
 
             colors = TextFieldDefaults.colors(
                 focusedContainerColor = Color.Transparent,
@@ -218,6 +225,7 @@ fun Inuput_Signup() {
             },
             modifier = Modifier
                 .fillMaxWidth(),
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
 
             colors = TextFieldDefaults.colors(
                 focusedContainerColor = Color.Transparent,

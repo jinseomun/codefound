@@ -1,6 +1,7 @@
 package com.example.coneeze.mypage
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -9,6 +10,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -58,7 +60,11 @@ fun MypageScreen(navController: NavController) {
             TopLogo()
         },
         content = { innerPadding ->
-            Box(modifier = Modifier.padding(innerPadding)) {
+            Box(modifier = Modifier
+                .padding(innerPadding)
+                .fillMaxSize()
+                .background(color = Color.White)
+            ) {
                 // 메인 콘텐츠
                 Mypagecontent(navController)
             }
@@ -145,7 +151,7 @@ fun Mypagecontent(navController: NavController){
 
         TextAndIcon(text = "주문 내역", onClick = {navController.navigate("주문내역")})
 
-        TextAndIcon(text = "예약 내역", onClick = {navController.navigate("주문내역")})
+        TextAndIcon(text = "예약 내역", onClick = {navController.navigate("예약내역")})
 
         Box(
             modifier = Modifier

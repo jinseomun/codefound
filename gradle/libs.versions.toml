@@ -11,6 +11,8 @@ composeBom = "2024.09.03"
 nav = "2.8.2"
 navigationRuntimeKtx = "2.8.2"
 composeFoundation = "1.7.3"  # Compose Foundation 라이브러리 버전
+compose = "1.5.0"  # 최신 Compose 버전으로 설정
+
 
 
 
@@ -34,6 +36,8 @@ navigation-ui-ktx = { module = "androidx.navigation:navigation-ui-ktx", version.
 navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "nav" }
 androidx-compose-foundation = { group = "androidx.compose.foundation", name = "foundation", version.ref = "composeFoundation" }
 androidx-navigation-runtime-ktx = { group = "androidx.navigation", name = "navigation-runtime-ktx", version.ref = "navigationRuntimeKtx" }
+compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose" }
+compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "compose" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

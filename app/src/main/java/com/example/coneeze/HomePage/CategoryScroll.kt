@@ -22,7 +22,7 @@ modifier = Modifier
         modifier = Modifier
             .fillMaxWidth()
             .padding(start = 20.dp, end = 20.dp, bottom = 24.dp)
-            .height(78.dp),
+            .height(84.dp),
 
         ) {
         CategoryItem(

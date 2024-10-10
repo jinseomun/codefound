@@ -2,7 +2,9 @@ package com.example.coneeze.HomePage
 
 import KeywordPrice
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Box
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -65,7 +67,6 @@ import com.example.coneeze.ui.theme.Gray10
 fun HomeScreen(navController: NavController) {
     var selectedIndex by remember { mutableStateOf(0) }
 
-
     Scaffold(
         topBar = {
             TopAppBar(
@@ -78,6 +79,7 @@ fun HomeScreen(navController: NavController) {
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
+                            .background(color = Color.White)
                             .height(56.dp),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
@@ -93,109 +95,119 @@ fun HomeScreen(navController: NavController) {
             )
         },
         content = { paddingValues ->
-            LazyColumn(
+            Box(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(paddingValues)
+                    .background(color = Color.White)
             ) {
+                LazyColumn(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(paddingValues)
+                ) {
 
-                item { ExplainBanner() }
+                    item { ExplainBanner() }
 
-                item { ReserveTest(navController) }
+                    item { ReserveTest(navController) }
 
-                item { CategoryScroll(navController) }
+                    item { CategoryScroll(navController) }
 
-                item { GrayLine() }
+                    item { GrayLine() }
 
-                item { Header("홍길동 님의 취향에 맞는 커피예요") }
+                    item { Header("홍길동 님의 취향에 맞는 커피예요") }
 
-                item {
-                    RowScroll(
-                        navController = navController,
-                        names = names1,
-                        features = features1,
-                        images = coffeeImages1,
-                        prices = prices1
-                    )
-                }
-
-                item { GrayLine() }
-
-                item { Header("이전 구매 상품과 유사한 상품") }
-
-                item {
-                    RowScroll(
-                        navController = navController,
-                        names = names2,
-                        features = features2,
-                        images = coffeeImages2,
-                        prices = prices2
-                    )
-                }
-
-                item { ReviewBanner() }
-
-
-
-
-                item { Header("커니즈 추천 베스트 상품") }
-
-                item { PagerWithDotsIndicator(
-                    pageCount = 3,
-                    pageContent = { page ->
-                        twobytwo(
+                    item {
+                        RowScroll(
                             navController = navController,
-                            names = names3,
-                            features = features3,
-                            images = coffeeImages3,
-                            prices = prices3
+                            names = names1,
+                            features = features1,
+                            images = coffeeImages1,
+                            prices = prices1
                         )
                     }
-                ) }
 
-                item { GrayLine() }
+                    item { GrayLine() }
 
-                item { Header("선물하기 좋은 상품") }
+                    item { Header("이전 구매 상품과 유사한 상품") }
 
-                item { KeywordPrice() }
-
-                item { Spacer(modifier = Modifier.height(16.dp)) }
-
-                item {
-                    RowScroll(
-                        navController = navController,
-                        names = names1,
-                        features = features1,
-                        images = coffeeImages1,
-                        prices = prices1
-                    )
-                }
-
-                item { OnedayBanner() }
-
-                item { Header("특가/혜택 상품") }
-
-                item{ PagerWithDotsIndicator(
-                    pageCount = 3,
-                    pageContent = { page ->
-                        // 페이지 내용으로 SaleCategory를 전달
-                        SaleCategory(
-                            image = SaleImages,
-                            name = SaleNames,
-                            feature = SaleFeatures,
-                            percent = Percents,
-                            price = SalePrices,
-                            origin_price = OriginPrices,
-                            tagCategory = tags,
-                            tagBackgroundColor = tagbackgroundColors,
-                            tagTextColor = tagtextColors
+                    item {
+                        RowScroll(
+                            navController = navController,
+                            names = names2,
+                            features = features2,
+                            images = coffeeImages2,
+                            prices = prices2
                         )
                     }
-                )
-                }
 
-                item { Footer()}
+                    item { ReviewBanner() }
+
+
+
+
+                    item { Header("커니즈 추천 베스트 상품") }
+
+                    item {
+                        PagerWithDotsIndicator(
+                            pageCount = 3,
+                            pageContent = { page ->
+                                twobytwo(
+                                    navController = navController,
+                                    names = names3,
+                                    features = features3,
+                                    images = coffeeImages3,
+                                    prices = prices3
+                                )
+                            }
+                        )
+                    }
+
+                    item { GrayLine() }
+
+                    item { Header("선물하기 좋은 상품") }
+
+                    item { KeywordPrice() }
+
+                    item { Spacer(modifier = Modifier.height(16.dp)) }
+
+                    item {
+                        RowScroll(
+                            navController = navController,
+                            names = names1,
+                            features = features1,
+                            images = coffeeImages1,
+                            prices = prices1
+                        )
+                    }
+
+                    item { OnedayBanner() }
+
+                    item { Header("특가/혜택 상품") }
+
+                    item {
+                        PagerWithDotsIndicator(
+                            pageCount = 3,
+                            pageContent = { page ->
+                                // 페이지 내용으로 SaleCategory를 전달
+                                SaleCategory(
+                                    image = SaleImages,
+                                    name = SaleNames,
+                                    feature = SaleFeatures,
+                                    percent = Percents,
+                                    price = SalePrices,
+                                    origin_price = OriginPrices,
+                                    tagCategory = tags,
+                                    tagBackgroundColor = tagbackgroundColors,
+                                    tagTextColor = tagtextColors
+                                )
+                            }
+                        )
+                    }
+
+                    item { Footer() }
+                }
             }
+
         },
         bottomBar = {
             BottomAppBar(

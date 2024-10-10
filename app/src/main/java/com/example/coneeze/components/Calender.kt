@@ -42,34 +42,42 @@ fun CustomCalendar(
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceBetween,
+            horizontalArrangement = Arrangement.Center,
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 100.dp)
                 .padding(top = 12.dp, bottom = 36.dp)
         ) {
             Text(
                 text = "〈",
                 fontSize = 20.sp,
-                modifier = Modifier.clickable {
-                    currentMonth = currentMonth.minusMonths(1)
-                    selectedDate = null // 월이 변경되면 선택 초기화
-                }
+                modifier = Modifier
+                    .weight(1f)
+                    .clickable {
+                        currentMonth = currentMonth.minusMonths(1)
+                        selectedDate = null // 월이 변경되면 선택 초기화
+                    },
+                textAlign = TextAlign.Center // 중앙 정렬
             )
             Text(
                 text = "${currentMonth.year}년 ${currentMonth.monthValue}월",
                 fontSize = 20.sp,
-                fontWeight = FontWeight.Bold
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier.weight(3f),
+                textAlign = TextAlign.Center
             )
             Text(
                 text = "〉",
                 fontSize = 20.sp,
-                modifier = Modifier.clickable {
-                    currentMonth = currentMonth.plusMonths(1)
-                    selectedDate = null // 월이 변경되면 선택 초기화
-                }
+                modifier = Modifier
+                    .weight(1f)
+                    .clickable {
+                        currentMonth = currentMonth.plusMonths(1)
+                        selectedDate = null // 월이 변경되면 선택 초기화
+                    },
+                textAlign = TextAlign.Center // 중앙 정렬
             )
         }
+
 
         // 요일 헤더 표시
         Row(
@@ -87,6 +95,7 @@ fun CustomCalendar(
             }
         }
 
+        // 날짜 표시
         // 날짜 표시
         var weekHasNextMonthDays = false // 마지막 줄 표시 여부를 위한 변수
 
@@ -158,7 +167,7 @@ fun CustomCalendar(
             if (weekHasNextMonthDays) break
         }
 
-  //            text = selectedDate?.let {
+        //            text = selectedDate?.let {
   //              "${it.year}년 ${it.monthValue}월 ${it.dayOfMonth}일"
   //          } ?: "날짜를 선택하세요",
 

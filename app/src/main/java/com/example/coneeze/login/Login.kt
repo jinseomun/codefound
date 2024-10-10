@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Divider
@@ -36,6 +37,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -139,6 +141,9 @@ fun LoginField(navController: NavController) {
                 modifier = Modifier
                     .fillMaxWidth(),
 
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
+
+
                 colors = TextFieldDefaults.colors(
                     focusedContainerColor = Color.Transparent,
                     unfocusedContainerColor = Color.Transparent,
@@ -164,6 +169,8 @@ fun LoginField(navController: NavController) {
                 },
                 modifier = Modifier
                     .fillMaxWidth(),
+
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
 
                 colors = TextFieldDefaults.colors(
                     focusedContainerColor = Color.Transparent,
