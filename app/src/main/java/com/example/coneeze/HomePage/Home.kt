@@ -111,6 +111,7 @@ fun HomeScreen(navController: NavController) {
 
                 item {
                     RowScroll(
+                        navController = navController,
                         names = names1,
                         features = features1,
                         images = coffeeImages1,
@@ -124,6 +125,7 @@ fun HomeScreen(navController: NavController) {
 
                 item {
                     RowScroll(
+                        navController = navController,
                         names = names2,
                         features = features2,
                         images = coffeeImages2,
@@ -161,6 +163,7 @@ fun HomeScreen(navController: NavController) {
 
                 item {
                     RowScroll(
+                        navController = navController,
                         names = names1,
                         features = features1,
                         images = coffeeImages1,

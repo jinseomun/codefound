@@ -1,6 +1,7 @@
 package com.example.coneeze.HomePage
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -21,31 +22,41 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.coneeze.R
 import com.example.coneeze.ui.theme.suit
 
 @Composable
-fun RowItem(name: String, image: Painter, feature: String, price : String) {
+fun RowItem(
+    navController: NavController,
+    name: String,
+    image: Int,
+    feature: String,
+    price: String
+) {
     Card(
         modifier = Modifier
             .padding(end = 10.dp)
             .width(122.dp)
-            .height(188.dp),  // 각 항목의 너비를 고정
+            .height(188.dp)
+            .clickable {
+                // Int 타입 이미지 리소스 ID를 그대로 전달
+                navController.navigate("디테일/$image/$name/$price")
+            },
         colors = CardDefaults.cardColors(
             containerColor = Color.White
         ),
         shape = RoundedCornerShape(
-            topStart = 16.dp,  // 상단 왼쪽 모서리 둥글게
-            topEnd = 16.dp,    // 상단 오른쪽 모서리 둥글게
-            bottomEnd = 0.dp,  // 하단 오른쪽 모서리는 뾰족하게
-            bottomStart = 0.dp // 하단 왼쪽 모서리는 뾰족하게
+            topStart = 16.dp,
+            topEnd = 16.dp,
+            bottomEnd = 0.dp,
+            bottomStart = 0.dp
         )
-
-        ) {
-        Column(
-        ) {
+    ) {
+        Column {
             Image(
-                painter = image,  // 이미지 리소스 설정
+                painter = painterResource(id = image),
                 contentDescription = "배너 사진",
                 modifier = Modifier
                     .width(122.dp)
@@ -54,60 +65,32 @@ fun RowItem(name: String, image: Painter, feature: String, price : String) {
             )
             Text(
                 text = name,
-                modifier = Modifier
-                    .padding(top=8.dp),
+                modifier = Modifier.padding(top = 8.dp),
                 style = TextStyle(
                     fontSize = 14.sp,
                     lineHeight = 18.sp,
-                    fontFamily = suit,
                     fontWeight = FontWeight(600),
                 ),
-                maxLines = 1,  // 한 줄로 제한
-                overflow = TextOverflow.Ellipsis)
-
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis
+            )
             Text(
                 text = feature,
-
-                // Body/Caption 12 R
                 style = TextStyle(
                     fontSize = 12.sp,
                     lineHeight = 16.sp,
-                    fontFamily = suit,
                     fontWeight = FontWeight(400),
                     color = Color(0xFF60646C)
                 )
             )
-
             Text(
                 text = price,
-
                 style = TextStyle(
                     fontSize = 16.sp,
                     lineHeight = 20.sp,
-                    fontFamily = suit,
-                    fontWeight = FontWeight(600),
-
-                    )
+                    fontWeight = FontWeight(600)
+                )
             )
-
-
-
-
-
-
         }
     }
-}
-
-@Preview
-@Composable
-fun RowItemPreview(){
-    RowItem(
-        name = "고양이",
-        image = painterResource(id = R.drawable.guatemala),
-        feature = "귀여움",
-        price = "800원"
-
-    )
-
 }

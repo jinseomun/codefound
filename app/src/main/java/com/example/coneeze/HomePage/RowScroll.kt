@@ -11,6 +11,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.coneeze.R
 
 
@@ -19,9 +21,9 @@ import com.example.coneeze.data.features1
 import com.example.coneeze.data.names1
 import com.example.coneeze.data.prices1
 
-
 @Composable
 fun RowScroll(
+    navController: NavController,
     names: List<String>,
     features: List<String>,
     images: List<Int>,
@@ -29,27 +31,22 @@ fun RowScroll(
 ) {
     Row(
         modifier = Modifier.fillMaxWidth()
-
     ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(start = 20.dp, bottom = 24.dp)
         ) {
-
-
             Column {
                 LazyRow(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                    // LazyRow가 화면 가로로 꽉 차도록 설정
+                    modifier = Modifier.fillMaxWidth()
                 ) {
-                    itemsIndexed(names) { index, language ->
-                        // 언어 리스트와 이미지 리스트를 매칭하여 RowItem에 전달
+                    itemsIndexed(names) { index, name ->
                         if (index < images.size && index < features.size && index < prices.size) {
                             RowItem(
-                                name = language,
-                                image = painterResource(id = images[index]),
+                                navController = navController,
+                                name = name,
+                                image = images[index],
                                 feature = features[index],
                                 price = prices[index]
                             )
@@ -57,16 +54,16 @@ fun RowScroll(
                     }
                 }
             }
-
-
         }
     }
 }
+
 
 @Preview
 @Composable
 fun RowScrollPreview(){
     RowScroll(
+        navController = rememberNavController(),  // 임시 NavController 사용
         names = names1,
         features = features1,
         images = coffeeImages1,

@@ -56,7 +56,7 @@ fun ResultScreen(navController: NavController) {
         content = { innerPadding ->
             Box(modifier = Modifier.padding(innerPadding)) {
                 // 메인 콘텐츠
-                ResultContent()
+                ResultContent(navController)
             }
         },
         bottomBar = {
@@ -74,7 +74,7 @@ fun ResultScreen(navController: NavController) {
 }
 
 @Composable
-fun ResultContent(){
+fun ResultContent(navController: NavController){
 
     Column(
         modifier = Modifier
@@ -133,6 +133,7 @@ fun ResultContent(){
                 ) {
                     item {
                         RowScroll(
+                            navController = navController,
                             names = names1,
                             features = features1,
                             images = coffeeImages1,
