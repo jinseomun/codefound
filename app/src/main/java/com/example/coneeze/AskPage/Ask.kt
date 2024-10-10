@@ -1,36 +1,32 @@
-package com.example.coneeze.DetailPage
+package com.example.coneeze.AskPage
 
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-
 import com.example.coneeze.CategoryPage.BackTopBar
 import com.example.coneeze.CategoryPage.Section
-
-import com.example.coneeze.CategoryPage.TapMenu1
-import com.example.coneeze.CategoryPage.TenItems
-import com.example.coneeze.HomePage.BottomIconRow
+import com.example.coneeze.DetailPage.BottomButtonBar
+import com.example.coneeze.DetailPage.TapMenu2
 import com.example.coneeze.HomePage.GrayLine
-import com.example.coneeze.data.TapNames1
-import com.example.coneeze.data.TapNames2
-import com.example.coneeze.ui.theme.Gray10
+import com.example.coneeze.HomePage.ReviewBanner
+import com.example.coneeze.ReviewPage.CustomerReviews
+import com.example.coneeze.ReviewPage.MoreReview
+import com.example.coneeze.ReviewPage.Rating
+import com.example.coneeze.ReviewPage.ReviewHeader
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DetailScreen(){
+fun AskScreen(){
     Scaffold(
         topBar = {
             TopAppBar(
@@ -50,32 +46,25 @@ fun DetailScreen(){
                     .padding(paddingValues)
             ) {
 
-                item { TapMenu2(first = 0) }
+                item { TapMenu2(first = 2) }
 
-                item { DetailInfo() }
+                item { AskHeader() }
 
-                item { GrayLine() }
-
-                item { DetailExplain() }
-
-
-
+                item { Answers()}
 
 
             }
         },
         bottomBar = {
-           BottomButtonBar()
+            BottomButtonBar()
         }
     )
-
 }
 
 
 
-@Preview(showBackground = true)
+@Preview
 @Composable
-fun DetailScreenPreview(){
-
-DetailScreen()
+fun AskPagePreview(){
+    AskScreen()
 }
