@@ -51,7 +51,7 @@ fun ReviewScreen(){
                     .padding(paddingValues)
             ) {
 
-                item { TapMenu2(datas = TapNames2) }
+                item { TapMenu2(first = 1) }
 
                 item { Section("별점", "")}
 

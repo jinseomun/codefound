@@ -42,10 +42,10 @@ import com.example.coneeze.ui.theme.suit
 
 @Composable
 fun TapMenu2(
-    datas: List<String>
+   first: Int
 ) {
     // 누른 버튼의 인덱스를 기억하는 상태
-    var selectedIndex by remember { mutableStateOf(0) }  // 초기값은 선택되지 않은 상태 (-1)
+    var selectedIndex by remember { mutableStateOf(first) }  // 초기값은 선택되지 않은 상태 (-1)
 
     Row(
         modifier = Modifier
@@ -60,7 +60,7 @@ fun TapMenu2(
             // 각 버튼을 Row 안에서 균등하게 배치하기 위해 weight(1f)를 적용
             TapMenuButton(
                 index = 0,
-                MenuName = datas[0],
+                MenuName = TapNames2[0],
                 isSelected = (0 == selectedIndex), // 현재 인덱스가 선택된 인덱스와 같은지 확인
             ) {
                 selectedIndex = 0 // 버튼을 클릭하면 선택된 인덱스 변경
@@ -69,7 +69,7 @@ fun TapMenu2(
 
         TapMenuButton(
             index = 1,
-            MenuName = datas[1],
+            MenuName = TapNames2[1],
             isSelected = (1 == selectedIndex), // 현재 인덱스가 선택된 인덱스와 같은지 확인
         ) {
             selectedIndex = 1 // 버튼을 클릭하면 선택된 인덱스 변경
@@ -77,7 +77,7 @@ fun TapMenu2(
         Spacer(modifier = Modifier.weight(1f))
         TapMenuButton(
             index = 2,
-            MenuName = datas[2],
+            MenuName = TapNames2[2],
             isSelected = (2 == selectedIndex), // 현재 인덱스가 선택된 인덱스와 같은지 확인
         ) {
             selectedIndex = 2 // 버튼을 클릭하면 선택된 인덱스 변경
@@ -144,6 +144,6 @@ fun TapMenuButton(
 @Composable
 fun TapMenu2Preview() {
     TapMenu2(
-        datas = TapNames2 // 예시 데이터로 TapNames2 사용
+        first = 0
     )
 }
