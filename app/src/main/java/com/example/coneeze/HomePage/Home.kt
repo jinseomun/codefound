@@ -126,6 +126,7 @@ fun HomeScreen(navController: NavController) {
                         )
                     }
 
+
                     item { GrayLine() }
 
                     item { Header("이전 구매 상품과 유사한 상품") }
@@ -139,6 +140,7 @@ fun HomeScreen(navController: NavController) {
                             prices = prices2
                         )
                     }
+
 
                     item { ReviewBanner() }
 

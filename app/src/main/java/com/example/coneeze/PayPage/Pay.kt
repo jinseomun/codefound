@@ -13,12 +13,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.coneeze.DetailPage.Buy_BottomButtonBar
 import com.example.coneeze.HomePage.GrayLine
 import com.example.coneeze.R
 import com.example.coneeze.components.CustomTopBar
+import com.example.coneeze.components.NextButton
+import com.example.coneeze.login.SignupScreen
 import com.example.coneeze.ui.theme.Gray10
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -55,19 +59,19 @@ fun PayScreen(navController: NavController, image: Int, name: String, price: Str
             }
         },
         bottomBar = {
-            BottomAppBar(
-                modifier = Modifier
-                    .height(80.dp) // 크기 설정
-                    .border(2.dp, Gray10),
-                containerColor = Color.White
 
-                // 테두리 설정
-            ) {
-                Buy_BottomButtonBar(image, name, price) // 버튼에 매개변수 전달
-            }
+            Buy_BottomButtonBar(navController, image = image, name = name, price = price)
+
+
         }
     )
+}
 
+@Preview(showBackground = true)
+@Composable
+fun PayPreview2(){
+    val navController = rememberNavController()
+    PayScreen(navController, image = R.drawable.check_pay,name = "", price = "" )
 }
 
 

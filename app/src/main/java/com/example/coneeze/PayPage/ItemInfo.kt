@@ -44,7 +44,7 @@ fun ItemInfo(image: Int, name: String, price: String) {
             .padding(horizontal = 20.dp, vertical = 24.dp)
     ) {
 
-        Row(modifier = Modifier.height(20.dp)) {
+        Row(modifier = Modifier.height(30.dp)) {
             Text(
                 text = "주문 상품 정보",
                 style = TextStyle(

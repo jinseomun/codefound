@@ -130,7 +130,7 @@ fun DeliveryInfo(){
                 .fillMaxWidth()
                 .height(84.dp)
                 .border(1.dp, Color.LightGray, RoundedCornerShape(4.dp))
-                .background(Color.White, shape = RoundedCornerShape(4.dp))
+                .background(Color.Transparent, shape = RoundedCornerShape(4.dp))
                 .padding(horizontal = 16.dp, vertical = 12.dp)
         ) {
             if (textState.isEmpty()) {

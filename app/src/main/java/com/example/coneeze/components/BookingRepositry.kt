@@ -22,7 +22,7 @@ object BookingRepository {
         Booking(
             bookingId = "123456789",
             date = "2023.11.11",
-            serviceName = "향기로운 커피 원데이 클래스",
+            serviceName = "커피 원데이 클래스",
             bookingDate = "2023.12.11",
             progressMethod = "오프라인",
             numberOfReservations = "6명"
@@ -30,7 +30,7 @@ object BookingRepository {
         Booking(
             bookingId = "123456789",
             date = "2023.11.11",
-            serviceName = "향기로운 커피 원데이 클래스",
+            serviceName = "커피 원데이 클래스",
             bookingDate = "2023.12.11",
             progressMethod = "오프라인",
             numberOfReservations = "6명"

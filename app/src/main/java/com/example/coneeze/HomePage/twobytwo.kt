@@ -51,6 +51,9 @@ fun twobytwo(
             images = imageChunks.getOrNull(1) ?: emptyList(),
             prices = priceChunks.getOrNull(1) ?: emptyList()
         )
+
+        Spacer(modifier = Modifier.height(24.dp))
+
     }
 }
 

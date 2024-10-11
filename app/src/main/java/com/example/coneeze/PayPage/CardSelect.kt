@@ -1,4 +1,5 @@
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -28,42 +29,45 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.coneeze.PayPage.Form
 import com.example.coneeze.ui.theme.Black22
+import com.example.coneeze.ui.theme.GrayLine
 import com.example.coneeze.ui.theme.Main600
 import com.example.coneeze.ui.theme.suit
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CardSelect() {
-    // 상태를 관리하는 변수: 첫 번째 버튼 선택 여부
-    val isSelectedPurchase = remember { mutableStateOf(true) }  // 기본적으로 구매하기 버튼이 선택됨
+    val isSelectedPurchase = remember { mutableStateOf(true) }
     val isSelectedCard = remember { mutableStateOf(false) }
     val type = remember { mutableStateOf(true) }
 
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 20.dp),
-        horizontalAlignment = Alignment.CenterHorizontally, // 가로 중앙 정렬
+            .padding(horizontal = 20.dp)
+            .padding(top = 20.dp)
+
+        ,
+        horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        Row() {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
             Button(
                 onClick = {
-                    // 구매하기 버튼을 클릭하면 이 버튼이 선택됨
                     isSelectedPurchase.value = true
                     isSelectedCard.value = false
-
                     type.value = true
                 },
                 modifier = Modifier
-                    .width(204.dp)
-                    .height(40.dp)
-                    .padding(horizontal = 20.dp)
-                    .background(
-                        color = if (isSelectedPurchase.value) Main600 else Color.Transparent,
-                        shape = RoundedCornerShape(size = 4.dp)
+                    .weight(1f)
+                    .height(44.dp)
+                    .border(
+                        width = 1.dp,
+                        color = Color(0xFFE4E5E7)
                     ),
-
+                shape = RoundedCornerShape(4.dp),
                 colors = ButtonDefaults.buttonColors(
                     containerColor = if (isSelectedPurchase.value) Main600 else Color.Transparent,
                     contentColor = if (isSelectedPurchase.value) Color.White else Black22
@@ -82,25 +86,20 @@ fun CardSelect() {
                 )
             }
 
-            Spacer(modifier = Modifier.width(8.dp))
-
             Button(
                 onClick = {
-                    // 신용카드 버튼을 클릭하면 이 버튼이 선택됨
                     isSelectedPurchase.value = false
                     isSelectedCard.value = true
-
                     type.value = false
                 },
                 modifier = Modifier
-                    .width(204.dp)
-                    .height(40.dp)
-                    .padding(horizontal = 20.dp)
-                    .background(
-                        color = if (isSelectedCard.value) Main600 else Color.Transparent,
-                        shape = RoundedCornerShape(size = 4.dp)
+                    .weight(1f)
+                    .height(44.dp)
+                    .border(
+                        width = 1.dp,
+                        color = Color(0xFFE4E5E7)
                     ),
-                shape = RectangleShape,
+                shape = if (isSelectedCard.value) RectangleShape else RoundedCornerShape(4.dp),
                 colors = ButtonDefaults.buttonColors(
                     containerColor = if (isSelectedCard.value) Main600 else Color.Transparent,
                     contentColor = if (isSelectedCard.value) Color.White else Black22

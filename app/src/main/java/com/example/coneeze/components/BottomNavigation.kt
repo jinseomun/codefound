@@ -66,7 +66,7 @@ fun BottomIconRow(
             selected = selectedIndex == 1, // 두 번째 버튼이 선택되어 있는지 확인
             action = {
                 onItemSelected(1)
-                navController.navigate("reservation") {
+                navController.navigate("예약하기") {
                     popUpTo(navController.graph.startDestinationId)
                     launchSingleTop = true
                 }

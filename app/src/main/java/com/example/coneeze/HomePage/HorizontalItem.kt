@@ -3,6 +3,7 @@ package com.example.coneeze.HomePage
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
@@ -22,7 +23,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.coneeze.R
+import com.example.coneeze.data.coffeeImages1
+import com.example.coneeze.data.features1
+import com.example.coneeze.data.names1
+import com.example.coneeze.data.prices1
 
 
 @Composable
@@ -36,12 +42,11 @@ fun HorizontalItem(
     Card(
         modifier = Modifier
             .width(155.dp)
-            .height(219.dp)
             .clickable {
                 navController.navigate("디테일/$image/$name/$price")
             },  // 각 항목의 너비를 고정
         colors = CardDefaults.cardColors(
-            containerColor = Color.White
+            containerColor = Color.Transparent
         ),
         shape = RoundedCornerShape(
             topStart = 16.dp,  // 상단 왼쪽 모서리 둥글게
@@ -99,3 +104,10 @@ fun HorizontalItem(
     }
 }
 
+
+@Composable
+@Preview(showBackground = true)
+fun Preview22() {
+    val navController = rememberNavController()
+    HorizontalItem(navController , name = names1[0], image = coffeeImages1[0], feature = features1[0], price = prices1[0])
+}

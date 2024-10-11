@@ -3,6 +3,7 @@ package com.example.coneeze.HomePage
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
@@ -30,12 +31,13 @@ fun RowScroll(
     prices: List<String>
 ) {
     Row(
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier
+            .fillMaxWidth()
     ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(start = 20.dp, bottom = 24.dp)
+                .padding(start = 20.dp, bottom =20.dp)
         ) {
             Column {
                 LazyRow(

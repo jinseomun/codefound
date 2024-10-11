@@ -141,6 +141,7 @@ fun ResultContent(navController: NavController){
                         )
                     }
                 }
+
             }
 
         }

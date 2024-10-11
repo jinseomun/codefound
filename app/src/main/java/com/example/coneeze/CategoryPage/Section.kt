@@ -27,8 +27,8 @@ fun Section(
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .height(68.dp)
-            .padding(start = 20.dp, top = 24.dp, end = 20.dp, bottom = 24.dp)
+            .height(72.dp)
+            .padding(start = 20.dp, top = 20.dp, end = 20.dp, bottom = 20.dp)
     ) {
         Text(
             text = text,

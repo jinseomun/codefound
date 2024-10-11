@@ -37,9 +37,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.coneeze.R
@@ -122,10 +124,12 @@ fun LoginContent(navController: NavController) {
 fun LoginField(navController: NavController) {
     Box(
         modifier = Modifier
-            .padding(horizontal = 20.dp)
     ) {
         Column(
-            modifier = Modifier.align(Alignment.Center)
+            modifier = Modifier
+                .align(Alignment.Center)
+                .padding(horizontal = 20.dp)
+
         ) {
             Text(
                 text = "아이디",
@@ -136,7 +140,12 @@ fun LoginField(navController: NavController) {
                 value = "",
                 onValueChange = {},
                 placeholder = {
-                    Text(text = "아이디를 입력해 주세요.", color = Color.LightGray)
+                    Text(
+                        text = "아이디를 입력해 주세요.",
+                        color = Color.LightGray,
+                        style = TextStyle(fontSize = 12.sp)
+
+                    )
                 },
                 modifier = Modifier
                     .fillMaxWidth(),
@@ -165,7 +174,11 @@ fun LoginField(navController: NavController) {
                 value = "",
                 onValueChange = {},
                 placeholder = {
-                    Text(text = "비밀번호를 입력해 주세요.", color = Color.LightGray)
+                    Text(
+                        text = "비밀번호를 입력해 주세요.",
+                        color = Color.LightGray,
+                        style = TextStyle(fontSize = 12.sp)
+                    )
                 },
                 modifier = Modifier
                     .fillMaxWidth(),
@@ -204,7 +217,11 @@ fun LoginField(navController: NavController) {
                     .height(40.dp)
             ) {
                 TextButton(onClick = { /* 아이디 찾기 */ }) {
-                    Text("아이디 찾기", color = Color.Gray)
+                    Text(
+                        "아이디 찾기",
+                        color = Color.Gray,
+                        style = TextStyle(fontSize = 12.sp)
+                        )
                 }
                 Divider(
                     color = Color.Gray,
@@ -213,7 +230,8 @@ fun LoginField(navController: NavController) {
                         .width(1.dp)      // 선의 두께 설정
                 )
                 TextButton(onClick = { /* 비밀번호 재설정 */ }) {
-                    Text("비밀번호 재설정", color = Color.Gray)
+                    Text("비밀번호 재설정", color = Color.Gray, style = TextStyle(fontSize = 12.sp)
+                    )
                 }
                 Divider(
                     color = Color.Gray,
@@ -221,8 +239,10 @@ fun LoginField(navController: NavController) {
                         .height(15.dp)  // 세로 방향으로 꽉 채움
                         .width(1.dp)      // 선의 두께 설정
                 )
-                TextButton(onClick = { /* 회원가입 */ }) {
-                    Text("회원가입", color = Color.Gray)
+                TextButton(onClick = {  navController.navigate("회원가입")
+                }) {
+                    Text("회원가입", color = Color.Gray, style = TextStyle(fontSize = 12.sp)
+                    )
                 }
             }
         }

@@ -1,8 +1,10 @@
 package com.example.coneeze.login
 
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -10,6 +12,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -75,35 +78,33 @@ fun SignupScreen(navController: NavController) {
 }
 
 @Composable
-fun SignupContent(){
-    Column(
+fun SignupContent() {
+    LazyColumn(
         modifier = Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        Spacer(modifier = Modifier.height(40.dp))
-
-        Box(
-            modifier = Modifier.fillMaxWidth(),
-            contentAlignment = Alignment.Center
-        ) {
-            Text(
-                text = "가입을 위해 회원 정보를 \n 입력해 주세요.",
-                style = TextStyle(
-                    fontFamily = cafeFontFamily,
-                    fontSize = 28.sp,
-                    textAlign = TextAlign.Center,
-                    fontWeight = FontWeight(700),
-                    color = Main600,
+        item {
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top=44.dp),
+                contentAlignment = Alignment.Center
+            ) {
+                Text(
+                    text = "가입을 위해 회원 정보를 \n 입력해 주세요.",
+                    style = TextStyle(
+                        fontFamily = cafeFontFamily,
+                        fontSize = 28.sp,
+                        textAlign = TextAlign.Center,
+                        fontWeight = FontWeight(700),
+                        color = Main600,
+                    )
                 )
-            )
+            }
         }
 
-        Inuput_Signup()
-
-        Spacer(modifier = Modifier.height(28.dp))
-
-
-        PrivacyAgreementRow()
-
+        item { Inuput_Signup() }
+        item { PrivacyAgreementRow() }
     }
 }
 
@@ -113,7 +114,7 @@ fun Inuput_Signup() {
     Column(
         modifier = Modifier
             .padding(horizontal = 28.dp)
-            .padding(top = 28.dp)
+            .padding(top = 20.dp)
 
     ) {
         Text(
@@ -125,7 +126,11 @@ fun Inuput_Signup() {
             value = "",
             onValueChange = {},
             placeholder = {
-                Text(text = "아이디를 입력해 주세요.", color = Color.LightGray)
+                Text(
+                    text = "아이디를 입력해 주세요.",
+                    color = Color.LightGray,
+                    style = TextStyle(fontSize = 12.sp),
+                )
             },
             modifier = Modifier
                 .fillMaxWidth(),
@@ -139,7 +144,7 @@ fun Inuput_Signup() {
             )
         )
 
-        Spacer(modifier = Modifier.height(28.dp))
+        Spacer(modifier = Modifier.height(20.dp))
 
         Text(
             text = "비밀번호",
@@ -150,7 +155,11 @@ fun Inuput_Signup() {
             value = "",
             onValueChange = {},
             placeholder = {
-                Text(text = "비밀번호를 입력해 주세요.", color = Color.LightGray)
+                Text(
+                    text = "비밀번호를 입력해 주세요.",
+                    color = Color.LightGray,
+                    style = TextStyle(fontSize = 12.sp),
+                )
             },
             modifier = Modifier
                 .fillMaxWidth(),
@@ -171,7 +180,12 @@ fun Inuput_Signup() {
             value = "",
             onValueChange = {},
             placeholder = {
-                Text(text = "비밀번호를 한 번 더 입력해 주세요.", color = Color.LightGray)
+                Text(
+                    text = "비밀번호를 한번 더 입력해 주세요.",
+                    color = Color.LightGray,
+                    style = TextStyle(fontSize = 12.sp)
+
+                    )
             },
             modifier = Modifier
                 .fillMaxWidth(),
@@ -185,7 +199,7 @@ fun Inuput_Signup() {
             )
         )
 
-        Spacer(modifier = Modifier.height(28.dp))
+        Spacer(modifier = Modifier.height(20.dp))
 
         Text(
             text = "이름",
@@ -196,12 +210,15 @@ fun Inuput_Signup() {
             value = "",
             onValueChange = {},
             placeholder = {
-                Text(text = "이름을 입력해 주세요.", color = Color.LightGray)
+                Text(
+                    text = "이름을 입력해 주세요.",
+                    color = Color.LightGray,
+                    style = TextStyle(fontSize = 12.sp),
+                )
             },
             modifier = Modifier
                 .fillMaxWidth(),
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
-
             colors = TextFieldDefaults.colors(
                 focusedContainerColor = Color.Transparent,
                 unfocusedContainerColor = Color.Transparent,
@@ -210,7 +227,7 @@ fun Inuput_Signup() {
             )
         )
 
-        Spacer(modifier = Modifier.height(28.dp))
+        Spacer(modifier = Modifier.height(20.dp))
 
         Text(
             text = "연락처",
@@ -221,7 +238,11 @@ fun Inuput_Signup() {
             value = "",
             onValueChange = {},
             placeholder = {
-                Text(text = "연락처를 입력해 주세요.", color = Color.LightGray)
+                Text(
+                    text = "연락처를 입력해 주세요.",
+                    color = Color.LightGray,
+                    style = TextStyle(fontSize = 12.sp),
+                )
             },
             modifier = Modifier
                 .fillMaxWidth(),

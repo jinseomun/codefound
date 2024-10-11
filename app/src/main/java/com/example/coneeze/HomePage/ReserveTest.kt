@@ -38,7 +38,7 @@ fun ReserveTest(navController: NavController){
 
             Button(
                 contentPadding = PaddingValues(0.dp),
-                onClick = {navController.navigate("reservation")},
+                onClick = {navController.navigate("예약하기")},
                 // 내용에 맞게 버튼 크기 조정
                 colors = ButtonDefaults.buttonColors(
                     Color.Transparent,  // 버튼 배경을 투명하게 설정

@@ -31,47 +31,49 @@ import java.time.ZoneId
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 
+import androidx.navigation.NavController
+
 @Composable
-fun Buy_BottomButtonBar(image: Int, name: String, price: String){
+fun Buy_BottomButtonBar(navController: NavController, image: Int, name: String, price: String) {
     BottomAppBar(
         modifier = Modifier
-            .height(80.dp) // 크기 설정
-            .border(2.dp, Gray10),
-        containerColor = Color.White
-
-        // 테두리 설정
+            .height(80.dp), // 크기 설정
+        containerColor = Color.Transparent
     ) {
         Button(
             onClick = {
+                // 현재 날짜 생성
                 val currentDate = ZonedDateTime.now(ZoneId.of("Asia/Seoul"))
                     .format(DateTimeFormatter.ofPattern("yyyy.MM.dd"))
 
+                // 새로운 주문 객체 생성
                 val newOrder = Order(
                     orderId = System.currentTimeMillis().toString(),
-                    date = currentDate,  // 현재 날짜를 사용
+                    date = currentDate,
                     orderState = "구매 확정",
                     name = name,
                     price = price,
                     imageRes = image
                 )
-                OrderRepository.addOrder(newOrder)  // 새로운 주문을 OrderRepository에 추가
 
+                // 주문 저장
+                OrderRepository.addOrder(newOrder)
+
+                // 네비게이션 실행
+                navController.navigate("결제완료/$image/$name/$price")
             },
-
             colors = ButtonDefaults.buttonColors(
-                Color.Transparent,  // 버튼 배경을 투명하게 설정
-                contentColor = Color.Unspecified ),
+                Color.Transparent,
+                contentColor = Color.Unspecified
+            ),
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 20.dp)
                 .background(color = Main600, shape = RoundedCornerShape(size = 4.dp)),
             shape = RectangleShape
-        ){
-
+        ) {
             Text(
                 text = "구매하기",
-
-                // Button/Button2 14 B
                 style = TextStyle(
                     fontSize = 14.sp,
                     lineHeight = 18.sp,
@@ -84,4 +86,3 @@ fun Buy_BottomButtonBar(image: Int, name: String, price: String){
         }
     }
 }
-

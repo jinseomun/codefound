@@ -17,9 +17,12 @@ import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 
 private val DarkColorScheme = darkColorScheme(
-    primary = Purple80,
-    secondary = PurpleGrey80,
-    tertiary = Pink80
+    primary = Color.White,
+    secondary = Color.White,
+    tertiary = Color.White,
+    background = Color.White,  // 배경색을 흰색으로 설정
+    surface = Color.White,     // 표면 색상도 흰색으로 설정
+
 )
 
 private val LightColorScheme = lightColorScheme(

@@ -30,10 +30,10 @@ fun HeaderWithIcon(
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 20.dp, vertical = 24.dp)
-    ) {
+            .padding(horizontal = 20.dp)
+            .padding(top = 20.dp)    ) {
 
-        Row(modifier = Modifier.height(20.dp)) {
+        Row(modifier = Modifier.height(30.dp)) {
             Text(
                 text = text,
 
