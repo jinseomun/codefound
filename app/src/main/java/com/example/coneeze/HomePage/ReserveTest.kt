@@ -24,71 +24,67 @@ import com.example.coneeze.R
 
 @Composable
 fun ReserveTest(navController: NavController){
-Row(
-modifier = Modifier
-.fillMaxWidth()
-) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(start = 30.dp, end = 30.dp, top = 24.dp, bottom = 20.dp),
-
-        ) {
-        Button(
-            contentPadding = PaddingValues(0.dp),
-            onClick = {navController.navigate("reservation")},
-            // 내용에 맞게 버튼 크기 조정
-            colors = ButtonDefaults.buttonColors(
-                Color.Transparent,  // 버튼 배경을 투명하게 설정
-                contentColor = Color.Unspecified ),
-            // 기본 텍스트 색상 사용
-            shape = RectangleShape
-
-
-
-        ){
-        Image(
-            painter = painterResource(id = R.drawable.reservation),  // 이미지 리소스 설정
-            contentDescription = "에약하기 사진",
+    ) {
+        Row(
             modifier = Modifier
-                .width(155.dp)
-                .height(100.dp)
-                .aspectRatio(155f / 100f)
+                .fillMaxWidth()
+                .padding(top = 24.dp, bottom = 20.dp),
+
+            ) {
+            Spacer(modifier = Modifier.weight(1f))
+
+            Button(
+                contentPadding = PaddingValues(0.dp),
+                onClick = {navController.navigate("reservation")},
+                // 내용에 맞게 버튼 크기 조정
+                colors = ButtonDefaults.buttonColors(
+                    Color.Transparent,  // 버튼 배경을 투명하게 설정
+                    contentColor = Color.Unspecified ),
+                // 기본 텍스트 색상 사용
+                shape = RectangleShape
 
 
-        )}
-        Spacer(modifier = Modifier.weight(1f))
-        Button(
-            contentPadding = PaddingValues(0.dp),
-            onClick = {navController.navigate("테스트시작")},
-            // 내용에 맞게 버튼 크기 조정
-            colors = ButtonDefaults.buttonColors(
-                Color.Transparent,  // 버튼 배경을 투명하게 설정
-                contentColor = Color.Unspecified ),
-            // 기본 텍스트 색상 사용
-            shape = RectangleShape
+
+            ){
+                Image(
+                    painter = painterResource(id = R.drawable.reservation),  // 이미지 리소스 설정
+                    contentDescription = "에약하기 사진",
+                    modifier = Modifier
+                        .width(155.dp)
+                        .height(100.dp)
+                        .aspectRatio(155f / 100f)
+
+
+                )}
+            Spacer(modifier = Modifier.weight(1f))
+            Button(
+                contentPadding = PaddingValues(0.dp),
+                onClick = {navController.navigate("테스트시작")},
+                // 내용에 맞게 버튼 크기 조정
+                colors = ButtonDefaults.buttonColors(
+                    Color.Transparent,  // 버튼 배경을 투명하게 설정
+                    contentColor = Color.Unspecified ),
+                // 기본 텍스트 색상 사용
+                shape = RectangleShape
 
 
 
-        ){
+            ){
 
-        Image(
-            painter = painterResource(id = R.drawable.test),  // 이미지 리소스 설정
-            contentDescription = "테스트하기 사진",
-            modifier = Modifier
-                .width(155.dp)
-                .height(100.dp)
+                Image(
+                    painter = painterResource(id = R.drawable.test),  // 이미지 리소스 설정
+                    contentDescription = "테스트하기 사진",
+                    modifier = Modifier
+                        .width(155.dp)
+                        .height(100.dp)
 
-        )}
+                )}
+
+            Spacer(modifier = Modifier.weight(1f))
+        }
     }
 }
-}
-
-@Preview
-@Composable
-fun ReserveTestPreview(){
-    val navController = rememberNavController()
-    ReserveTest(navController)
-}
-
 

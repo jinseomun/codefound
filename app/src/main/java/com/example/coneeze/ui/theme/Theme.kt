@@ -26,6 +26,9 @@ private val LightColorScheme = lightColorScheme(
     primary = Color.White,
     secondary = Color.White,
     tertiary = Color.White,
+    background = Color.White,  // 배경색을 흰색으로 설정
+    surface = Color.White,     // 표면 색상도 흰색으로 설정
+
 
     /* Other default colors to override
     background = Color(0xFFFFFBFE),

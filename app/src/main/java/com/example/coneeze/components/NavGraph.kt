@@ -9,6 +9,7 @@ import androidx.navigation.navArgument
 import com.example.coneeze.CategoryPage.CategoryScreen
 import com.example.coneeze.DetailPage.DetailScreen
 import com.example.coneeze.HomePage.HomeScreen
+import com.example.coneeze.PayPage.PayScreen
 import com.example.coneeze.R
 import com.example.coneeze.login.LoginScreen
 import com.example.coneeze.login.SignupScreen
@@ -46,7 +47,21 @@ fun NavGraph(navController: NavHostController) {
                 DetailScreen(navController = navController, image = image, name = name, price = price)
             }
         }
-        composable("reservation") { ReservationScreen(navController)}
+        composable(
+            route = "결제/{image}/{name}/{price}",
+            arguments = listOf(
+                navArgument("image") { type = NavType.IntType },
+                navArgument("name") { type = NavType.StringType },
+                navArgument("price") { type = NavType.StringType }
+        )
+        ) { backStackEntry ->
+            val image = backStackEntry.arguments?.getInt("image")
+            val name = backStackEntry.arguments?.getString("name") ?: "Unknown"
+            val price = backStackEntry.arguments?.getString("price") ?: "0원"
+            if (image != null) {
+                PayScreen(navController = navController, image = image, name = name, price = price)
+            }
+        }
         composable("reserving1") { FirstScreen(navController) }
         composable("reserving2") { SecondScreenWithModalBottomSheet(navController) }
         composable("테스트시작") { TestScreen(navController) }

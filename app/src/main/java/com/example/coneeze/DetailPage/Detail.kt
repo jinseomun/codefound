@@ -87,7 +87,9 @@ fun DetailScreen(navController: NavController, image: Int, name: String, price: 
             }
         },
         bottomBar = {
-            NextButton(onClick = { /*TODO*/ }, text = "구매하기")
+            NextButton(onClick = {
+                navController.navigate("결제/$image/$name/$price")
+            }, text = "구매하기")
         }
     )
 }
