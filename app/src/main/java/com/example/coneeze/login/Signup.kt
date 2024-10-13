@@ -53,16 +53,19 @@ import com.example.coneeze.ui.theme.suit
 @Composable
 fun SignupScreen(navController: NavController) {
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
+    val focusManager = LocalFocusManager.current // 포커스 매니저 선언
 
     Scaffold(
-        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
+        modifier = Modifier
+            .nestedScroll(scrollBehavior.nestedScrollConnection)
+            .clickable { focusManager.clearFocus() }, // 화면 터치 시 키보드 내리기
         topBar = {
             CustomTopBar(
                 title = "회원가입",
-                showNavigationIcon = true, // 네비게이션 아이콘을 보여줌
-                showActionIcon = false,    // 액션 아이콘을 숨김
-                onNavigationClick = {navController.navigate("로그인") },
-                onActionClick = {  }
+                showNavigationIcon = true,
+                showActionIcon = false,
+                onNavigationClick = { navController.navigate("로그인") },
+                onActionClick = { }
             )
         },
         content = { innerPadding ->
@@ -70,11 +73,10 @@ fun SignupScreen(navController: NavController) {
                 // 메인 콘텐츠
                 SignupContent()
             }
-
         },
         bottomBar = {
             // 하단 바에 NextButton 추가
-            NextButton(onClick = { navController.navigate("홈")  }, text = "회원가입")
+            NextButton(onClick = { navController.navigate("홈") }, text = "회원가입")
         }
     )
 }
@@ -89,7 +91,7 @@ fun SignupContent() {
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top=44.dp),
+                    .padding(top = 44.dp),
                 contentAlignment = Alignment.Center
             ) {
                 Text(
@@ -108,8 +110,7 @@ fun SignupContent() {
         item { Inuput_Signup() }
         item { PrivacyAgreementRow() }
 
-        item{ Spacer(modifier = Modifier.height(12.dp)) }
-
+        item { Spacer(modifier = Modifier.height(12.dp)) }
     }
 }
 
@@ -138,16 +139,13 @@ fun Inuput_Signup() {
             style = TextStyle(fontFamily = suit)
         )
         TextField(
-            value = username, // 상태 연결
-            onValueChange = { username = it }, // 입력 변화 시 상태 업데이트
+            value = username,
+            onValueChange = { username = it },
             placeholder = {
                 Text(
                     text = "아이디를 입력해 주세요.",
                     color = Color.LightGray,
-                    style = TextStyle(
-                        fontSize = 12.sp,
-                        fontFamily = suit
-                        )
+                    style = TextStyle(fontSize = 12.sp, fontFamily = suit)
                 )
             },
             modifier = Modifier
@@ -172,16 +170,13 @@ fun Inuput_Signup() {
             style = TextStyle(fontFamily = suit)
         )
         TextField(
-            value = password, // 상태 연결
-            onValueChange = { password = it }, // 입력 변화 시 상태 업데이트
+            value = password,
+            onValueChange = { password = it },
             placeholder = {
                 Text(
                     text = "비밀번호를 입력해 주세요.",
                     color = Color.LightGray,
-                    style = TextStyle(
-                        fontSize = 12.sp,
-                        fontFamily = suit
-                    )
+                    style = TextStyle(fontSize = 12.sp, fontFamily = suit)
                 )
             },
             modifier = Modifier
@@ -200,16 +195,13 @@ fun Inuput_Signup() {
 
         // 비밀번호 확인 필드
         TextField(
-            value = confirmPassword, // 상태 연결
-            onValueChange = { confirmPassword = it }, // 입력 변화 시 상태 업데이트
+            value = confirmPassword,
+            onValueChange = { confirmPassword = it },
             placeholder = {
                 Text(
                     text = "비밀번호를 한번 더 입력해 주세요.",
                     color = Color.LightGray,
-                    style = TextStyle(
-                        fontSize = 12.sp,
-                        fontFamily = suit
-                        )
+                    style = TextStyle(fontSize = 12.sp, fontFamily = suit)
                 )
             },
             modifier = Modifier
@@ -234,16 +226,13 @@ fun Inuput_Signup() {
             style = TextStyle(fontFamily = suit)
         )
         TextField(
-            value = name, // 상태 연결
-            onValueChange = { name = it }, // 입력 변화 시 상태 업데이트
+            value = name,
+            onValueChange = { name = it },
             placeholder = {
                 Text(
                     text = "이름을 입력해 주세요.",
                     color = Color.LightGray,
-                    style = TextStyle(
-                        fontSize = 12.sp,
-                        fontFamily = suit
-                    )
+                    style = TextStyle(fontSize = 12.sp, fontFamily = suit)
                 )
             },
             modifier = Modifier
@@ -268,16 +257,13 @@ fun Inuput_Signup() {
             style = TextStyle(fontFamily = suit)
         )
         TextField(
-            value = phoneNumber, // 상태 연결
-            onValueChange = { phoneNumber = it }, // 입력 변화 시 상태 업데이트
+            value = phoneNumber,
+            onValueChange = { phoneNumber = it },
             placeholder = {
                 Text(
                     text = "연락처를 입력해 주세요.",
                     color = Color.LightGray,
-                    style = TextStyle(
-                        fontSize = 12.sp,
-                        fontFamily = suit
-                    )
+                    style = TextStyle(fontSize = 12.sp, fontFamily = suit)
                 )
             },
             modifier = Modifier
@@ -293,7 +279,6 @@ fun Inuput_Signup() {
         )
     }
 }
-
 
 @Composable
 fun PrivacyAgreementRow() {

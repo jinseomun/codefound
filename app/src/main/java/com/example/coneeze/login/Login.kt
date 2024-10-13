@@ -54,20 +54,22 @@ import kotlinx.coroutines.delay
 @Composable
 fun LoginScreen(navController: NavController) {
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
+    val focusManager = LocalFocusManager.current // 포커스 매니저 선언
 
-    Scaffold(modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection), topBar = {
-
-    }, content = { innerPadding ->
-        Box(modifier = Modifier.padding(innerPadding)) {
-            // 메인 콘텐츠
-            LoginContent(navController)
-
-
+    Scaffold(modifier = Modifier
+        .nestedScroll(scrollBehavior.nestedScrollConnection)
+        .clickable { focusManager.clearFocus() }, // 화면을 클릭하면 키보드 내리기
+        topBar = {},
+        content = { innerPadding ->
+            Box(modifier = Modifier.padding(innerPadding)) {
+                // 메인 콘텐츠
+                LoginContent(navController)
+            }
+        },
+        bottomBar = {
+            // 하단 바에 NextButton 추가
         }
-
-    }, bottomBar = {
-        // 하단 바에 NextButton 추가
-    })
+    )
 }
 
 @Composable
@@ -105,13 +107,9 @@ fun LoginContent(navController: NavController) {
 
             LoginField(navController)
 
-
             LoginRow(navController)
-
-
         }
     }
-
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -137,21 +135,19 @@ fun LoginField(navController: NavController) {
                 modifier = Modifier.padding(start = 8.dp),
                 style = TextStyle(fontFamily = suit)
             )
-            TextField(value = username, // username 상태를 value로 사용
-                onValueChange = { username = it }, // 입력이 변경될 때 상태를 업데이트
+            TextField(value = username,
+                onValueChange = { username = it },
                 placeholder = {
                     Text(
-                        text = "아이디를 입력해 주세요.", color = Color.LightGray, style = TextStyle(
-                            fontSize = 12.sp, fontFamily = suit
-                        )
+                        text = "아이디를 입력해 주세요.",
+                        color = Color.LightGray,
+                        style = TextStyle(fontSize = 12.sp, fontFamily = suit)
                     )
                 },
                 modifier = Modifier
                     .fillMaxWidth()
                     .clickable { focusManager.clearFocus() }, // 화면 터치 시 키보드 내림
-
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
-
                 colors = TextFieldDefaults.colors(
                     focusedContainerColor = Color.Transparent,
                     unfocusedContainerColor = Color.Transparent,
@@ -168,20 +164,19 @@ fun LoginField(navController: NavController) {
                 modifier = Modifier.padding(start = 8.dp),
                 style = TextStyle(fontFamily = suit)
             )
-            TextField(value = password, // password 상태를 value로 사용
-                onValueChange = { password = it }, // 입력이 변경될 때 상태를 업데이트
+            TextField(value = password,
+                onValueChange = { password = it },
                 placeholder = {
                     Text(
                         text = "비밀번호를 입력해 주세요.",
                         color = Color.LightGray,
                         style = TextStyle(fontSize = 12.sp, fontFamily = suit)
                     )
-                }, modifier = Modifier
+                },
+                modifier = Modifier
                     .fillMaxWidth()
                     .clickable { focusManager.clearFocus() },
-
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
-
                 colors = TextFieldDefaults.colors(
                     focusedContainerColor = Color.Transparent,
                     unfocusedContainerColor = Color.Transparent,

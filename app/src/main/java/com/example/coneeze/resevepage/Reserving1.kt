@@ -152,7 +152,7 @@ fun ServiceButton(title: String, description: String) {
                     fontWeight = FontWeight.Bold,
                     fontFamily = suit
                 ),
-                fontSize = 16.sp // 제목 텍스트 크기 설정
+                fontSize = 14.sp // 제목 텍스트 크기 설정
             )
 
             Spacer(modifier = Modifier.height(6.dp)) // 제목과 설명 사이 간격

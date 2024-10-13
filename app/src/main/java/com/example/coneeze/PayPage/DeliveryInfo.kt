@@ -54,8 +54,6 @@ fun DeliveryInfo(){
         ){
             Text(
                 text = "홍길동",
-
-                // Headline/Subtitle2 16 SB
                 style = TextStyle(
                     fontSize = 16.sp,
                     lineHeight = 20.sp,
@@ -84,7 +82,6 @@ fun DeliveryInfo(){
                         fontWeight = FontWeight(400),
                         color = FeatureColor,
                     ),
-
                 )
             }
         }
@@ -93,8 +90,6 @@ fun DeliveryInfo(){
 
         Text(
             text = "[05210] 서울시 강동구 아리수로97길 19 405동 202호",
-
-            // Body/Body3 14 R
             style = TextStyle(
                 fontSize = 14.sp,
                 lineHeight = 18.sp,
@@ -108,8 +103,6 @@ fun DeliveryInfo(){
 
         Text(
             text = "010-7541-0012",
-
-            // Body/Body3 14 R
             style = TextStyle(
                 fontSize = 14.sp,
                 lineHeight = 18.sp,
@@ -157,10 +150,8 @@ fun DeliveryInfo(){
     }
 }
 
-
-
 @Composable
 @Preview(showBackground = true)
 fun DeliveryInfoPreview(){
-DeliveryInfo()
+    DeliveryInfo()
 }
