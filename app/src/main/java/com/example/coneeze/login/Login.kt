@@ -126,6 +126,10 @@ fun LoginContent(navController: NavController) {
 fun LoginField(navController: NavController) {
     val focusManager = LocalFocusManager.current
 
+    // 아이디와 비밀번호의 상태를 저장할 변수를 추가
+    var username by remember { mutableStateOf("") }
+    var password by remember { mutableStateOf("") }
+
     Box(
         modifier = Modifier
     ) {
@@ -133,7 +137,6 @@ fun LoginField(navController: NavController) {
             modifier = Modifier
                 .align(Alignment.Center)
                 .padding(horizontal = 20.dp)
-
         ) {
             Text(
                 text = "아이디",
@@ -141,32 +144,27 @@ fun LoginField(navController: NavController) {
                 modifier = Modifier.padding(start = 8.dp)
             )
             TextField(
-                value = "",
-                onValueChange = {},
+                value = username, // username 상태를 value로 사용
+                onValueChange = { username = it }, // 입력이 변경될 때 상태를 업데이트
                 placeholder = {
                     Text(
                         text = "아이디를 입력해 주세요.",
                         color = Color.LightGray,
                         style = TextStyle(fontSize = 12.sp)
-
                     )
                 },
                 modifier = Modifier
                     .fillMaxWidth()
                     .clickable { focusManager.clearFocus() }, // 화면 터치 시 키보드 내림
 
-
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
-
 
                 colors = TextFieldDefaults.colors(
                     focusedContainerColor = Color.Transparent,
                     unfocusedContainerColor = Color.Transparent,
-                    focusedIndicatorColor = Main600,       // 포커스된 상태의 하단 바 색상
-                    unfocusedIndicatorColor = Color(0xFFF1F2F3)  // 포커스 해제된 상태의 하단 바 색상
+                    focusedIndicatorColor = Main600,
+                    unfocusedIndicatorColor = Color(0xFFF1F2F3)
                 )
-
-
             )
 
             Spacer(modifier = Modifier.height(24.dp))
@@ -177,16 +175,13 @@ fun LoginField(navController: NavController) {
                 modifier = Modifier.padding(start = 8.dp)
             )
             TextField(
-                value = "",
-                onValueChange = {},
+                value = password, // password 상태를 value로 사용
+                onValueChange = { password = it }, // 입력이 변경될 때 상태를 업데이트
                 placeholder = {
                     Text(
                         text = "비밀번호를 입력해 주세요.",
                         color = Color.LightGray,
-                        style = TextStyle(
-                            fontSize = 12.sp,
-                            fontFamily = suit
-                            )
+                        style = TextStyle(fontSize = 12.sp, fontFamily = suit)
                     )
                 },
                 modifier = Modifier
@@ -198,10 +193,9 @@ fun LoginField(navController: NavController) {
                 colors = TextFieldDefaults.colors(
                     focusedContainerColor = Color.Transparent,
                     unfocusedContainerColor = Color.Transparent,
-                    focusedIndicatorColor = Main600,       // 포커스된 상태의 하단 바 색상
-                    unfocusedIndicatorColor = Color(0xFFF1F2F3)  // 포커스 해제된 상태의 하단 바 색상
+                    focusedIndicatorColor = Main600,
+                    unfocusedIndicatorColor = Color(0xFFF1F2F3)
                 )
-
             )
 
             Spacer(modifier = Modifier.height(36.dp))
@@ -231,28 +225,25 @@ fun LoginField(navController: NavController) {
                         "아이디 찾기",
                         color = Color.Gray,
                         style = TextStyle(fontSize = 12.sp)
-                        )
+                    )
                 }
                 Divider(
                     color = Color.Gray,
                     modifier = Modifier
-                        .height(15.dp)  // 세로 방향으로 꽉 채움
-                        .width(1.dp)      // 선의 두께 설정
+                        .height(15.dp)
+                        .width(1.dp)
                 )
                 TextButton(onClick = { /* 비밀번호 재설정 */ }) {
-                    Text("비밀번호 재설정", color = Color.Gray, style = TextStyle(fontSize = 12.sp)
-                    )
+                    Text("비밀번호 재설정", color = Color.Gray, style = TextStyle(fontSize = 12.sp))
                 }
                 Divider(
                     color = Color.Gray,
                     modifier = Modifier
-                        .height(15.dp)  // 세로 방향으로 꽉 채움
-                        .width(1.dp)      // 선의 두께 설정
+                        .height(15.dp)
+                        .width(1.dp)
                 )
-                TextButton(onClick = {  navController.navigate("회원가입")
-                }) {
-                    Text("회원가입", color = Color.Gray, style = TextStyle(fontSize = 12.sp)
-                    )
+                TextButton(onClick = { navController.navigate("회원가입") }) {
+                    Text("회원가입", color = Color.Gray, style = TextStyle(fontSize = 12.sp))
                 }
             }
         }

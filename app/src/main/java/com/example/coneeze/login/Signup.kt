@@ -114,161 +114,163 @@ fun SignupContent() {
 fun Inuput_Signup() {
     val focusManager = LocalFocusManager.current
 
+    // 각 필드에 대한 상태를 정의
+    var username by remember { mutableStateOf("") }
+    var password by remember { mutableStateOf("") }
+    var confirmPassword by remember { mutableStateOf("") }
+    var name by remember { mutableStateOf("") }
+    var phoneNumber by remember { mutableStateOf("") }
+
     Column(
         modifier = Modifier
             .padding(horizontal = 28.dp)
             .padding(top = 20.dp)
-
     ) {
+        // 아이디 입력 필드
         Text(
             text = "아이디",
             color = Color.Gray,
             modifier = Modifier.padding(start = 8.dp)
         )
         TextField(
-            value = "",
-            onValueChange = {},
+            value = username, // 상태 연결
+            onValueChange = { username = it }, // 입력 변화 시 상태 업데이트
             placeholder = {
                 Text(
                     text = "아이디를 입력해 주세요.",
                     color = Color.LightGray,
-                    style = TextStyle(fontSize = 12.sp),
+                    style = TextStyle(fontSize = 12.sp)
                 )
             },
             modifier = Modifier
                 .fillMaxWidth()
-                .clickable { focusManager.clearFocus() }, // 화면 터치 시 키보드 내림
+                .clickable { focusManager.clearFocus() },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
-
             colors = TextFieldDefaults.colors(
                 focusedContainerColor = Color.Transparent,
                 unfocusedContainerColor = Color.Transparent,
-                focusedIndicatorColor = Main600,       // 포커스된 상태의 하단 바 색상
-                unfocusedIndicatorColor = Color(0xFFF1F2F3)  // 포커스 해제된 상태의 하단 바 색상
+                focusedIndicatorColor = Main600,
+                unfocusedIndicatorColor = Color(0xFFF1F2F3)
             )
         )
 
         Spacer(modifier = Modifier.height(20.dp))
 
+        // 비밀번호 입력 필드
         Text(
             text = "비밀번호",
             color = Color.Gray,
             modifier = Modifier.padding(start = 8.dp)
         )
         TextField(
-            value = "",
-            onValueChange = {},
+            value = password, // 상태 연결
+            onValueChange = { password = it }, // 입력 변화 시 상태 업데이트
             placeholder = {
                 Text(
                     text = "비밀번호를 입력해 주세요.",
                     color = Color.LightGray,
-                    style = TextStyle(fontSize = 12.sp),
+                    style = TextStyle(fontSize = 12.sp)
                 )
             },
             modifier = Modifier
                 .fillMaxWidth()
-                .clickable { focusManager.clearFocus() }, // 화면 터치 시 키보드 내림
-
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
-
+                .clickable { focusManager.clearFocus() },
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
             colors = TextFieldDefaults.colors(
                 focusedContainerColor = Color.Transparent,
                 unfocusedContainerColor = Color.Transparent,
-                focusedIndicatorColor = Main600,       // 포커스된 상태의 하단 바 색상
-                unfocusedIndicatorColor = Color(0xFFF1F2F3)  // 포커스 해제된 상태의 하단 바 색상
+                focusedIndicatorColor = Main600,
+                unfocusedIndicatorColor = Color(0xFFF1F2F3)
             )
         )
 
         Spacer(modifier = Modifier.height(8.dp))
 
-
+        // 비밀번호 확인 필드
         TextField(
-            value = "",
-            onValueChange = {},
+            value = confirmPassword, // 상태 연결
+            onValueChange = { confirmPassword = it }, // 입력 변화 시 상태 업데이트
             placeholder = {
                 Text(
                     text = "비밀번호를 한번 더 입력해 주세요.",
                     color = Color.LightGray,
                     style = TextStyle(fontSize = 12.sp)
-
-                    )
+                )
             },
             modifier = Modifier
                 .fillMaxWidth()
-                .clickable { focusManager.clearFocus() }, // 화면 터치 시 키보드 내림
-
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
-
+                .clickable { focusManager.clearFocus() },
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
             colors = TextFieldDefaults.colors(
                 focusedContainerColor = Color.Transparent,
                 unfocusedContainerColor = Color.Transparent,
-                focusedIndicatorColor = Main600,       // 포커스된 상태의 하단 바 색상
-                unfocusedIndicatorColor = Color(0xFFF1F2F3)  // 포커스 해제된 상태의 하단 바 색상
+                focusedIndicatorColor = Main600,
+                unfocusedIndicatorColor = Color(0xFFF1F2F3)
             )
         )
 
         Spacer(modifier = Modifier.height(20.dp))
 
+        // 이름 입력 필드
         Text(
             text = "이름",
             color = Color.Gray,
             modifier = Modifier.padding(start = 8.dp)
         )
         TextField(
-            value = "",
-            onValueChange = {},
+            value = name, // 상태 연결
+            onValueChange = { name = it }, // 입력 변화 시 상태 업데이트
             placeholder = {
                 Text(
                     text = "이름을 입력해 주세요.",
                     color = Color.LightGray,
-                    style = TextStyle(fontSize = 12.sp),
+                    style = TextStyle(fontSize = 12.sp)
                 )
             },
             modifier = Modifier
                 .fillMaxWidth()
-                .clickable { focusManager.clearFocus() }, // 화면 터치 시 키보드 내림
-
+                .clickable { focusManager.clearFocus() },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
             colors = TextFieldDefaults.colors(
                 focusedContainerColor = Color.Transparent,
                 unfocusedContainerColor = Color.Transparent,
-                focusedIndicatorColor = Main600,       // 포커스된 상태의 하단 바 색상
-                unfocusedIndicatorColor = Color(0xFFF1F2F3)  // 포커스 해제된 상태의 하단 바 색상
+                focusedIndicatorColor = Main600,
+                unfocusedIndicatorColor = Color(0xFFF1F2F3)
             )
         )
 
         Spacer(modifier = Modifier.height(20.dp))
 
+        // 연락처 입력 필드
         Text(
             text = "연락처",
             color = Color.Gray,
             modifier = Modifier.padding(start = 8.dp)
         )
         TextField(
-            value = "",
-            onValueChange = {},
+            value = phoneNumber, // 상태 연결
+            onValueChange = { phoneNumber = it }, // 입력 변화 시 상태 업데이트
             placeholder = {
                 Text(
                     text = "연락처를 입력해 주세요.",
                     color = Color.LightGray,
-                    style = TextStyle(fontSize = 12.sp),
+                    style = TextStyle(fontSize = 12.sp)
                 )
             },
             modifier = Modifier
                 .fillMaxWidth()
-                .clickable { focusManager.clearFocus() }, // 화면 터치 시 키보드 내림
-
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
-
+                .clickable { focusManager.clearFocus() },
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Phone),
             colors = TextFieldDefaults.colors(
                 focusedContainerColor = Color.Transparent,
                 unfocusedContainerColor = Color.Transparent,
-                focusedIndicatorColor = Main600,       // 포커스된 상태의 하단 바 색상
-                unfocusedIndicatorColor = Color(0xFFF1F2F3)  // 포커스 해제된 상태의 하단 바 색상
+                focusedIndicatorColor = Main600,
+                unfocusedIndicatorColor = Color(0xFFF1F2F3)
             )
         )
     }
 }
+
 
 @Composable
 fun PrivacyAgreementRow() {
