@@ -3,6 +3,7 @@ package com.example.coneeze.HomePage
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
@@ -33,64 +34,68 @@ fun RowItem(
     name: String,
     image: Int,
     feature: String,
-    price: String
+    price: String,
+    modifier: Modifier =Modifier
 ) {
-    Card(
-        modifier = Modifier
-            .padding(end = 10.dp)
-            .width(122.dp)
-            .height(188.dp)
-            .clickable {
-                // Int 타입 이미지 리소스 ID를 그대로 전달
-                navController.navigate("디테일/$image/$name/$price")
-            },
-        colors = CardDefaults.cardColors(
-            containerColor = Color.White
-        ),
-        shape = RoundedCornerShape(
-            topStart = 16.dp,
-            topEnd = 16.dp,
-            bottomEnd = 0.dp,
-            bottomStart = 0.dp
-        )
+    Row(
+        modifier = modifier
     ) {
-        Column {
-            Image(
-                painter = painterResource(id = image),
-                contentDescription = "배너 사진",
-                modifier = Modifier
-                    .width(122.dp)
-                    .height(122.dp)
-                    .clip(RoundedCornerShape(6.dp))
+        Card(
+            modifier = Modifier
+                .padding(end = 10.dp)
+                .width(122.dp)
+                .clickable {
+                    // Int 타입 이미지 리소스 ID를 그대로 전달
+                    navController.navigate("디테일/$image/$name/$price")
+                },
+            colors = CardDefaults.cardColors(
+                containerColor = Color.White
+            ),
+            shape = RoundedCornerShape(
+                topStart = 16.dp,
+                topEnd = 16.dp,
+                bottomEnd = 0.dp,
+                bottomStart = 0.dp
             )
-            Text(
-                text = name,
-                modifier = Modifier.padding(top = 8.dp),
-                style = TextStyle(
-                    fontSize = 14.sp,
-                    lineHeight = 18.sp,
-                    fontWeight = FontWeight(600),
-                ),
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis
-            )
-            Text(
-                text = feature,
-                style = TextStyle(
-                    fontSize = 12.sp,
-                    lineHeight = 16.sp,
-                    fontWeight = FontWeight(400),
-                    color = Color(0xFF60646C)
+        ) {
+            Column {
+                Image(
+                    painter = painterResource(id = image),
+                    contentDescription = "배너 사진",
+                    modifier = Modifier
+                        .width(122.dp)
+                        .height(122.dp)
+                        .clip(RoundedCornerShape(6.dp))
                 )
-            )
-            Text(
-                text = price,
-                style = TextStyle(
-                    fontSize = 16.sp,
-                    lineHeight = 20.sp,
-                    fontWeight = FontWeight(600)
+                Text(
+                    text = name,
+                    modifier = Modifier.padding(top = 8.dp),
+                    style = TextStyle(
+                        fontSize = 14.sp,
+                        lineHeight = 18.sp,
+                        fontWeight = FontWeight(600),
+                    ),
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis
                 )
-            )
+                Text(
+                    text = feature,
+                    style = TextStyle(
+                        fontSize = 12.sp,
+                        lineHeight = 16.sp,
+                        fontWeight = FontWeight(400),
+                        color = Color(0xFF60646C)
+                    )
+                )
+                Text(
+                    text = price,
+                    style = TextStyle(
+                        fontSize = 16.sp,
+                        lineHeight = 20.sp,
+                        fontWeight = FontWeight(600)
+                    )
+                )
+            }
         }
     }
 }

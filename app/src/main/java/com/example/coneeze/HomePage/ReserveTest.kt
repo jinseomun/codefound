@@ -31,10 +31,9 @@ fun ReserveTest(navController: NavController){
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(top = 24.dp, bottom = 20.dp),
+                .padding(start = 20.dp, end = 20.dp, top = 24.dp, bottom = 20.dp),
 
             ) {
-            Spacer(modifier = Modifier.weight(1f))
 
             Button(
                 contentPadding = PaddingValues(0.dp),
@@ -44,7 +43,9 @@ fun ReserveTest(navController: NavController){
                     Color.Transparent,  // 버튼 배경을 투명하게 설정
                     contentColor = Color.Unspecified ),
                 // 기본 텍스트 색상 사용
-                shape = RectangleShape
+                shape = RectangleShape,
+                modifier = Modifier.
+                weight(1f)
 
 
 
@@ -53,13 +54,11 @@ fun ReserveTest(navController: NavController){
                     painter = painterResource(id = R.drawable.reservation),  // 이미지 리소스 설정
                     contentDescription = "에약하기 사진",
                     modifier = Modifier
-                        .width(155.dp)
-                        .height(100.dp)
                         .aspectRatio(155f / 100f)
-
-
                 )}
-            Spacer(modifier = Modifier.weight(1f))
+
+            Spacer(modifier = Modifier.width(10.dp))
+
             Button(
                 contentPadding = PaddingValues(0.dp),
                 onClick = {navController.navigate("테스트시작")},
@@ -68,7 +67,9 @@ fun ReserveTest(navController: NavController){
                     Color.Transparent,  // 버튼 배경을 투명하게 설정
                     contentColor = Color.Unspecified ),
                 // 기본 텍스트 색상 사용
-                shape = RectangleShape
+                shape = RectangleShape,
+                modifier = Modifier.
+                weight(1f)
 
 
 
@@ -78,13 +79,18 @@ fun ReserveTest(navController: NavController){
                     painter = painterResource(id = R.drawable.test),  // 이미지 리소스 설정
                     contentDescription = "테스트하기 사진",
                     modifier = Modifier
-                        .width(155.dp)
-                        .height(100.dp)
+                        .aspectRatio(155f / 100f)
 
                 )}
 
-            Spacer(modifier = Modifier.weight(1f))
+           
         }
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun ReserveTestPreview(){
+    ReserveTest(navController = rememberNavController())
 }
 

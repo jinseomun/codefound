@@ -39,7 +39,7 @@ fun RowScroll(
                 .fillMaxWidth()
                 .padding(start = 20.dp, bottom =20.dp)
         ) {
-            Column {
+
                 LazyRow(
                     modifier = Modifier.fillMaxWidth()
                 ) {
@@ -50,12 +50,13 @@ fun RowScroll(
                                 name = name,
                                 image = images[index],
                                 feature = features[index],
-                                price = prices[index]
+                                price = prices[index],
+                                modifier = Modifier.weight(1f)
                             )
                         }
                     }
                 }
-            }
+
         }
     }
 }

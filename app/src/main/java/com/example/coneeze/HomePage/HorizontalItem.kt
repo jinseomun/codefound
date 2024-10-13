@@ -4,6 +4,8 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
@@ -15,6 +17,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -38,10 +41,16 @@ fun HorizontalItem(
     image: Int,
     feature: String,
     price: String
+
 ) {
+    val configuration = LocalConfiguration.current
+    val screenWidth = configuration.screenWidthDp.dp
+
+
+    val adjustedWidth = (screenWidth-64.dp) / 2f
     Card(
         modifier = Modifier
-            .width(155.dp)
+            .width(adjustedWidth)
             .clickable {
                 navController.navigate("디테일/$image/$name/$price")
             },  // 각 항목의 너비를 고정
@@ -62,13 +71,14 @@ fun HorizontalItem(
                 painter = painterResource(id = image),  // 이미지 리소스 설정
                 contentDescription = "배너 사진",
                 modifier = Modifier
-                    .width(155.dp)
-                    .height(155.dp)
+                    .width(adjustedWidth)
+                    .aspectRatio(1f)
                     .clip(RoundedCornerShape(6.dp))
             )
             Text(
                 text = name,
                 modifier = Modifier
+                    .fillMaxWidth()
                     .padding(top=8.dp),
                 style = TextStyle(
                     fontSize = 14.sp,
@@ -80,7 +90,8 @@ fun HorizontalItem(
 
             Text(
                 text = feature,
-
+                modifier = Modifier.
+                    fillMaxWidth(),
                 // Body/Caption 12 R
                 style = TextStyle(
                     fontSize = 12.sp,
@@ -92,6 +103,8 @@ fun HorizontalItem(
 
             Text(
                 text = price,
+                modifier = Modifier.
+                fillMaxWidth(),
 
                 style = TextStyle(
                     fontSize = 16.sp,

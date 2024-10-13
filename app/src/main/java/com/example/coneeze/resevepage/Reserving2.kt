@@ -88,7 +88,7 @@ fun SecondScreenWithModalBottomSheet(navController: NavController) {
                     showNavigationIcon = false,
                     showActionIcon = true,
                     onNavigationClick = { /* 네비게이션 클릭 동작 */ },
-                    onActionClick = { navController.popBackStack("reservation", inclusive = false) }
+                    onActionClick = { navController.popBackStack("홈", inclusive = false) }
                 )
             },
             content = { innerPadding ->
