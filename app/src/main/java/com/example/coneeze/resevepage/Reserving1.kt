@@ -43,6 +43,7 @@ import com.example.coneeze.R
 import com.example.coneeze.components.CustomTopBar
 import com.example.coneeze.components.NextButton
 import com.example.coneeze.ui.theme.Main600
+import com.example.coneeze.ui.theme.suit
 
 @OptIn(ExperimentalMaterial3Api::class)  // 실험적 API 사용을 명시적으로 허용
 @Composable
@@ -147,7 +148,10 @@ fun ServiceButton(title: String, description: String) {
             Text(
                 text = title,
                 color = Color.Black,
-                style = TextStyle(fontWeight = FontWeight.Bold),
+                style = TextStyle(
+                    fontWeight = FontWeight.Bold,
+                    fontFamily = suit
+                ),
                 fontSize = 16.sp // 제목 텍스트 크기 설정
             )
 
@@ -158,7 +162,8 @@ fun ServiceButton(title: String, description: String) {
                 color = Color.Gray,
                 fontSize = 14.sp, // 설명 텍스트 크기 설정
                 maxLines = Int.MAX_VALUE, // 텍스트를 여러 줄로 표시
-                overflow = TextOverflow.Visible // 텍스트가 넘어가면 줄바꿈
+                overflow = TextOverflow.Visible, // 텍스트가 넘어가면 줄바꿈
+                fontFamily = suit
             )
         }
     }

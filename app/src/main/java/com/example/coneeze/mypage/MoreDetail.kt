@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -41,12 +42,12 @@ import com.example.coneeze.components.CustomTopBar
 import com.example.coneeze.components.Info
 import com.example.coneeze.components.Order
 import com.example.coneeze.components.OrderRepository
+import com.example.coneeze.ui.theme.suit
 
 @OptIn(ExperimentalMaterial3Api::class)  // 실험적 API 사용을 명시적으로 허용
 @Composable
 fun MoreDetailScreen(navController: NavController, orderId: String?) {
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
-
     val order = OrderRepository.orders.find { it.orderId == orderId }
 
     val orders = listOf(
@@ -68,34 +69,35 @@ fun MoreDetailScreen(navController: NavController, orderId: String?) {
         ),
     )
 
-    Scaffold(
-        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
-        topBar = {
-            CustomTopBar(
-                title = "주문 상세",
-                showNavigationIcon = true, // 네비게이션 아이콘을 보여줌
-                showActionIcon = false,    // 액션 아이콘을 숨김
-                onNavigationClick = { navController.navigate("주문내역")  },
-                onActionClick = { /* 액션 버튼 클릭 동작 */ }
-            )
-        },
-        content = { innerPadding ->
-            Box(modifier = Modifier
+    Scaffold(modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection), topBar = {
+        CustomTopBar(title = "주문 상세",
+            showNavigationIcon = true, // 네비게이션 아이콘을 보여줌
+            showActionIcon = false,    // 액션 아이콘을 숨김
+            onNavigationClick = { navController.navigate("주문내역") },
+            onActionClick = { /* 액션 버튼 클릭 동작 */ })
+    }, content = { innerPadding ->
+        Box(
+            modifier = Modifier
                 .padding(innerPadding)
                 .fillMaxSize()
                 .background(color = Color.White)
-            ) {
-                order?.let {
-                    MoreDetailContent(it)
-                } ?: run {
-                    Text("주문 정보를 찾을 수 없습니다.")
+        ) {
+            order?.let {
+                LazyColumn(
+                    modifier = Modifier.fillMaxSize(),
+                    verticalArrangement = Arrangement.spacedBy(8.dp) // 아이템 간의 간격 설정
+                ) {
+                    item {
+                        MoreDetailContent(it)
+                    }
                 }
+            } ?: run {
+                Text("주문 정보를 찾을 수 없습니다.", modifier = Modifier.padding(16.dp))
             }
-        },
-        bottomBar = {
-            // 하단 바에 NextButton 추가
         }
-    )
+    }, bottomBar = {
+        // 하단 바에 NextButton 추가
+    })
 }
 
 @Composable
@@ -113,22 +115,17 @@ fun MoreDetailContent(order: Order) {
                     .padding(horizontal = 20.dp, vertical = 24.dp)
             ) {
                 Text(
-                    text = order.date,
-                    style = TextStyle(
-                        fontSize = 22.sp,
-                        fontWeight = FontWeight.Bold
+                    text = order.date, style = TextStyle(
+                        fontSize = 22.sp, fontWeight = FontWeight.Bold, fontFamily = suit
                     )
                 )
 
                 Spacer(modifier = Modifier.height(6.dp))
 
                 Text(
-                    text = "주문번호 ${order.orderId}",
-                    style = TextStyle(
-                        fontSize = 14.sp,
-                        fontWeight = FontWeight.Medium
-                    ),
-                    color = Color.Gray
+                    text = "주문번호 ${order.orderId}", style = TextStyle(
+                        fontSize = 14.sp, fontWeight = FontWeight.Medium, fontFamily = suit
+                    ), color = Color.Gray
                 )
             }
         }
@@ -146,43 +143,36 @@ fun MoreDetailContent(order: Order) {
                     .padding(horizontal = 20.dp, vertical = 24.dp)
             ) {
                 Text(
-                    text = "배송정보",
-                    style = TextStyle(
+                    text = "배송정보", style = TextStyle(
                         fontSize = 16.sp,
                         lineHeight = 20.sp,
-                        fontWeight = FontWeight.Bold
+                        fontWeight = FontWeight.Bold,
+                        fontFamily = suit
                     )
                 )
 
                 Spacer(modifier = Modifier.height(14.dp))
 
                 Text(
-                    text = order.name,
-                    style = TextStyle(
+                    text = order.name, style = TextStyle(
                         fontSize = 16.sp,
                         lineHeight = 20.sp,
-                        fontWeight = FontWeight.Medium
-                    ),
-                    color = Color.Gray
+                        fontWeight = FontWeight.Medium,
+                        fontFamily = suit
+                    ), color = Color.Gray
                 )
 
                 Spacer(modifier = Modifier.height(10.dp))
 
                 Text(
-                    text = "[05210] 서울시 강동구 아리수로97길 19 405동 202호",
-                    style = TextStyle(
-                        fontSize = 14.sp,
-                        fontWeight = FontWeight.Medium
-                    ),
-                    color = Color.Gray
+                    text = "[05210] 서울시 강동구 아리수로97길 19 405동 202호", style = TextStyle(
+                        fontSize = 14.sp, fontWeight = FontWeight.Medium, fontFamily = suit
+                    ), color = Color.Gray
                 )
                 Text(
-                    text = "010-7541-0012   ",
-                    style = TextStyle(
-                        fontSize = 14.sp,
-                        fontWeight = FontWeight.Medium
-                    ),
-                    color = Color.Gray
+                    text = "010-7541-0012   ", style = TextStyle(
+                        fontSize = 14.sp, fontWeight = FontWeight.Medium, fontFamily = suit
+                    ), color = Color.Gray
                 )
 
             }
@@ -201,11 +191,11 @@ fun MoreDetailContent(order: Order) {
                     .padding(horizontal = 20.dp, vertical = 24.dp)
             ) {
                 Text(
-                    text = "주문 상품 정보",
-                    style = TextStyle(
+                    text = "주문 상품 정보", style = TextStyle(
                         fontSize = 16.sp,
                         lineHeight = 20.sp,
-                        fontWeight = FontWeight.Bold
+                        fontWeight = FontWeight.Bold,
+                        fontFamily = suit
                     )
                 )
 
@@ -226,27 +216,25 @@ fun MoreDetailContent(order: Order) {
 
                     Column {
                         Text(
-                            text = order.name,
-                            style = TextStyle(
+                            text = order.name, style = TextStyle(
                                 fontSize = 15.sp,
                                 lineHeight = 18.sp,
                                 fontWeight = FontWeight(400),
                                 color = Color(0xFF303236),
-                            ),
-                            maxLines = 1,
-                            overflow = TextOverflow.Ellipsis
+                                fontFamily = suit
+                            ), maxLines = 1, overflow = TextOverflow.Ellipsis
                         )
 
                         Spacer(modifier = Modifier.height(1.dp))
 
 
                         Text(
-                            text = "100g / 1개",
-                            style = TextStyle(
+                            text = "100g / 1개", style = TextStyle(
                                 fontSize = 13.sp,
                                 lineHeight = 16.sp,
                                 fontWeight = FontWeight(400),
                                 color = Color(0xFF60646C),
+                                fontFamily = suit
                             )
                         )
 
@@ -259,6 +247,7 @@ fun MoreDetailContent(order: Order) {
                                 lineHeight = 18.sp,
                                 fontWeight = FontWeight(400),
                                 color = Color(0xFF303236),
+                                fontFamily = suit
                             ),
 
                             )
@@ -282,11 +271,12 @@ fun MoreDetailContent(order: Order) {
                     .padding(horizontal = 20.dp, vertical = 24.dp)
             ) {
                 Text(
-                    text = "결제 정보",
-                    style = TextStyle(
+                    text = "결제 정보", style = TextStyle(
                         fontSize = 16.sp,
                         lineHeight = 20.sp,
-                        fontWeight = FontWeight.Bold
+                        fontWeight = FontWeight.Bold,
+                        fontFamily = suit
+
                     )
                 )
 
@@ -309,23 +299,21 @@ fun MoreDetailContent(order: Order) {
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Text(
-                        text = "최종 결제 금액",
-                        style = TextStyle(
+                        text = "최종 결제 금액", style = TextStyle(
                             fontSize = 16.sp,
                             lineHeight = 20.sp,
-                            fontWeight = FontWeight.Medium
-                        ),
-                        color = Color.Black
+                            fontWeight = FontWeight.Medium,
+                            fontFamily = suit
+                        ), color = Color.Black
                     )
 
                     Text(
-                        text = order.price,
-                        style = TextStyle(
+                        text = order.price, style = TextStyle(
                             fontSize = 18.sp,
                             lineHeight = 20.sp,
-                            fontWeight = FontWeight.Medium
-                        ),
-                        color = Color.Black
+                            fontWeight = FontWeight.Medium,
+                            fontFamily = suit
+                        ), color = Color.Black
                     )
 
                 }

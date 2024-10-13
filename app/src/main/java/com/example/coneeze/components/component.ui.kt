@@ -2,6 +2,7 @@ package com.example.coneeze.components
 
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -14,6 +15,7 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
@@ -21,6 +23,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.coneeze.ui.theme.Main600
+import com.example.coneeze.ui.theme.suit
 
 @Composable
 fun ScrollableButton(
@@ -90,33 +93,37 @@ fun Info(front : String, back : String){
 }
 
 @Composable
-fun Bookinginfo(front : String, back : String){
-    Row(
+fun Bookinginfo(front: String, back: String) {
+    Box(
         modifier = Modifier
             .padding(vertical = 4.dp)
-            .fillMaxWidth(),
-        horizontalArrangement = Arrangement.SpaceBetween
+            .fillMaxWidth()
     ) {
+        // 왼쪽에 정렬된 front 텍스트
         Text(
             text = front,
             style = TextStyle(
                 fontSize = 16.sp,
                 lineHeight = 20.sp,
-                fontWeight = FontWeight.Medium
+                fontWeight = FontWeight.Medium,
+                fontFamily = suit
             ),
-            color = Color.Gray
+            color = Color.Gray,
+            modifier = Modifier.align(Alignment.CenterStart)
         )
 
+        // 오른쪽에 정렬된 back 텍스트
         Text(
             text = back,
             style = TextStyle(
                 fontSize = 16.sp,
                 lineHeight = 20.sp,
-                fontWeight = FontWeight.Medium
+                fontWeight = FontWeight.Medium,
+                fontFamily = suit
             ),
-            color = Color.Black
+            color = Color.Black,
+            modifier = Modifier.align(Alignment.CenterEnd)
         )
-
     }
 }
 
@@ -134,7 +141,8 @@ fun RoundButton(onClick: () -> Unit, text: String) {
             text = text,  // 버튼 텍스트
             style = TextStyle(
                 color = Color.White,  // 텍스트 색상
-                fontSize = 16.sp  // 텍스트 크기
+                fontSize = 16.sp,  // 텍스트 크기
+                fontFamily = suit
             )
         )
     }

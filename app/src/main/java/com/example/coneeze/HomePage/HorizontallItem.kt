@@ -27,6 +27,7 @@ import com.example.coneeze.data.coffeeImages1
 import com.example.coneeze.data.features1
 import com.example.coneeze.data.names1
 import com.example.coneeze.data.prices1
+import com.example.coneeze.ui.theme.suit
 
 
 @Composable
@@ -72,6 +73,7 @@ fun HorizontalItem(
                     fontSize = 14.sp,
                     lineHeight = 18.sp,
                     fontWeight = FontWeight(600),
+                    fontFamily = suit
                 ),
                 maxLines = 1,  // 한 줄로 제한
                 overflow = TextOverflow.Ellipsis)
@@ -84,7 +86,8 @@ fun HorizontalItem(
                     fontSize = 12.sp,
                     lineHeight = 16.sp,
                     fontWeight = FontWeight(400),
-                    color = Color(0xFF60646C)
+                    color = Color(0xFF60646C),
+                    fontFamily = suit
                 )
             )
 
@@ -95,6 +98,7 @@ fun HorizontalItem(
                     fontSize = 16.sp,
                     lineHeight = 20.sp,
                     fontWeight = FontWeight(600),
+                    fontFamily = suit
 
                     )
             )

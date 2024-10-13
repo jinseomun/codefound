@@ -8,10 +8,12 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.coneeze.ui.theme.suit
 import java.time.LocalDate
 import java.time.YearMonth
 
@@ -63,7 +65,8 @@ fun CustomCalendar(
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier.weight(3f),
-                textAlign = TextAlign.Center
+                textAlign = TextAlign.Center,
+                style = TextStyle(fontFamily = suit)
             )
             Text(
                 text = "〉",
@@ -90,7 +93,8 @@ fun CustomCalendar(
                     fontSize = 16.sp,
                     color = if (day == "일") Color.Red else Color.Gray,
                     textAlign = TextAlign.Center,
-                    modifier = Modifier.weight(1f)
+                    modifier = Modifier.weight(1f),
+                    style = TextStyle( fontFamily = suit)
                 )
             }
         }
@@ -99,6 +103,7 @@ fun CustomCalendar(
         // 날짜 표시
         var weekHasNextMonthDays = false // 마지막 줄 표시 여부를 위한 변수
 
+        // 날짜 표시
         for (week in 0 until 6) {
             Row(
                 modifier = Modifier.fillMaxWidth(),
@@ -126,6 +131,11 @@ fun CustomCalendar(
                             color = if (day == 0) Color.Red else Color.Black
                             isFaded = false
                             date = currentMonth.atDay(dayOfMonth) // 클릭 가능한 날짜
+
+                            // 30일이 토요일일 경우 다음 달 날짜 표시 중단
+                            if (dayOfMonth == 30 && day == 6) {
+                                weekHasNextMonthDays = true
+                            }
                         }
                         // 다음 달의 날짜 (한 주 내에서만 표시)
                         else -> {
@@ -152,12 +162,14 @@ fun CustomCalendar(
                                     selectedDate = date
                                     onDateSelected(date) // 콜백 호출 추가
                                 }
-                            }                    ) {
+                            }
+                    ) {
                         Text(
                             text = dateText,
                             fontSize = 16.sp,
                             color = color.copy(alpha = if (isFaded) 0.5f else 1f),
-                            textAlign = TextAlign.Center
+                            textAlign = TextAlign.Center,
+                            style = TextStyle(fontFamily = suit)
                         )
                     }
                 }
@@ -167,13 +179,11 @@ fun CustomCalendar(
             if (weekHasNextMonthDays) break
         }
 
+
         //            text = selectedDate?.let {
-  //              "${it.year}년 ${it.monthValue}월 ${it.dayOfMonth}일"
-  //          } ?: "날짜를 선택하세요",
+        //              "${it.year}년 ${it.monthValue}월 ${it.dayOfMonth}일"
+        //          } ?: "날짜를 선택하세요",
 
     }
 }
-
-
-
 

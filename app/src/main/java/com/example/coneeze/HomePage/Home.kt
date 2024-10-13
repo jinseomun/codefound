@@ -211,12 +211,11 @@ fun HomeScreen(navController: NavController) {
 
         },
         bottomBar = {
-            BottomAppBar(
+            Box(
                 modifier = Modifier
-                    .height(80.dp),  // 크기 설정
-                containerColor = Color.White
-
-                // 테두리 설정
+                    .fillMaxWidth()
+                    .height(80.dp) // 높이 설정
+                    .background(Color.White) // 배경색 설정
             ) {
                 Column {
                     // 상단에 Gray 색상의 선을 추가
@@ -225,7 +224,6 @@ fun HomeScreen(navController: NavController) {
                         thickness = 1.dp,
                         modifier = Modifier.fillMaxWidth()
                     )
-                    Spacer(modifier = Modifier.height(5.dp))
                     // 하단 아이콘들 배치
                     BottomIconRow(
                         navController = navController,
@@ -237,6 +235,7 @@ fun HomeScreen(navController: NavController) {
                 }
             }
         }
+
     )
 }
 

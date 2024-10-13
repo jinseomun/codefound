@@ -34,6 +34,7 @@ import com.example.coneeze.components.Bookinginfo
 import com.example.coneeze.components.CustomTopBar
 import com.example.coneeze.ui.theme.Main800
 import com.example.coneeze.ui.theme.cafeFontFamily
+import com.example.coneeze.ui.theme.suit
 import java.time.ZoneId
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
@@ -146,7 +147,8 @@ fun EndpopContent(name: String, price: String, dateTime: String) {
                         style = TextStyle(
                             fontSize = 16.sp,
                             lineHeight = 20.sp,
-                            fontWeight = FontWeight.Medium
+                            fontWeight = FontWeight.Medium,
+                            fontFamily = suit
                         ),
                         color = Color.Black
                     )
@@ -156,7 +158,8 @@ fun EndpopContent(name: String, price: String, dateTime: String) {
                         style = TextStyle(
                             fontSize = 22.sp,
                             lineHeight = 20.sp,
-                            fontWeight = FontWeight.Medium
+                            fontWeight = FontWeight.Medium,
+                            fontFamily = suit
                         ),
                         color = Color.Black
                     )

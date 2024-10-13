@@ -141,7 +141,8 @@ fun LoginField(navController: NavController) {
             Text(
                 text = "아이디",
                 color = Color.Gray,
-                modifier = Modifier.padding(start = 8.dp)
+                modifier = Modifier.padding(start = 8.dp),
+                style = TextStyle(fontFamily = suit)
             )
             TextField(
                 value = username, // username 상태를 value로 사용
@@ -150,7 +151,10 @@ fun LoginField(navController: NavController) {
                     Text(
                         text = "아이디를 입력해 주세요.",
                         color = Color.LightGray,
-                        style = TextStyle(fontSize = 12.sp)
+                        style = TextStyle(
+                            fontSize = 12.sp,
+                            fontFamily = suit
+                            )
                     )
                 },
                 modifier = Modifier
@@ -172,7 +176,8 @@ fun LoginField(navController: NavController) {
             Text(
                 text = "비밀번호",
                 color = Color.Gray,
-                modifier = Modifier.padding(start = 8.dp)
+                modifier = Modifier.padding(start = 8.dp),
+                style = TextStyle(fontFamily = suit)
             )
             TextField(
                 value = password, // password 상태를 value로 사용
@@ -208,7 +213,11 @@ fun LoginField(navController: NavController) {
                 shape = RoundedCornerShape(size = 4.dp),
                 colors = ButtonDefaults.buttonColors(containerColor = Main600)
             ) {
-                Text(text = "로그인", color = Color.White)
+                Text(
+                    text = "로그인",
+                    color = Color.White,
+                    style = TextStyle(fontFamily = suit)
+                    )
             }
 
             Spacer(modifier = Modifier.height(20.dp))
@@ -224,7 +233,10 @@ fun LoginField(navController: NavController) {
                     Text(
                         "아이디 찾기",
                         color = Color.Gray,
-                        style = TextStyle(fontSize = 12.sp)
+                        style = TextStyle(
+                            fontSize = 12.sp,
+                            fontFamily = suit
+                            )
                     )
                 }
                 Divider(

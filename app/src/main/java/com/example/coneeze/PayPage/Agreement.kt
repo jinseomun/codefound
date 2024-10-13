@@ -151,6 +151,7 @@ fun AgreementRow() {
 
         Text(
             text = "주문 내용 확인 및 결제 동의 (필수)",
+            fontFamily = suit
         )
 
 

@@ -31,6 +31,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.sp
 import com.example.coneeze.R
+import com.example.coneeze.ui.theme.suit
 
 @OptIn(ExperimentalMaterial3Api::class)  // 실험적 API 사용을 명시적으로 허용
 @Composable
@@ -60,6 +61,7 @@ fun CustomTopBar(
                             fontWeight = FontWeight.W600, // 폰트 두께, 600은 W600으로 표기
                             color = Color(0xFF000000), // 텍스트 색상, 예시로 검정색
                             textAlign = TextAlign.Center, // 텍스트 가운데 정렬
+                            fontFamily = suit
                         ),
                     )
                 },
@@ -88,8 +90,8 @@ fun CustomTopBar(
                     }
                 },
             )
-            Divider(color = Color(0xFFF1F2F3), thickness = 1.dp)  // 하단에 회색 구분선 추가
         }
+        Divider(color = Color(0xFFF1F2F3), thickness = 1.dp)  // 하단에 회색 구분선 추가
     }
 }
 

@@ -46,6 +46,7 @@ import androidx.compose.ui.draw.scale
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.input.KeyboardType
 import com.example.coneeze.components.NextButton
+import com.example.coneeze.ui.theme.suit
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -106,6 +107,9 @@ fun SignupContent() {
 
         item { Inuput_Signup() }
         item { PrivacyAgreementRow() }
+
+        item{ Spacer(modifier = Modifier.height(12.dp)) }
+
     }
 }
 
@@ -130,7 +134,8 @@ fun Inuput_Signup() {
         Text(
             text = "아이디",
             color = Color.Gray,
-            modifier = Modifier.padding(start = 8.dp)
+            modifier = Modifier.padding(start = 8.dp),
+            style = TextStyle(fontFamily = suit)
         )
         TextField(
             value = username, // 상태 연결
@@ -139,7 +144,10 @@ fun Inuput_Signup() {
                 Text(
                     text = "아이디를 입력해 주세요.",
                     color = Color.LightGray,
-                    style = TextStyle(fontSize = 12.sp)
+                    style = TextStyle(
+                        fontSize = 12.sp,
+                        fontFamily = suit
+                        )
                 )
             },
             modifier = Modifier
@@ -160,7 +168,8 @@ fun Inuput_Signup() {
         Text(
             text = "비밀번호",
             color = Color.Gray,
-            modifier = Modifier.padding(start = 8.dp)
+            modifier = Modifier.padding(start = 8.dp),
+            style = TextStyle(fontFamily = suit)
         )
         TextField(
             value = password, // 상태 연결
@@ -169,7 +178,10 @@ fun Inuput_Signup() {
                 Text(
                     text = "비밀번호를 입력해 주세요.",
                     color = Color.LightGray,
-                    style = TextStyle(fontSize = 12.sp)
+                    style = TextStyle(
+                        fontSize = 12.sp,
+                        fontFamily = suit
+                    )
                 )
             },
             modifier = Modifier
@@ -194,7 +206,10 @@ fun Inuput_Signup() {
                 Text(
                     text = "비밀번호를 한번 더 입력해 주세요.",
                     color = Color.LightGray,
-                    style = TextStyle(fontSize = 12.sp)
+                    style = TextStyle(
+                        fontSize = 12.sp,
+                        fontFamily = suit
+                        )
                 )
             },
             modifier = Modifier
@@ -215,7 +230,8 @@ fun Inuput_Signup() {
         Text(
             text = "이름",
             color = Color.Gray,
-            modifier = Modifier.padding(start = 8.dp)
+            modifier = Modifier.padding(start = 8.dp),
+            style = TextStyle(fontFamily = suit)
         )
         TextField(
             value = name, // 상태 연결
@@ -224,7 +240,10 @@ fun Inuput_Signup() {
                 Text(
                     text = "이름을 입력해 주세요.",
                     color = Color.LightGray,
-                    style = TextStyle(fontSize = 12.sp)
+                    style = TextStyle(
+                        fontSize = 12.sp,
+                        fontFamily = suit
+                    )
                 )
             },
             modifier = Modifier
@@ -245,7 +264,8 @@ fun Inuput_Signup() {
         Text(
             text = "연락처",
             color = Color.Gray,
-            modifier = Modifier.padding(start = 8.dp)
+            modifier = Modifier.padding(start = 8.dp),
+            style = TextStyle(fontFamily = suit)
         )
         TextField(
             value = phoneNumber, // 상태 연결
@@ -254,7 +274,10 @@ fun Inuput_Signup() {
                 Text(
                     text = "연락처를 입력해 주세요.",
                     color = Color.LightGray,
-                    style = TextStyle(fontSize = 12.sp)
+                    style = TextStyle(
+                        fontSize = 12.sp,
+                        fontFamily = suit
+                    )
                 )
             },
             modifier = Modifier
@@ -285,13 +308,16 @@ fun PrivacyAgreementRow() {
         Checkbox(
             checked = isChecked,
             onCheckedChange = { isChecked = it } ,// 체크박스 상태 변경
-            modifier = Modifier.scale(0.8f) // 원하는 크기 비율로 설정
+            modifier = Modifier.scale(0.7f) // 원하는 크기 비율로 설정
 
         )
 
         Text(
             text = "[필수] 개인정보처리방침에 동의합니다.",
-            style = TextStyle(fontSize = 12.sp)
+            style = TextStyle(
+                fontSize = 10.sp,
+                fontFamily = suit
+            )
         )
 
         Spacer(modifier = Modifier.width(16.dp))
@@ -302,7 +328,10 @@ fun PrivacyAgreementRow() {
             color = Color(0xFF60646C),
             textDecoration = TextDecoration.Underline, // 밑줄 추가
             modifier = Modifier.clickable { /* 약관보기 동작 추가 */ },
-            style = TextStyle(fontSize = 12.sp)
+            style = TextStyle(
+                fontSize = 10.sp,
+                fontFamily = suit
+            )
 
         )
     }

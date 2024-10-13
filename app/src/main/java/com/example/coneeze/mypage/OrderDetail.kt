@@ -2,6 +2,7 @@ package com.example.coneeze.mypage
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
@@ -58,6 +59,7 @@ import com.example.coneeze.components.OrderRepository
 import com.example.coneeze.components.ScrollableButton
 import com.example.coneeze.ui.theme.Gray10
 import com.example.coneeze.ui.theme.GrayLine
+import com.example.coneeze.ui.theme.suit
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -99,21 +101,19 @@ fun OrderDetailScreen(navController: NavController) {
             }
         },
         bottomBar = {
-            BottomAppBar(
+            Box(
                 modifier = Modifier
-                    .height(80.dp),  // 크기 설정
-                containerColor = Color.White
-
-                // 테두리 설정
+                    .fillMaxWidth()
+                    .height(80.dp) // 높이 설정
+                    .background(Color.White) // 배경색 설정
             ) {
                 Column {
                     // 상단에 Gray 색상의 선을 추가
                     Divider(
-                        color = GrayLine,
+                        color = com.example.coneeze.ui.theme.GrayLine,
                         thickness = 1.dp,
                         modifier = Modifier.fillMaxWidth()
                     )
-                    Spacer(modifier = Modifier.height(5.dp))
                     // 하단 아이콘들 배치
                     BottomIconRow(
                         navController = navController,
@@ -171,7 +171,8 @@ fun OrderCard(order: Order, navController: NavController) {
                     text = order.date,
                     style = TextStyle(
                         fontSize = 22.sp,
-                        fontWeight = FontWeight.Bold
+                        fontWeight = FontWeight.Bold,
+                        fontFamily = suit
                     )
                 )
 
@@ -186,7 +187,8 @@ fun OrderCard(order: Order, navController: NavController) {
                         text = "주문상세",
                         style = TextStyle(
                             fontSize = 14.sp,
-                            fontWeight = FontWeight.Medium
+                            fontWeight = FontWeight.Medium,
+                            fontFamily = suit
                         ),
                         color = Color.Gray
                     )
@@ -207,7 +209,8 @@ fun OrderCard(order: Order, navController: NavController) {
                     text = order.orderState,
                     style = TextStyle(
                         fontSize = 14.sp,
-                        fontWeight = FontWeight.Medium
+                        fontWeight = FontWeight.Medium,
+                        fontFamily = suit
                     ),
                     color = Color(0xFF68BC43)
                 )
@@ -235,6 +238,7 @@ fun OrderCard(order: Order, navController: NavController) {
                             lineHeight = 18.sp,
                             fontWeight = FontWeight(400),
                             color = Color(0xFF303236),
+                            fontFamily = suit
                         ),
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis
@@ -250,6 +254,7 @@ fun OrderCard(order: Order, navController: NavController) {
                             lineHeight = 16.sp,
                             fontWeight = FontWeight(400),
                             color = Color(0xFF60646C),
+                            fontFamily = suit
                         )
                     )
 
@@ -262,6 +267,7 @@ fun OrderCard(order: Order, navController: NavController) {
                             lineHeight = 18.sp,
                             fontWeight = FontWeight(400),
                             color = Color(0xFF303236),
+                            fontFamily = suit
                         ),
 
                         )

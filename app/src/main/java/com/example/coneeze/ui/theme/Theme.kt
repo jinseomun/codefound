@@ -28,29 +28,26 @@ private val DarkColorScheme = darkColorScheme(
     primary = Color.White,
     secondary = Color.White,
     tertiary = Color.White,
-    background = Color.White,  // 배경색을 흰색으로 설정
-    surface = Color.White,     // 표면 색상도 흰색으로 설정
-
+    background = Color.White,
+    surface = Color.White,
+    onPrimary = Color.Black,       // 텍스트 색상 추가
+    onSecondary = Color.Black,
+    onBackground = Color.Black,
+    onSurface = Color.Black
 )
 
 private val LightColorScheme = lightColorScheme(
     primary = Color.White,
     secondary = Color.White,
     tertiary = Color.White,
-    background = Color.White,  // 배경색을 흰색으로 설정
-    surface = Color.White,     // 표면 색상도 흰색으로 설정
-
-
-    /* Other default colors to override
-    background = Color(0xFFFFFBFE),
-    surface = Color(0xFFFFFBFE),
-    onPrimary = Color.White,
-    onSecondary = Color.White,
-    onTertiary = Color.White,
-    onBackground = Color(0xFF1C1B1F),
-    onSurface = Color(0xFF1C1B1F),
-    */
+    background = Color.White,
+    surface = Color.White,
+    onPrimary = Color.Black,       // 텍스트 색상 추가
+    onSecondary = Color.Black,
+    onBackground = Color.Black,
+    onSurface = Color.Black
 )
+
 
 @Composable
 fun ConeezeTheme(

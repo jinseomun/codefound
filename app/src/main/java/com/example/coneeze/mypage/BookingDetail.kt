@@ -35,6 +35,7 @@ import com.example.coneeze.components.Info
 import com.example.coneeze.components.PAYMENT_METHOD
 import com.example.coneeze.components.PAYMENT_STATUS
 import com.example.coneeze.components.TOTAL_AMOUNT
+import com.example.coneeze.ui.theme.suit
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -91,7 +92,8 @@ fun BookingDetailContent(booking: Booking) {
                     text = "기본 정보",
                     style = TextStyle(
                         fontSize = 18.sp,
-                        fontWeight = FontWeight.Bold
+                        fontWeight = FontWeight.Bold,
+                        fontFamily = suit
                     )
                 )
                 Spacer(modifier = Modifier.height(16.dp))
@@ -113,7 +115,8 @@ fun BookingDetailContent(booking: Booking) {
                     text = "예약 상세 정보",
                     style = TextStyle(
                         fontSize = 18.sp,
-                        fontWeight = FontWeight.Bold
+                        fontWeight = FontWeight.Bold,
+                        fontFamily = suit
                     )
                 )
                 Spacer(modifier = Modifier.height(16.dp))
@@ -138,7 +141,8 @@ fun BookingDetailContent(booking: Booking) {
                     text = "결제 정보",
                     style = TextStyle(
                         fontSize = 18.sp,
-                        fontWeight = FontWeight.Bold
+                        fontWeight = FontWeight.Bold,
+                        fontFamily = suit
                     )
                 )
                 Spacer(modifier = Modifier.height(16.dp))
@@ -159,7 +163,8 @@ fun BookingDetailContent(booking: Booking) {
                         style = TextStyle(
                             fontSize = 16.sp,
                             lineHeight = 20.sp,
-                            fontWeight = FontWeight.Medium
+                            fontWeight = FontWeight.Medium,
+                            fontFamily = suit
                         ),
                         color = Color.Black
                     )
@@ -169,7 +174,8 @@ fun BookingDetailContent(booking: Booking) {
                         style = TextStyle(
                             fontSize = 22.sp,
                             lineHeight = 20.sp,
-                            fontWeight = FontWeight.Medium
+                            fontWeight = FontWeight.Medium,
+                            fontFamily = suit
                         ),
                         color = Color.Black
                     )

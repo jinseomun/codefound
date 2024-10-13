@@ -58,6 +58,7 @@ import com.example.coneeze.ui.theme.Main800
 import com.example.coneeze.ui.theme.cafeFontFamily
 import com.example.coneeze.R
 import com.example.coneeze.components.Booking
+import com.example.coneeze.ui.theme.suit
 import java.time.LocalDate
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
@@ -196,7 +197,10 @@ fun SecondScreenWithModalBottomSheet(navController: NavController) {
                             Text(
                                 text = "확인",
                                 color = Color.White,
-                                style = TextStyle(fontWeight = FontWeight.Bold)
+                                style = TextStyle(
+                                    fontWeight = FontWeight.Bold,
+                                    fontFamily = suit
+                                )
                             )
                         }
                     }
@@ -242,7 +246,8 @@ fun SecondScreenWithModalBottomSheet(navController: NavController) {
                         text = "시간 선택",
                         style = TextStyle(
                             fontSize = 16.sp,
-                            fontWeight = FontWeight.SemiBold
+                            fontWeight = FontWeight.SemiBold,
+                            fontFamily = suit
                         ),
                         modifier = Modifier.padding(horizontal = 24.dp)
                     )
@@ -297,7 +302,11 @@ fun ContentScreen2(
                 // "클래스 진행 방식" 텍스트
                 Text(
                     text = "클래스 진행 방식",
-                    style = TextStyle(fontSize = 16.sp, fontWeight = FontWeight.Bold),
+                    style = TextStyle(
+                        fontSize = 16.sp,
+                        fontWeight = FontWeight.Bold,
+                        fontFamily = suit
+                    ),
                     color = Color.Black,
                     modifier = Modifier.align(Alignment.Start)
                 )
@@ -338,7 +347,11 @@ fun ContentScreen2(
             ) {
                 Text(
                     text = "인원수",
-                    style = TextStyle(fontSize = 16.sp, fontWeight = FontWeight.Bold),
+                    style = TextStyle(
+                        fontSize = 16.sp,
+                        fontWeight = FontWeight.Bold,
+                        fontFamily = suit
+                    ),
                     color = Color.Black,
                 )
 
@@ -378,7 +391,10 @@ fun ModeButton(title: String, isSelected: Boolean, onClick: () -> Unit,  modifie
         Text(
             text = title,
             color = if (isSelected) Color.White else Color.Gray,
-            style = TextStyle(fontWeight = FontWeight.Bold),
+            style = TextStyle(
+                fontWeight = FontWeight.Bold,
+                fontFamily = suit
+            ),
             fontSize = 16.sp
         )
     }
@@ -419,6 +435,7 @@ fun PlusMinusButton(
             fontSize = 18.sp,
             fontWeight = FontWeight.Bold,
             color = Color.Black,
+            fontFamily = suit
         )
 
         Button(
@@ -449,7 +466,7 @@ fun OffScreen(
         modifier = Modifier
             .fillMaxWidth()
     ) {
-        Text(text = "예약 일정", fontSize = 16.sp, fontWeight = FontWeight.Bold)
+        Text(text = "예약 일정", fontSize = 16.sp, fontWeight = FontWeight.Bold, fontFamily = suit)
 
         Spacer(modifier = Modifier.height(16.dp))
 
@@ -470,7 +487,8 @@ fun OffScreen(
                     text = selectedDate?.toString() ?: "일정을 선택해 주세요.",
                     fontSize = 16.sp,
                     color = if (selectedDate != null) Color.Black else Color(0xFFAEB1B7),
-                    modifier = Modifier.weight(1f)
+                    modifier = Modifier.weight(1f),
+                    fontFamily = suit
                 )
 
                 Icon(
@@ -492,9 +510,10 @@ fun OffScreen(
             text = "오프라인 시 방문 주소",
             fontSize = 16.sp,
             fontWeight = FontWeight.Bold,
+            fontFamily = suit
         )
         Spacer(modifier = Modifier.height(8.dp))
-        Text(text = "서울시 서초구 강남대로 545-4, 8층 커니즈 교육센터", color = Color.Gray)
+        Text(text = "서울시 서초구 강남대로 545-4, 8층 커니즈 교육센터", color = Color.Gray, fontFamily = suit)
     }
 }
 
@@ -548,7 +567,8 @@ fun SheetButtonRow(onClose: () -> Unit) {
                 text = "닫기",
                 color = Main600,
                 style = TextStyle(fontWeight = FontWeight.Bold),
-                fontSize = 16.sp
+                fontSize = 16.sp,
+                fontFamily = suit
             )
         }
 
@@ -571,7 +591,8 @@ fun SheetButtonRow(onClose: () -> Unit) {
                 text = "확인",
                 color    = Color.White,
                 style = TextStyle(fontWeight = FontWeight.Bold),
-                fontSize = 16.sp
+                fontSize = 16.sp,
+                fontFamily = suit
             )
         }
     }

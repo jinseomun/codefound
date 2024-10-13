@@ -37,6 +37,7 @@ import com.example.coneeze.components.CustomTopBar
 import com.example.coneeze.components.PrevNextButton
 import com.example.coneeze.ui.theme.Main600
 import com.example.coneeze.ui.theme.cafeFontFamily
+import com.example.coneeze.ui.theme.suit
 
 @OptIn(ExperimentalMaterial3Api::class)  // 실험적 API 사용을 명시적으로 허용
 @Composable
@@ -102,7 +103,8 @@ fun SurveyScreen(navController: NavController) {
                                 text = "결과보기",
                                 color = Color.White,
                                 style = TextStyle(fontWeight = FontWeight.Bold),
-                                fontSize = 14.sp
+                                fontSize = 14.sp,
+                                fontFamily = suit
                             )
                         }
                     }
@@ -185,7 +187,8 @@ fun SurveyButton(
             text = text,
             style = TextStyle(
                 fontSize = 14.sp,
-                color = Color.Black
+                color = Color.Black,
+                fontFamily = suit
             )
         )
     }

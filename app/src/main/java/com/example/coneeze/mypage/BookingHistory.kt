@@ -53,6 +53,7 @@ import com.example.coneeze.components.BottomIconRow
 import com.example.coneeze.components.CustomTopBar
 import com.example.coneeze.components.ScrollableButton
 import com.example.coneeze.ui.theme.Gray10
+import com.example.coneeze.ui.theme.suit
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -85,12 +86,11 @@ fun BookingHistoryScreen(navController: NavController) {
             }
         },
         bottomBar = {
-            BottomAppBar(
+            Box(
                 modifier = Modifier
-                    .height(80.dp),  // 크기 설정
-                containerColor = Color.White
-
-                // 테두리 설정
+                    .fillMaxWidth()
+                    .height(80.dp) // 높이 설정
+                    .background(Color.White) // 배경색 설정
             ) {
                 Column {
                     // 상단에 Gray 색상의 선을 추가
@@ -99,7 +99,6 @@ fun BookingHistoryScreen(navController: NavController) {
                         thickness = 1.dp,
                         modifier = Modifier.fillMaxWidth()
                     )
-                    Spacer(modifier = Modifier.height(5.dp))
                     // 하단 아이콘들 배치
                     BottomIconRow(
                         navController = navController,
@@ -154,7 +153,8 @@ fun BookingCard(booking: Booking, navController: NavController) {
                     text = booking.date,
                     style = TextStyle(
                         fontSize = 22.sp,
-                        fontWeight = FontWeight.Bold
+                        fontWeight = FontWeight.Bold,
+                        fontFamily = suit
                     )
                 )
 
@@ -169,7 +169,8 @@ fun BookingCard(booking: Booking, navController: NavController) {
                         text = "예약 상세",
                         style = TextStyle(
                             fontSize = 14.sp,
-                            fontWeight = FontWeight.Medium
+                            fontWeight = FontWeight.Medium,
+                            fontFamily = suit
                         ),
                         color = Color.Gray
                     )

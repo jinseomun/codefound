@@ -106,7 +106,8 @@ fun CustomRowWithIcon(
                 fontSize = 14.sp,
                 lineHeight = 18.sp,
                 fontWeight = FontWeight.Normal,
-                color = Color.Gray
+                color = Color.Gray,
+                fontFamily = suit
             ),
             modifier = Modifier
                 .padding(start = 16.dp)

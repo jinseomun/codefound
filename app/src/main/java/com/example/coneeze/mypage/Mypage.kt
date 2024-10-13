@@ -47,6 +47,7 @@ import com.example.coneeze.R
 import com.example.coneeze.components.BottomIconRow
 import com.example.coneeze.components.TopLogo
 import com.example.coneeze.ui.theme.Gray10
+import com.example.coneeze.ui.theme.suit
 
 @OptIn(ExperimentalMaterial3Api::class)  // 실험적 API 사용을 명시적으로 허용
 @Composable
@@ -70,12 +71,11 @@ fun MypageScreen(navController: NavController) {
             }
         },
         bottomBar = {
-            BottomAppBar(
+            Box(
                 modifier = Modifier
-                    .height(80.dp),  // 크기 설정
-                containerColor = Color.White
-
-                // 테두리 설정
+                    .fillMaxWidth()
+                    .height(80.dp) // 높이 설정
+                    .background(Color.White) // 배경색 설정
             ) {
                 Column {
                     // 상단에 Gray 색상의 선을 추가
@@ -84,7 +84,6 @@ fun MypageScreen(navController: NavController) {
                         thickness = 1.dp,
                         modifier = Modifier.fillMaxWidth()
                     )
-                    Spacer(modifier = Modifier.height(5.dp))
                     // 하단 아이콘들 배치
                     BottomIconRow(
                         navController = navController,
@@ -127,7 +126,8 @@ fun Mypagecontent(navController: NavController){
                     text = "홍길동 님",
                     style = TextStyle(
                         fontSize = 20.sp,
-                        fontWeight = FontWeight.ExtraBold
+                        fontWeight = FontWeight.ExtraBold,
+                        fontFamily = suit
                     )
                 )
 
@@ -152,7 +152,8 @@ fun Mypagecontent(navController: NavController){
                 text = "메뉴",
                 style = TextStyle(
                     fontSize = 16.sp,
-                    fontWeight = FontWeight.Bold
+                    fontWeight = FontWeight.Bold,
+                    fontFamily = suit
                 )
 
             )
@@ -173,7 +174,8 @@ fun Mypagecontent(navController: NavController){
                 text = "로그아웃",
                 style = TextStyle(
                     fontSize = 16.sp,
-                    fontWeight = FontWeight.Medium
+                    fontWeight = FontWeight.Medium,
+                    fontFamily = suit
                 )
 
             )

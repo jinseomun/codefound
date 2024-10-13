@@ -74,6 +74,7 @@ fun RowItem(
                         fontSize = 14.sp,
                         lineHeight = 18.sp,
                         fontWeight = FontWeight(600),
+                        fontFamily = suit
                     ),
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis
@@ -84,7 +85,8 @@ fun RowItem(
                         fontSize = 12.sp,
                         lineHeight = 16.sp,
                         fontWeight = FontWeight(400),
-                        color = Color(0xFF60646C)
+                        color = Color(0xFF60646C),
+                        fontFamily = suit
                     )
                 )
                 Text(
@@ -92,7 +94,8 @@ fun RowItem(
                     style = TextStyle(
                         fontSize = 16.sp,
                         lineHeight = 20.sp,
-                        fontWeight = FontWeight(600)
+                        fontWeight = FontWeight(600),
+                        fontFamily = suit
                     )
                 )
             }

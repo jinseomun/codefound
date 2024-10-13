@@ -16,6 +16,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.coneeze.R
+import com.example.coneeze.ui.theme.suit
 
 
 @Composable
@@ -38,6 +39,7 @@ fun ExplainBanner() {
                 lineHeight = 28.sp,
                 fontWeight = FontWeight(800),
                 color = Color.White,
+                fontFamily = suit
             ),
             modifier = Modifier
                 .padding(start = 28.dp, top = 130.dp)
@@ -50,6 +52,7 @@ fun ExplainBanner() {
                 lineHeight = 18.sp,
                 fontWeight = FontWeight(400),
                 color = Color.White,
+                fontFamily = suit
             ),
             modifier = Modifier
                 .padding(start = 28.dp, top = 190.dp)

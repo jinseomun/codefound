@@ -24,6 +24,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.coneeze.ui.theme.Main600
+import com.example.coneeze.ui.theme.suit
 
 
 @Composable
@@ -48,7 +49,10 @@ fun NextButton( onClick: () -> Unit, text : String) {
             Text(
                 text = text,
                 color = Color.White,
-                style = TextStyle(fontWeight = FontWeight.Bold),
+                style = TextStyle(
+                    fontWeight = FontWeight.Bold,
+                    fontFamily = suit,
+                    ),
                 fontSize = 14.sp // 제목 텍스트 크기 설정
             )
         }
@@ -140,7 +144,10 @@ fun PrevNextButton(
                 Text(
                     text = "이전",
                     color = Main600,
-                    style = TextStyle(fontWeight = FontWeight.Bold),
+                    style = TextStyle(
+                        fontWeight = FontWeight.Bold,
+                        fontFamily = suit,
+                    ),
                     fontSize = 14.sp
                 )
             }
@@ -159,7 +166,10 @@ fun PrevNextButton(
                 Text(
                     text = "다음",
                     color = Color.White,
-                    style = TextStyle(fontWeight = FontWeight.Bold),
+                    style = TextStyle(
+                        fontWeight = FontWeight.Bold,
+                        fontFamily = suit,
+                    ),
                     fontSize = 14.sp
                 )
             }
@@ -195,7 +205,10 @@ fun SurveyfinButton(
                 Text(
                     text = text1,
                     color = Color.White,
-                    style = TextStyle(fontWeight = FontWeight.Bold),
+                    style = TextStyle(
+                        fontWeight = FontWeight.Bold,
+                        fontFamily = suit,
+                    ),
                     fontSize = 14.sp // 제목 텍스트 크기 설정
                 )
             }
@@ -214,7 +227,10 @@ fun SurveyfinButton(
                 Text(
                     text = text2,
                     color = Main600,
-                    style = TextStyle(fontWeight = FontWeight.Bold),
+                    style = TextStyle(
+                        fontWeight = FontWeight.Bold,
+                        fontFamily = suit,
+                    ),
                     fontSize = 14.sp // 제목 텍스트 크기 설정
                 )
             }

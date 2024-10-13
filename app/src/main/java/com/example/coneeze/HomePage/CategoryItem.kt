@@ -25,6 +25,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.coneeze.R
+import com.example.coneeze.ui.theme.suit
 
 @Composable
 fun CategoryItem(
@@ -68,7 +69,8 @@ fun CategoryItem(
                     fontSize = 12.sp,
                     lineHeight = 16.sp,
                     fontWeight = FontWeight(400),
-                    color = Color(0xFF484B51)  // 텍스트 색상 설정
+                    color = Color(0xFF484B51),  // 텍스트 색상 설정
+                    fontFamily = suit
                 )
             )
         }

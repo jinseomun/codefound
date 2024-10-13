@@ -136,7 +136,8 @@ fun DeliveryInfo(){
                     text = "배송메모를 입력해주세요.",
                     style = TextStyle(
                         fontSize = 14.sp,
-                        color = Color.Gray
+                        color = Color.Gray,
+                        fontFamily = suit
                     )
                 )
             }
