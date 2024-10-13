@@ -6,7 +6,9 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
@@ -41,13 +43,12 @@ fun PagerWithDotsIndicator(
             ) { page ->
                 pageContent(page)
             }
-
+            Spacer(modifier = Modifier.height(16.dp))
             // 도트 인디케이터
             Row(
                 modifier = Modifier
                     .wrapContentHeight()
-                    .fillMaxWidth()
-                    .padding(top = 16.dp,bottom =16.dp),
+                    .fillMaxWidth(),
                 horizontalArrangement = Arrangement.Center
             ) {
                 repeat(pageCount) { iteration ->
@@ -62,6 +63,7 @@ fun PagerWithDotsIndicator(
                     )
                 }
             }
+            Spacer(modifier = Modifier.height(24.dp))
         }
     }
 }
