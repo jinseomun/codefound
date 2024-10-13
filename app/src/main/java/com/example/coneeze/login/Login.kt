@@ -2,39 +2,14 @@ package com.example.coneeze.login
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Divider
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
-import androidx.compose.material3.TextField
-import androidx.compose.material3.TextFieldDefaults
-import androidx.compose.material3.TopAppBarDefaults
-import androidx.compose.material3.rememberTopAppBarState
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
@@ -53,35 +28,39 @@ import kotlinx.coroutines.delay
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LoginScreen(navController: NavController) {
-    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
     val focusManager = LocalFocusManager.current // 포커스 매니저 선언
 
-    Scaffold(modifier = Modifier
-        .nestedScroll(scrollBehavior.nestedScrollConnection)
-        .clickable { focusManager.clearFocus() }, // 화면을 클릭하면 키보드 내리기
-        topBar = {},
+    Scaffold(
+        modifier = Modifier.clickable { focusManager.clearFocus() }, // 화면 클릭 시 키보드 내리기
+        topBar = { /* 상단바 필요 시 추가 */ },
         content = { innerPadding ->
             Box(modifier = Modifier.padding(innerPadding)) {
-                // 메인 콘텐츠
                 LoginContent(navController)
             }
         },
-        bottomBar = {
-            // 하단 바에 NextButton 추가
-        }
+        bottomBar = { /* 하단 바 필요 시 추가 */ }
     )
 }
 
 @Composable
 fun LoginContent(navController: NavController) {
-    Box(
-        modifier = Modifier.fillMaxSize()
-    ) {
+    var showLoadingScreen by remember { mutableStateOf(false) }
+    var loadingType by remember { mutableStateOf("") }
+
+    if (showLoadingScreen) {
+        // 로딩 화면 표시
+        LoadingScreen(navController, loadingType) {
+            showLoadingScreen = false
+        }
+    } else {
+        // 기본 로그인 화면 표시
         Column(
+            modifier = Modifier.fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Spacer(modifier = Modifier.height(120.dp))
 
+            // 로고 표시
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.Center,
@@ -89,15 +68,14 @@ fun LoginContent(navController: NavController) {
             ) {
                 Image(
                     painter = painterResource(id = R.drawable.symbol),
-                    contentDescription = "logo",
+                    contentDescription = "Symbol Logo",
                     contentScale = ContentScale.Crop,
                     modifier = Modifier.width(60.dp)
                 )
                 Spacer(modifier = Modifier.width(10.dp))
-
                 Image(
                     painter = painterResource(id = R.drawable.logo),
-                    contentDescription = "logo",
+                    contentDescription = "Main Logo",
                     contentScale = ContentScale.Crop,
                     modifier = Modifier.width(210.dp)
                 )
@@ -105,9 +83,28 @@ fun LoginContent(navController: NavController) {
 
             Spacer(modifier = Modifier.height(60.dp))
 
+            // 로그인 필드
             LoginField(navController)
 
-            LoginRow(navController)
+            // 소셜 로그인 버튼 행
+            LoginRow(
+                onClickKakao = {
+                    loadingType = "kakao"
+                    showLoadingScreen = true
+                },
+                onClickNaver = {
+                    loadingType = "naver"
+                    showLoadingScreen = true
+                },
+                onClickGoogle = {
+                    loadingType = "google"
+                    showLoadingScreen = true
+                },
+                onClickApple = {
+                    loadingType = "apple"
+                    showLoadingScreen = true
+                }
+            )
         }
     }
 }
@@ -115,271 +112,163 @@ fun LoginContent(navController: NavController) {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LoginField(navController: NavController) {
-    val focusManager = LocalFocusManager.current
-
-    // 아이디와 비밀번호의 상태를 저장할 변수를 추가
+    // 아이디와 비밀번호 상태 변수 추가
     var username by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
 
-    Box(
+    Column(
         modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 20.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Column(
-            modifier = Modifier
-                .align(Alignment.Center)
-                .padding(horizontal = 20.dp)
-        ) {
-            Text(
-                text = "아이디",
-                color = Color.Gray,
-                modifier = Modifier.padding(start = 8.dp),
-                style = TextStyle(fontFamily = suit)
-            )
-            TextField(value = username,
-                onValueChange = { username = it },
-                placeholder = {
-                    Text(
-                        text = "아이디를 입력해 주세요.",
-                        color = Color.LightGray,
-                        style = TextStyle(fontSize = 12.sp, fontFamily = suit)
-                    )
-                },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .clickable { focusManager.clearFocus() }, // 화면 터치 시 키보드 내림
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
-                colors = TextFieldDefaults.colors(
-                    focusedContainerColor = Color.Transparent,
-                    unfocusedContainerColor = Color.Transparent,
-                    focusedIndicatorColor = Main600,
-                    unfocusedIndicatorColor = Color(0xFFF1F2F3)
-                )
-            )
-
-            Spacer(modifier = Modifier.height(24.dp))
-
-            Text(
-                text = "비밀번호",
-                color = Color.Gray,
-                modifier = Modifier.padding(start = 8.dp),
-                style = TextStyle(fontFamily = suit)
-            )
-            TextField(value = password,
-                onValueChange = { password = it },
-                placeholder = {
-                    Text(
-                        text = "비밀번호를 입력해 주세요.",
-                        color = Color.LightGray,
-                        style = TextStyle(fontSize = 12.sp, fontFamily = suit)
-                    )
-                },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .clickable { focusManager.clearFocus() },
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
-                colors = TextFieldDefaults.colors(
-                    focusedContainerColor = Color.Transparent,
-                    unfocusedContainerColor = Color.Transparent,
-                    focusedIndicatorColor = Main600,
-                    unfocusedIndicatorColor = Color(0xFFF1F2F3)
-                )
-            )
-
-            Spacer(modifier = Modifier.height(36.dp))
-
-            Button(
-                onClick = { navController.navigate("홈") },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(48.dp),
-                shape = RoundedCornerShape(size = 4.dp),
-                colors = ButtonDefaults.buttonColors(containerColor = Main600)
-            ) {
+        Text(text = "아이디", color = Color.Gray, modifier = Modifier.padding(start = 8.dp), fontFamily = suit)
+        TextField(
+            value = username, // 상태 연결
+            onValueChange = { username = it }, // 입력 변화 시 상태 업데이트
+            placeholder = {
                 Text(
-                    text = "로그인", color = Color.White, style = TextStyle(fontFamily = suit)
+                    text = "아이디를 입력해 주세요.",
+                    color = Color.LightGray,
+                    style = TextStyle(fontSize = 12.sp),
+                    fontFamily = suit
                 )
-            }
+            },
+            modifier = Modifier.fillMaxWidth(),
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
+            colors = TextFieldDefaults.colors(
+                focusedContainerColor = Color.Transparent,
+                unfocusedContainerColor = Color.Transparent,
+                focusedIndicatorColor = Main600,
+                unfocusedIndicatorColor = Color(0xFFF1F2F3)
+            )
+        )
 
-            Spacer(modifier = Modifier.height(20.dp))
+        Spacer(modifier = Modifier.height(24.dp))
 
-            Row(
-                horizontalArrangement = Arrangement.Center,
-                verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(40.dp)
-            ) {
-                TextButton(onClick = { /* 아이디 찾기 */ }) {
-                    Text(
-                        "아이디 찾기", color = Color.Gray, style = TextStyle(
-                            fontSize = 12.sp, fontFamily = suit
-                        )
-                    )
-                }
-                Divider(
-                    color = Color.Gray, modifier = Modifier
-                        .height(15.dp)
-                        .width(1.dp)
+        Text(text = "비밀번호", color = Color.Gray, modifier = Modifier.padding(start = 8.dp), fontFamily = suit)
+        TextField(
+            value = password, // 상태 연결
+            onValueChange = { password = it }, // 입력 변화 시 상태 업데이트
+            placeholder = {
+                Text(
+                    text = "비밀번호를 입력해 주세요.",
+                    color = Color.LightGray,
+                    style = TextStyle(fontSize = 12.sp),
+                    fontFamily = suit
                 )
-                TextButton(onClick = { /* 비밀번호 재설정 */ }) {
-                    Text("비밀번호 재설정", color = Color.Gray, style = TextStyle(fontSize = 12.sp))
-                }
-                Divider(
-                    color = Color.Gray, modifier = Modifier
-                        .height(15.dp)
-                        .width(1.dp)
-                )
-                TextButton(onClick = { navController.navigate("회원가입") }) {
-                    Text("회원가입", color = Color.Gray, style = TextStyle(fontSize = 12.sp))
-                }
-            }
+            },
+            modifier = Modifier.fillMaxWidth(),
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password), // 비밀번호 필드 설정
+            colors = TextFieldDefaults.colors(
+                focusedContainerColor = Color.Transparent,
+                unfocusedContainerColor = Color.Transparent,
+                focusedIndicatorColor = Main600,
+                unfocusedIndicatorColor = Color(0xFFF1F2F3)
+            )
+        )
+
+        Spacer(modifier = Modifier.height(36.dp))
+
+        Button(
+            onClick = { navController.navigate("홈") },
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(48.dp),
+            shape = RoundedCornerShape(size = 4.dp),
+            colors = ButtonDefaults.buttonColors(containerColor = Main600)
+        ) {
+            Text(text = "로그인", color = Color.White, fontFamily = suit)
         }
+
+        Spacer(modifier = Modifier.height(20.dp))
     }
 }
 
 @Composable
-fun LoginRow(navController: NavController) {
-
-    var kakaoImage by remember { mutableStateOf(false) }
-    var naverImage by remember { mutableStateOf(false) }
-    var googleImage by remember { mutableStateOf(false) }
-    var appleImage by remember { mutableStateOf(false) }
-
-    Column {
-        Row(
+fun LoginRow(
+    onClickKakao: () -> Unit,
+    onClickNaver: () -> Unit,
+    onClickGoogle: () -> Unit,
+    onClickApple: () -> Unit
+) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(bottom = 20.dp),
+        horizontalArrangement = Arrangement.Center,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Image(
+            painter = painterResource(id = R.drawable.kakao),
+            contentDescription = "Kakao Login",
+            contentScale = ContentScale.Crop,
             modifier = Modifier
-                .fillMaxSize()
-                .padding(bottom = 20.dp),
-            horizontalArrangement = Arrangement.Center,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Image(painter = painterResource(id = R.drawable.kakao),
-                contentDescription = "logo",
-                contentScale = ContentScale.Crop,
-                modifier = Modifier
-                    .width(65.dp)
-                    .clickable {
-                        kakaoImage = true // 로딩 이미지 표시
-                    })
-
-            Spacer(modifier = Modifier.width(10.dp))
-
-            Image(painter = painterResource(id = R.drawable.naver),
-                contentDescription = "logo",
-                contentScale = ContentScale.Crop,
-                modifier = Modifier
-                    .width(65.dp)
-                    .clickable {
-                        naverImage = true // 로딩 이미지 표시
-                    })
-
-            Spacer(modifier = Modifier.width(10.dp))
-
-            Image(painter = painterResource(id = R.drawable.google),
-                contentDescription = "logo",
-                contentScale = ContentScale.Crop,
-                modifier = Modifier
-                    .width(65.dp)
-                    .clickable {
-                        googleImage = true // 로딩 이미지 표시
-                    })
-
-            Spacer(modifier = Modifier.width(10.dp))
-
-            Image(painter = painterResource(id = R.drawable.apple),
-                contentDescription = "logo",
-                contentScale = ContentScale.Crop,
-                modifier = Modifier
-                    .width(65.dp)
-                    .clickable {
-                        appleImage = true // 로딩 이미지 표시
-                    })
-        }
-
-        Spacer(modifier = Modifier.height(40.dp))
-
-        if (kakaoImage) {
-            Box(
-                modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center
-            ) {
-                Image(
-                    painter = painterResource(id = R.drawable.kakao_screen), // 보여줄 이미지
-                    contentDescription = "Kakao Loading", contentScale = ContentScale.Crop
-                )
-
-                LaunchedEffect(Unit) {
-                    delay(2000) // 2초 딜레이
-                    navController.navigate("홈") {
-                        popUpTo("login_screen") { inclusive = true }
-                    }
-                    kakaoImage = false // 상태 초기화 (필요시)
-                }
-            }
-        }
-
-        if (naverImage) {
-            Box(
-                modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center
-            ) {
-                Image(
-                    painter = painterResource(id = R.drawable.naver_screen), // 보여줄 이미지
-                    contentDescription = "Kakao Loading", contentScale = ContentScale.Crop
-                )
-
-                LaunchedEffect(Unit) {
-                    delay(2000) // 2초 딜레이
-                    navController.navigate("홈") {
-                        popUpTo("login_screen") { inclusive = true }
-                    }
-                    naverImage = false // 상태 초기화 (필요시)
-                }
-            }
-        }
-        if (googleImage) {
-            Box(
-                modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center
-            ) {
-                Image(
-                    painter = painterResource(id = R.drawable.google_screen), // 보여줄 이미지
-                    contentDescription = "Kakao Loading", contentScale = ContentScale.Crop
-                )
-
-                LaunchedEffect(Unit) {
-                    delay(2000) // 2초 딜레이
-                    navController.navigate("홈") {
-                        popUpTo("login_screen") { inclusive = true }
-                    }
-                    googleImage = false // 상태 초기화 (필요시)
-                }
-            }
-
-            if (appleImage) {
-                Box(
-                    modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center
-                ) {
-                    Image(
-                        painter = painterResource(id = R.drawable.apple_screen), // 보여줄 이미지
-                        contentDescription = "Kakao Loading", contentScale = ContentScale.Crop
-                    )
-
-                    LaunchedEffect(Unit) {
-                        delay(2000) // 2초 딜레이
-                        navController.navigate("홈") {
-                            popUpTo("login_screen") { inclusive = true }
-                        }
-                        appleImage = false // 상태 초기화 (필요시)
-                    }
-                }
-            }
-        }
-
+                .width(65.dp)
+                .clickable { onClickKakao() }
+        )
+        Spacer(modifier = Modifier.width(10.dp))
+        Image(
+            painter = painterResource(id = R.drawable.naver),
+            contentDescription = "Naver Login",
+            contentScale = ContentScale.Crop,
+            modifier = Modifier
+                .width(65.dp)
+                .clickable { onClickNaver() }
+        )
+        Spacer(modifier = Modifier.width(10.dp))
+        Image(
+            painter = painterResource(id = R.drawable.google),
+            contentDescription = "Google Login",
+            contentScale = ContentScale.Crop,
+            modifier = Modifier
+                .width(65.dp)
+                .clickable { onClickGoogle() }
+        )
+        Spacer(modifier = Modifier.width(10.dp))
+        Image(
+            painter = painterResource(id = R.drawable.apple),
+            contentDescription = "Apple Login",
+            contentScale = ContentScale.Crop,
+            modifier = Modifier
+                .width(65.dp)
+                .clickable { onClickApple() }
+        )
     }
 }
 
+@Composable
+fun LoadingScreen(navController: NavController, loadingType: String, onLoadingComplete: () -> Unit) {
+    Box(
+        modifier = Modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center
+    ) {
+        val imageResId = when (loadingType) {
+            "kakao" -> R.drawable.kakao_screen
+            "naver" -> R.drawable.naver_screen
+            "google" -> R.drawable.google_screen
+            else -> R.drawable.apple_screen
+        }
+
+        Image(
+            painter = painterResource(id = imageResId),
+            contentDescription = "$loadingType Loading",
+            contentScale = ContentScale.Crop,
+            modifier = Modifier.fillMaxSize()
+        )
+
+        LaunchedEffect(Unit) {
+            delay(2000) // 2초 후에 홈 화면으로 전환
+            navController.navigate("홈") {
+                popUpTo("login_screen") { inclusive = true }
+            }
+        }
+    }
+}
 
 @Preview(showBackground = true)
 @Composable
-fun Previewlogin() {
+fun PreviewLogin() {
     val navController = rememberNavController()
     LoginScreen(navController)
 }
