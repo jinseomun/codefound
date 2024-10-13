@@ -54,10 +54,10 @@ fun FirstScreen(navController: NavController) {
         topBar = {
             CustomTopBar(
                 title = "커니즈 서비스",
-                showNavigationIcon = false, // 네비게이션 아이콘을 보여줌
-                showActionIcon = true,    // 액션 아이콘을 숨김
+                showNavigationIcon = false, // 네비게이션 아이콘을 숨김
+                showActionIcon = true,    // 액션 아이콘을 보여줌
                 onNavigationClick = { /* 네비게이션 클릭 동작 */ },
-                onActionClick = { navController.popBackStack("reservation", inclusive = false)  }
+                onActionClick = { navController.popBackStack("홈", inclusive = false) }
             )
         },
         content = { innerPadding ->

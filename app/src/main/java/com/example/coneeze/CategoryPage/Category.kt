@@ -1,12 +1,15 @@
 package com.example.coneeze.CategoryPage
 
 import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.BottomAppBar
+import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -26,6 +29,7 @@ import com.example.coneeze.components.BottomIconRow
 import com.example.coneeze.components.CustomTopBar
 import com.example.coneeze.data.TapNames1
 import com.example.coneeze.ui.theme.Gray10
+import com.example.coneeze.ui.theme.GrayLine
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -67,19 +71,28 @@ fun CategoryScreen(navController: NavController) {
         bottomBar = {
             BottomAppBar(
                 modifier = Modifier
-                    .height(80.dp) // 크기 설정
-                    .border(2.dp, Gray10),
+                    .height(80.dp),  // 크기 설정
                 containerColor = Color.White
 
                 // 테두리 설정
             ) {
-                BottomIconRow(
-                    navController = navController,
-                    selectedIndex = selectedIndex,
-                    onItemSelected = { index ->
-                        selectedIndex = index
-                    }
-                )
+                Column {
+                    // 상단에 Gray 색상의 선을 추가
+                    Divider(
+                        color = GrayLine,
+                        thickness = 1.dp,
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                    Spacer(modifier = Modifier.height(5.dp))
+                    // 하단 아이콘들 배치
+                    BottomIconRow(
+                        navController = navController,
+                        selectedIndex = selectedIndex,
+                        onItemSelected = { index ->
+                            selectedIndex = index
+                        }
+                    )
+                }
             }
         }
     )

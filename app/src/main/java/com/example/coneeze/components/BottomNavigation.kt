@@ -43,7 +43,6 @@ fun BottomIconRow(
 ) {
     // 상태 변수로 현재 선택된 버튼의 인덱스를 저장 (초기값은 0 -> 첫 번째 버튼이 선택된 상태)
     Column {
-        HorizontalDivider(thickness = 1.dp, color = GrayLine)
 
         Row(
             modifier = Modifier.fillMaxWidth(),

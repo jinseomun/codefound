@@ -26,7 +26,6 @@ fun Tag(
 ){
     Row(
         Modifier
-            .width(34.dp)
             .height(16.dp)
             .background(color = backgrounder, shape = RoundedCornerShape(size = 4.dp))
             .padding(start = 8.dp, end = 8.dp),

@@ -67,7 +67,7 @@ fun SurveyScreen(navController: NavController) {
                 showNavigationIcon = false, // 네비게이션 아이콘을 보여줌
                 showActionIcon = true,    // 액션 아이콘을 숨김
                 onNavigationClick = { /* 네비게이션 클릭 동작 */ },
-                onActionClick = { navController.navigate("teststart") }
+                onActionClick = { navController.navigate("홈") }
             )
         },
         content = { innerPadding ->

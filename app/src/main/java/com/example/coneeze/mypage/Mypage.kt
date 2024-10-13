@@ -72,19 +72,28 @@ fun MypageScreen(navController: NavController) {
         bottomBar = {
             BottomAppBar(
                 modifier = Modifier
-                    .height(80.dp) // 크기 설정
-                    .border(2.dp, Gray10),
+                    .height(80.dp),  // 크기 설정
                 containerColor = Color.White
 
                 // 테두리 설정
             ) {
-                BottomIconRow(
-                    navController = navController,
-                    selectedIndex = selectedIndex,
-                    onItemSelected = { index ->
-                        selectedIndex = index
-                    }
-                )
+                Column {
+                    // 상단에 Gray 색상의 선을 추가
+                    Divider(
+                        color = com.example.coneeze.ui.theme.GrayLine,
+                        thickness = 1.dp,
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                    Spacer(modifier = Modifier.height(5.dp))
+                    // 하단 아이콘들 배치
+                    BottomIconRow(
+                        navController = navController,
+                        selectedIndex = selectedIndex,
+                        onItemSelected = { index ->
+                            selectedIndex = index
+                        }
+                    )
+                }
             }
         }
     )

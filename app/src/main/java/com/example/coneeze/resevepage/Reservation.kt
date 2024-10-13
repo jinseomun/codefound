@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -19,6 +20,7 @@ import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.BottomAppBar
+import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.TopAppBarDefaults
@@ -45,6 +47,7 @@ import com.example.coneeze.components.BottomIconRow
 import com.example.coneeze.components.RoundButton
 import com.example.coneeze.components.TopLogo
 import com.example.coneeze.ui.theme.Gray10
+import com.example.coneeze.ui.theme.GrayLine
 import com.example.coneeze.ui.theme.Main600
 
 @OptIn(ExperimentalMaterial3Api::class)  // 실험적 API 사용을 명시적으로 허용
@@ -67,19 +70,29 @@ fun ReservationScreen(navController: NavController) {
         bottomBar = {
             BottomAppBar(
                 modifier = Modifier
-                    .height(80.dp) // 크기 설정
-                    .border(2.dp, Gray10),
+                    .height(80.dp),  // 크기 설정
                 containerColor = Color.White
 
                 // 테두리 설정
             ) {
-                BottomIconRow(
-                    navController = navController,
-                    selectedIndex = selectedIndex,
-                    onItemSelected = { index ->
-                        selectedIndex = index
-                    }
-                )            }
+                Column {
+                    // 상단에 Gray 색상의 선을 추가
+                    Divider(
+                        color = GrayLine,
+                        thickness = 1.dp,
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                    Spacer(modifier = Modifier.height(5.dp))
+                    // 하단 아이콘들 배치
+                    BottomIconRow(
+                        navController = navController,
+                        selectedIndex = selectedIndex,
+                        onItemSelected = { index ->
+                            selectedIndex = index
+                        }
+                    )
+                }
+            }
         }
     )
 }

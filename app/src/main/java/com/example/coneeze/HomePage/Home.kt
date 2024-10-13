@@ -5,6 +5,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -143,11 +144,7 @@ fun HomeScreen(navController: NavController) {
                         )
                     }
 
-
                     item { ReviewBanner() }
-
-
-
 
                     item { Header("커니즈 추천 베스트 상품") }
 
@@ -221,13 +218,23 @@ fun HomeScreen(navController: NavController) {
 
                 // 테두리 설정
             ) {
-                BottomIconRow(
-                    navController = navController,
-                    selectedIndex = selectedIndex,
-                    onItemSelected = { index ->
-                        selectedIndex = index
-                    }
-                )
+                Column {
+                    // 상단에 Gray 색상의 선을 추가
+                    Divider(
+                        color = com.example.coneeze.ui.theme.GrayLine,
+                        thickness = 1.dp,
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                    Spacer(modifier = Modifier.height(5.dp))
+                    // 하단 아이콘들 배치
+                    BottomIconRow(
+                        navController = navController,
+                        selectedIndex = selectedIndex,
+                        onItemSelected = { index ->
+                            selectedIndex = index
+                        }
+                    )
+                }
             }
         }
     )
