@@ -611,7 +611,7 @@ fun saveReservation(method: String, people: Int, date: LocalDate?) {
     val booking = Booking(
         bookingId = generateBookingId(),
         date = currentDate,
-        serviceName = "향기로운 커피 원데이 클래스",
+        serviceName = "커피 원데이 클래스",
         bookingDate = bookingDate,
         progressMethod = method,
         numberOfReservations = "${people}명"

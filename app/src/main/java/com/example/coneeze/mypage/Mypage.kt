@@ -2,7 +2,6 @@ package com.example.coneeze.mypage
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -17,7 +16,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowRight
-import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -46,7 +44,6 @@ import androidx.navigation.compose.rememberNavController
 import com.example.coneeze.R
 import com.example.coneeze.components.BottomIconRow
 import com.example.coneeze.components.TopLogo
-import com.example.coneeze.ui.theme.Gray10
 import com.example.coneeze.ui.theme.suit
 
 @OptIn(ExperimentalMaterial3Api::class)  // 실험적 API 사용을 명시적으로 허용
@@ -174,7 +171,7 @@ fun Mypagecontent(navController: NavController){
                 text = "로그아웃",
                 style = TextStyle(
                     fontSize = 16.sp,
-                    fontWeight = FontWeight.Medium,
+                    fontWeight = FontWeight.Bold,
                     fontFamily = suit
                 )
 

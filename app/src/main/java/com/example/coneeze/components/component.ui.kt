@@ -116,7 +116,7 @@ fun Bookinginfo(front: String, back: String) {
         Text(
             text = back,
             style = TextStyle(
-                fontSize = 16.sp,
+                fontSize = 14.sp,
                 lineHeight = 20.sp,
                 fontWeight = FontWeight.Medium,
                 fontFamily = suit

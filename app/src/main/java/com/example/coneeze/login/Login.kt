@@ -55,31 +55,25 @@ import kotlinx.coroutines.delay
 fun LoginScreen(navController: NavController) {
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
 
-    Scaffold(
-        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
-        topBar = {
+    Scaffold(modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection), topBar = {
 
-        },
-        content = { innerPadding ->
-            Box(modifier = Modifier.padding(innerPadding)) {
-                // 메인 콘텐츠
-                LoginContent(navController)
+    }, content = { innerPadding ->
+        Box(modifier = Modifier.padding(innerPadding)) {
+            // 메인 콘텐츠
+            LoginContent(navController)
 
 
-            }
-
-        },
-        bottomBar = {
-            // 하단 바에 NextButton 추가
         }
-    )
+
+    }, bottomBar = {
+        // 하단 바에 NextButton 추가
+    })
 }
 
 @Composable
 fun LoginContent(navController: NavController) {
     Box(
-        modifier = Modifier
-            .fillMaxSize()
+        modifier = Modifier.fillMaxSize()
     ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally
@@ -87,8 +81,7 @@ fun LoginContent(navController: NavController) {
             Spacer(modifier = Modifier.height(120.dp))
 
             Row(
-                modifier = Modifier
-                    .fillMaxWidth(),
+                modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.Center,
                 verticalAlignment = Alignment.CenterVertically
             ) {
@@ -144,17 +137,13 @@ fun LoginField(navController: NavController) {
                 modifier = Modifier.padding(start = 8.dp),
                 style = TextStyle(fontFamily = suit)
             )
-            TextField(
-                value = username, // username 상태를 value로 사용
+            TextField(value = username, // username 상태를 value로 사용
                 onValueChange = { username = it }, // 입력이 변경될 때 상태를 업데이트
                 placeholder = {
                     Text(
-                        text = "아이디를 입력해 주세요.",
-                        color = Color.LightGray,
-                        style = TextStyle(
-                            fontSize = 12.sp,
-                            fontFamily = suit
-                            )
+                        text = "아이디를 입력해 주세요.", color = Color.LightGray, style = TextStyle(
+                            fontSize = 12.sp, fontFamily = suit
+                        )
                     )
                 },
                 modifier = Modifier
@@ -179,8 +168,7 @@ fun LoginField(navController: NavController) {
                 modifier = Modifier.padding(start = 8.dp),
                 style = TextStyle(fontFamily = suit)
             )
-            TextField(
-                value = password, // password 상태를 value로 사용
+            TextField(value = password, // password 상태를 value로 사용
                 onValueChange = { password = it }, // 입력이 변경될 때 상태를 업데이트
                 placeholder = {
                     Text(
@@ -188,8 +176,7 @@ fun LoginField(navController: NavController) {
                         color = Color.LightGray,
                         style = TextStyle(fontSize = 12.sp, fontFamily = suit)
                     )
-                },
-                modifier = Modifier
+                }, modifier = Modifier
                     .fillMaxWidth()
                     .clickable { focusManager.clearFocus() },
 
@@ -214,10 +201,8 @@ fun LoginField(navController: NavController) {
                 colors = ButtonDefaults.buttonColors(containerColor = Main600)
             ) {
                 Text(
-                    text = "로그인",
-                    color = Color.White,
-                    style = TextStyle(fontFamily = suit)
-                    )
+                    text = "로그인", color = Color.White, style = TextStyle(fontFamily = suit)
+                )
             }
 
             Spacer(modifier = Modifier.height(20.dp))
@@ -231,17 +216,13 @@ fun LoginField(navController: NavController) {
             ) {
                 TextButton(onClick = { /* 아이디 찾기 */ }) {
                     Text(
-                        "아이디 찾기",
-                        color = Color.Gray,
-                        style = TextStyle(
-                            fontSize = 12.sp,
-                            fontFamily = suit
-                            )
+                        "아이디 찾기", color = Color.Gray, style = TextStyle(
+                            fontSize = 12.sp, fontFamily = suit
+                        )
                     )
                 }
                 Divider(
-                    color = Color.Gray,
-                    modifier = Modifier
+                    color = Color.Gray, modifier = Modifier
                         .height(15.dp)
                         .width(1.dp)
                 )
@@ -249,8 +230,7 @@ fun LoginField(navController: NavController) {
                     Text("비밀번호 재설정", color = Color.Gray, style = TextStyle(fontSize = 12.sp))
                 }
                 Divider(
-                    color = Color.Gray,
-                    modifier = Modifier
+                    color = Color.Gray, modifier = Modifier
                         .height(15.dp)
                         .width(1.dp)
                 )
@@ -278,68 +258,58 @@ fun LoginRow(navController: NavController) {
             horizontalArrangement = Arrangement.Center,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Image(
-                painter = painterResource(id = R.drawable.kakao),
+            Image(painter = painterResource(id = R.drawable.kakao),
                 contentDescription = "logo",
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
                     .width(65.dp)
                     .clickable {
                         kakaoImage = true // 로딩 이미지 표시
-                    }
-            )
+                    })
 
             Spacer(modifier = Modifier.width(10.dp))
 
-            Image(
-                painter = painterResource(id = R.drawable.naver),
+            Image(painter = painterResource(id = R.drawable.naver),
                 contentDescription = "logo",
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
                     .width(65.dp)
                     .clickable {
                         naverImage = true // 로딩 이미지 표시
-                    }
-            )
+                    })
 
             Spacer(modifier = Modifier.width(10.dp))
 
-            Image(
-                painter = painterResource(id = R.drawable.google),
+            Image(painter = painterResource(id = R.drawable.google),
                 contentDescription = "logo",
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
                     .width(65.dp)
                     .clickable {
                         googleImage = true // 로딩 이미지 표시
-                    }
-            )
+                    })
 
             Spacer(modifier = Modifier.width(10.dp))
 
-            Image(
-                painter = painterResource(id = R.drawable.apple),
+            Image(painter = painterResource(id = R.drawable.apple),
                 contentDescription = "logo",
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
                     .width(65.dp)
                     .clickable {
                         appleImage = true // 로딩 이미지 표시
-                    }
-            )
+                    })
         }
 
         Spacer(modifier = Modifier.height(40.dp))
 
         if (kakaoImage) {
             Box(
-                modifier = Modifier.fillMaxSize(),
-                contentAlignment = Alignment.Center
+                modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center
             ) {
                 Image(
                     painter = painterResource(id = R.drawable.kakao_screen), // 보여줄 이미지
-                    contentDescription = "Kakao Loading",
-                    contentScale = ContentScale.Crop
+                    contentDescription = "Kakao Loading", contentScale = ContentScale.Crop
                 )
 
                 LaunchedEffect(Unit) {
@@ -354,13 +324,11 @@ fun LoginRow(navController: NavController) {
 
         if (naverImage) {
             Box(
-                modifier = Modifier.fillMaxSize(),
-                contentAlignment = Alignment.Center
+                modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center
             ) {
                 Image(
                     painter = painterResource(id = R.drawable.naver_screen), // 보여줄 이미지
-                    contentDescription = "Kakao Loading",
-                    contentScale = ContentScale.Crop
+                    contentDescription = "Kakao Loading", contentScale = ContentScale.Crop
                 )
 
                 LaunchedEffect(Unit) {
@@ -374,13 +342,11 @@ fun LoginRow(navController: NavController) {
         }
         if (googleImage) {
             Box(
-                modifier = Modifier.fillMaxSize(),
-                contentAlignment = Alignment.Center
+                modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center
             ) {
                 Image(
                     painter = painterResource(id = R.drawable.google_screen), // 보여줄 이미지
-                    contentDescription = "Kakao Loading",
-                    contentScale = ContentScale.Crop
+                    contentDescription = "Kakao Loading", contentScale = ContentScale.Crop
                 )
 
                 LaunchedEffect(Unit) {
@@ -394,13 +360,11 @@ fun LoginRow(navController: NavController) {
 
             if (appleImage) {
                 Box(
-                    modifier = Modifier.fillMaxSize(),
-                    contentAlignment = Alignment.Center
+                    modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center
                 ) {
                     Image(
                         painter = painterResource(id = R.drawable.apple_screen), // 보여줄 이미지
-                        contentDescription = "Kakao Loading",
-                        contentScale = ContentScale.Crop
+                        contentDescription = "Kakao Loading", contentScale = ContentScale.Crop
                     )
 
                     LaunchedEffect(Unit) {
@@ -416,6 +380,7 @@ fun LoginRow(navController: NavController) {
 
     }
 }
+
 
 @Preview(showBackground = true)
 @Composable

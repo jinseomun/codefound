@@ -154,7 +154,7 @@ fun MoreDetailContent(order: Order) {
                 Spacer(modifier = Modifier.height(14.dp))
 
                 Text(
-                    text = order.name, style = TextStyle(
+                    text = "홍길동", style = TextStyle(
                         fontSize = 16.sp,
                         lineHeight = 20.sp,
                         fontWeight = FontWeight.Medium,
