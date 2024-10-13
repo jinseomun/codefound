@@ -36,6 +36,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.KeyboardType
@@ -46,6 +47,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.coneeze.R
 import com.example.coneeze.ui.theme.Main600
+import com.example.coneeze.ui.theme.suit
 import kotlinx.coroutines.delay
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -122,6 +124,8 @@ fun LoginContent(navController: NavController) {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LoginField(navController: NavController) {
+    val focusManager = LocalFocusManager.current
+
     Box(
         modifier = Modifier
     ) {
@@ -148,7 +152,9 @@ fun LoginField(navController: NavController) {
                     )
                 },
                 modifier = Modifier
-                    .fillMaxWidth(),
+                    .fillMaxWidth()
+                    .clickable { focusManager.clearFocus() }, // 화면 터치 시 키보드 내림
+
 
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
 
@@ -177,11 +183,15 @@ fun LoginField(navController: NavController) {
                     Text(
                         text = "비밀번호를 입력해 주세요.",
                         color = Color.LightGray,
-                        style = TextStyle(fontSize = 12.sp)
+                        style = TextStyle(
+                            fontSize = 12.sp,
+                            fontFamily = suit
+                            )
                     )
                 },
                 modifier = Modifier
-                    .fillMaxWidth(),
+                    .fillMaxWidth()
+                    .clickable { focusManager.clearFocus() },
 
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
 

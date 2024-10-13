@@ -25,6 +25,7 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -297,7 +298,7 @@ fun ContentScreen2(
                 // "클래스 진행 방식" 텍스트
                 Text(
                     text = "클래스 진행 방식",
-                    style = TextStyle(fontSize = 16.sp, fontWeight = FontWeight.Bold),
+                    style = TextStyle(fontSize = 16.sp, fontWeight = FontWeight.Bold), // 자동으로 suit 폰트가 적용된 스타일
                     color = Color.Black,
                     modifier = Modifier.align(Alignment.Start)
                 )
@@ -590,7 +591,7 @@ fun saveReservation(method: String, people: Int, date: LocalDate?) {
     val booking = Booking(
         bookingId = generateBookingId(),
         date = currentDate,
-        serviceName = "향기로운 커피 원데이 클래스",
+        serviceName = "커피 원데이 클래스",
         bookingDate = bookingDate,
         progressMethod = method,
         numberOfReservations = "${people}명"

@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -30,6 +31,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.coneeze.R
 import com.example.coneeze.ui.theme.Gray10
+import com.example.coneeze.ui.theme.GrayLine
 import com.example.coneeze.ui.theme.Main600
 import com.example.coneeze.ui.theme.suit
 
@@ -40,52 +42,55 @@ fun BottomIconRow(
     onItemSelected: (Int) -> Unit
 ) {
     // 상태 변수로 현재 선택된 버튼의 인덱스를 저장 (초기값은 0 -> 첫 번째 버튼이 선택된 상태)
+    Column {
+        HorizontalDivider(thickness = 1.dp, color = GrayLine)
 
-    Row(
-        modifier = Modifier.fillMaxWidth(),
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        // 하단 아이콘들 배치
-        Spacer(modifier = Modifier.weight(1f))
-        BottomIcon(
-            image = painterResource(id = R.drawable.home),
-            text = "홈",
-            selected = selectedIndex == 0, // 첫 번째 버튼이 선택되어 있는지 확인
-            action = {
-                onItemSelected(0)
-                navController.navigate("홈") {
-                    popUpTo(navController.graph.startDestinationId)
-                    launchSingleTop = true
-                }
-            } // 클릭하면 첫 번째 버튼이 선택됨
-        )
-        Spacer(modifier = Modifier.weight(1f))
-        BottomIcon(
-            image = painterResource(id = R.drawable.coffee),
-            text = "예약",
-            selected = selectedIndex == 1, // 두 번째 버튼이 선택되어 있는지 확인
-            action = {
-                onItemSelected(1)
-                navController.navigate("예약하기") {
-                    popUpTo(navController.graph.startDestinationId)
-                    launchSingleTop = true
-                }
-            } // 클릭하면 두 번째 버튼이 선택됨
-        )
-        Spacer(modifier = Modifier.weight(1f))
-        BottomIcon(
-            image = painterResource(id = R.drawable.my),
-            text = "마이페이지",
-            selected = selectedIndex == 2, // 세 번째 버튼이 선택되어 있는지 확인
-            action = {
-                onItemSelected(2)
-                navController.navigate("마이페이지") {
-                    popUpTo(navController.graph.startDestinationId)
-                    launchSingleTop = true
-                }
-            } // 클릭하면 세 번째 버튼이 선택됨
-        )
-        Spacer(modifier = Modifier.weight(1f))
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            // 하단 아이콘들 배치
+            Spacer(modifier = Modifier.weight(1f))
+            BottomIcon(
+                image = painterResource(id = R.drawable.home),
+                text = "홈",
+                selected = selectedIndex == 0, // 첫 번째 버튼이 선택되어 있는지 확인
+                action = {
+                    onItemSelected(0)
+                    navController.navigate("홈") {
+                        popUpTo(navController.graph.startDestinationId)
+                        launchSingleTop = true
+                    }
+                } // 클릭하면 첫 번째 버튼이 선택됨
+            )
+            Spacer(modifier = Modifier.weight(1f))
+            BottomIcon(
+                image = painterResource(id = R.drawable.coffee),
+                text = "예약",
+                selected = selectedIndex == 1, // 두 번째 버튼이 선택되어 있는지 확인
+                action = {
+                    onItemSelected(1)
+                    navController.navigate("예약하기") {
+                        popUpTo(navController.graph.startDestinationId)
+                        launchSingleTop = true
+                    }
+                } // 클릭하면 두 번째 버튼이 선택됨
+            )
+            Spacer(modifier = Modifier.weight(1f))
+            BottomIcon(
+                image = painterResource(id = R.drawable.my),
+                text = "마이페이지",
+                selected = selectedIndex == 2, // 세 번째 버튼이 선택되어 있는지 확인
+                action = {
+                    onItemSelected(2)
+                    navController.navigate("마이페이지") {
+                        popUpTo(navController.graph.startDestinationId)
+                        launchSingleTop = true
+                    }
+                } // 클릭하면 세 번째 버튼이 선택됨
+            )
+            Spacer(modifier = Modifier.weight(1f))
+        }
     }
 }
 
@@ -102,7 +107,8 @@ fun BottomIcon(
         // 내용에 맞게 버튼 크기 조정
         colors = ButtonDefaults.buttonColors(
             Color.Transparent,  // 버튼 배경을 투명하게 설정
-            contentColor = Color.Unspecified ),
+            contentColor = Color.Unspecified
+        ),
         // 기본 텍스트 색상 사용
         shape = RectangleShape
     ) {
@@ -123,9 +129,9 @@ fun BottomIcon(
                     .width(32.dp)
                     .height(32.dp),
 
-                colorFilter = if(selected){
+                colorFilter = if (selected) {
                     ColorFilter.tint(Main600)
-                } else{
+                } else {
                     null
                 }
 

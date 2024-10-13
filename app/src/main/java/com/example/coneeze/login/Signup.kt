@@ -4,7 +4,6 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -43,6 +42,8 @@ import com.example.coneeze.ui.theme.cafeFontFamily
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.draw.scale
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.input.KeyboardType
 import com.example.coneeze.components.NextButton
 
@@ -111,6 +112,8 @@ fun SignupContent() {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Inuput_Signup() {
+    val focusManager = LocalFocusManager.current
+
     Column(
         modifier = Modifier
             .padding(horizontal = 28.dp)
@@ -133,7 +136,8 @@ fun Inuput_Signup() {
                 )
             },
             modifier = Modifier
-                .fillMaxWidth(),
+                .fillMaxWidth()
+                .clickable { focusManager.clearFocus() }, // 화면 터치 시 키보드 내림
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
 
             colors = TextFieldDefaults.colors(
@@ -162,7 +166,9 @@ fun Inuput_Signup() {
                 )
             },
             modifier = Modifier
-                .fillMaxWidth(),
+                .fillMaxWidth()
+                .clickable { focusManager.clearFocus() }, // 화면 터치 시 키보드 내림
+
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
 
             colors = TextFieldDefaults.colors(
@@ -188,7 +194,9 @@ fun Inuput_Signup() {
                     )
             },
             modifier = Modifier
-                .fillMaxWidth(),
+                .fillMaxWidth()
+                .clickable { focusManager.clearFocus() }, // 화면 터치 시 키보드 내림
+
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
 
             colors = TextFieldDefaults.colors(
@@ -217,7 +225,9 @@ fun Inuput_Signup() {
                 )
             },
             modifier = Modifier
-                .fillMaxWidth(),
+                .fillMaxWidth()
+                .clickable { focusManager.clearFocus() }, // 화면 터치 시 키보드 내림
+
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
             colors = TextFieldDefaults.colors(
                 focusedContainerColor = Color.Transparent,
@@ -245,7 +255,9 @@ fun Inuput_Signup() {
                 )
             },
             modifier = Modifier
-                .fillMaxWidth(),
+                .fillMaxWidth()
+                .clickable { focusManager.clearFocus() }, // 화면 터치 시 키보드 내림
+
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
 
             colors = TextFieldDefaults.colors(
@@ -270,21 +282,26 @@ fun PrivacyAgreementRow() {
     ) {
         Checkbox(
             checked = isChecked,
-            onCheckedChange = { isChecked = it } // 체크박스 상태 변경
+            onCheckedChange = { isChecked = it } ,// 체크박스 상태 변경
+            modifier = Modifier.scale(0.8f) // 원하는 크기 비율로 설정
+
         )
 
         Text(
             text = "[필수] 개인정보처리방침에 동의합니다.",
+            style = TextStyle(fontSize = 12.sp)
         )
 
-        Spacer(modifier = Modifier.width(24.dp))
+        Spacer(modifier = Modifier.width(16.dp))
 
 
         Text(
             text = "약관보기",
             color = Color(0xFF60646C),
             textDecoration = TextDecoration.Underline, // 밑줄 추가
-            modifier = Modifier.clickable { /* 약관보기 동작 추가 */ }
+            modifier = Modifier.clickable { /* 약관보기 동작 추가 */ },
+            style = TextStyle(fontSize = 12.sp)
+
         )
     }
 }

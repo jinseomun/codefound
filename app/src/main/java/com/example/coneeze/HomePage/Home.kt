@@ -15,7 +15,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.BottomAppBar
+import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -214,8 +216,7 @@ fun HomeScreen(navController: NavController) {
         bottomBar = {
             BottomAppBar(
                 modifier = Modifier
-                    .height(80.dp) // 크기 설정
-                    .border(2.dp, Gray10),
+                    .height(80.dp),  // 크기 설정
                 containerColor = Color.White
 
                 // 테두리 설정
