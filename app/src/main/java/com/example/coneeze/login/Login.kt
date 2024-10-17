@@ -120,7 +120,6 @@ fun LoginField(navController: NavController) {
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 20.dp),
-        horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(text = "아이디", color = Color.Gray, modifier = Modifier.padding(start = 8.dp), fontFamily = suit)
         TextField(
