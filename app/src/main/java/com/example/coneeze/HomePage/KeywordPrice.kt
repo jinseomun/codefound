@@ -16,21 +16,19 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.coneeze.data.keyprices1
+import com.example.coneeze.data.toolskey
 import com.example.coneeze.ui.theme.Main600
 import com.example.coneeze.ui.theme.gray17
 import com.example.coneeze.ui.theme.suit
 
-val keyprices = listOf(
-    "3만원 이하",
-    "3~5만원",
-    "5~10만원",
-    "10만원 이상"
-)
 
 @Composable
-fun KeywordPrice() {
+fun KeywordPrice(
+    keyprices: List<String>
+) {
     // 누른 버튼의 인덱스를 기억하는 상태
-    var selectedIndex by remember { mutableStateOf(-1) }  // 초기값은 선택되지 않은 상태 (-1)
+    var selectedIndex by remember { mutableStateOf(0) }  // 초기값은 선택되지 않은 상태 (-1)
 
     Row(modifier = Modifier.fillMaxWidth()) {
         Row(
@@ -95,5 +93,5 @@ fun PriceButton(
 @Preview(showBackground = true)
 @Composable
 fun KeywordPricePreview(){
-    KeywordPrice()
+    KeywordPrice(toolskey)
 }

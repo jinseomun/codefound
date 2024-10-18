@@ -1,11 +1,12 @@
 package com.example.coneeze.data
 
 val TapNames1 = listOf(
-    "전체",
-    "카테고리1",
-    "카테고리2",
-    "카테고리3",
-    "카테고리4"
+    "ALL",
+    "BEANS",
+    "PRODUCTS",
+    "TOOLS",
+    "GOODS",
+    "GIFTS"
 )
 
 

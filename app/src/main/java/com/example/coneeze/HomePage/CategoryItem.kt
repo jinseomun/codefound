@@ -7,7 +7,9 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -31,7 +33,7 @@ import com.example.coneeze.ui.theme.suit
 fun CategoryItem(
     text: String,
     action: () -> Unit,
-    image: Painter
+    image: Painter?
 ) {
     Button(
         contentPadding = PaddingValues(0.dp),
@@ -51,15 +53,41 @@ fun CategoryItem(
             horizontalAlignment = Alignment.CenterHorizontally,
 
         ) {
-            // 이미지 설정
-            Image(
-                painter = image,
-                contentDescription = "카테고리 사진",
+
+            Box(
+                contentAlignment = Alignment.Center,
                 modifier = Modifier
+                    .padding(start=9.dp, end=9.dp)
                     .width(56.dp)
                     .height(56.dp)
 
-            )
+
+            ) {
+                // 이미지 설정
+                if (image != null) {
+                    Image(
+                        painter = painterResource(id = R.drawable.gray),
+                        contentDescription = "카테고리 사진",
+                        modifier = Modifier
+                            .width(56.dp)
+                            .height(56.dp)
+
+                    )
+
+
+                    Image(
+                        painter = image,
+                        contentDescription = null,
+                        modifier = Modifier
+                            .padding(1.dp)
+                            .width(44.dp)
+                            .height(44.dp)
+
+                    )
+                }
+
+
+            }
             Spacer(modifier = Modifier.height(5.dp))
 
             // 텍스트 설정
@@ -84,7 +112,7 @@ Box(modifier = Modifier.fillMaxSize()) {
 
     CategoryItem(
         text = "바보",
-        image = painterResource(id = R.drawable.gray),  // 이미지 리소스
+        image = painterResource(id = R.drawable.totalcategory),  // 이미지 리소스
         action = { /* onClick 동작 */ })
 }
 }

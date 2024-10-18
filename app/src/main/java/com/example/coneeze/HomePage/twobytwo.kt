@@ -42,7 +42,6 @@ fun twobytwo(
             prices = priceChunks.getOrNull(0) ?: emptyList()
         )
 
-        Spacer(modifier = Modifier.height(24.dp))
 
         twobyone(
             navController = navController,

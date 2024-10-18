@@ -55,6 +55,7 @@ import com.example.coneeze.data.prices1
 
 import com.example.coneeze.data.features2
 import com.example.coneeze.data.features3
+import com.example.coneeze.data.keyprices1
 import com.example.coneeze.data.names2
 import com.example.coneeze.data.names3
 import com.example.coneeze.data.prices2
@@ -167,7 +168,7 @@ fun HomeScreen(navController: NavController) {
 
                     item { Header("선물하기 좋은 상품") }
 
-                    item { KeywordPrice() }
+                    item { KeywordPrice(keyprices1) }
 
                     item { Spacer(modifier = Modifier.height(16.dp)) }
 

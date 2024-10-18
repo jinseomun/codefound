@@ -7,11 +7,13 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.example.coneeze.CategoryPage.CategoryScreen
+import com.example.coneeze.CategoryPage.TapMenu1
 import com.example.coneeze.DetailPage.DetailScreen
 import com.example.coneeze.HomePage.HomeScreen
 import com.example.coneeze.PayPage.EndpopScreen
 import com.example.coneeze.PayPage.PayScreen
 import com.example.coneeze.R
+import com.example.coneeze.data.TapNames1
 import com.example.coneeze.login.LoginScreen
 import com.example.coneeze.login.SignupScreen
 import com.example.coneeze.mypage.BookingDetailScreen
@@ -33,6 +35,7 @@ fun NavGraph(navController: NavHostController) {
         composable("회원가입") { SignupScreen(navController)}
         composable("홈") { HomeScreen(navController)}
         composable("카테고리") { CategoryScreen(navController)}
+
         composable(
             route = "디테일/{image}/{name}/{price}",
             arguments = listOf(

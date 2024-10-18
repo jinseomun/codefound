@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
@@ -17,7 +18,6 @@ import com.example.coneeze.data.coffeImages4
 import com.example.coneeze.data.features4
 import com.example.coneeze.data.names4
 import com.example.coneeze.data.prices4
-
 @Composable
 fun twobyone(
     navController: NavController,
@@ -32,40 +32,41 @@ fun twobyone(
             .padding(start = 20.dp, end = 20.dp),
         horizontalArrangement = Arrangement.Center
     ) {
-        // 첫 번째 아이템
+        // 첫 번째 아이템 렌더링
+        if (names.isNotEmpty() && images.isNotEmpty() && features.isNotEmpty() && prices.isNotEmpty()) {
+            HorizontalItem(
+                navController = navController,
+                name = names[0],
+                feature = features[0],
+                image = images[0],
+                price = prices[0],
+            )
+        }
 
-    if (names.isNotEmpty() && images.isNotEmpty() && features.isNotEmpty() && prices.isNotEmpty()) {
+        Spacer(modifier = Modifier.width(24.dp)) // 아이템 간의 간격 유지
 
-        HorizontalItem(
-            navController = navController,  // navController 전달
-            name = names[0],
-            feature = features[0],
-            image = images[0],
-            price = prices[0],
-        )
-
-
-    }
-
-
-                Spacer(modifier = Modifier.width(24.dp))
-
-
-            // 두 번째 아이템
-            if (names.size > 1 && images.size > 1 && features.size > 1 && prices.size > 1) {
-                HorizontalItem(
-                    navController = navController,  // navController 전달
-                    name = names[1],
-                    feature = features[1],
-                    image = images[1],
-                    price = prices[1],
-                )
+        // 두 번째 아이템 또는 빈 공간으로 대체
+        if (names.size > 1 && images.size > 1 && features.size > 1 && prices.size > 1) {
+            HorizontalItem(
+                navController = navController,
+                name = names[1],
+                feature = features[1],
+                image = images[1],
+                price = prices[1],
+            )
+        } else {
+            // 데이터가 하나만 있을 경우 빈 아이템 대체
+            Box(
+                modifier = Modifier
+                    .width(150.dp) // HorizontalItem과 동일한 너비
+                    .padding(8.dp)
+            ) {
+                // 빈 박스 또는 플레이스홀더 (디자인에 맞게 추가 가능)
             }
-
-
+        }
     }
+    Spacer(modifier = Modifier.height(24.dp))
 }
-
 
 
 @Preview(showBackground = true)
